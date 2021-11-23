@@ -25,5 +25,4 @@ public class UsuarioResource {
 		Usuario obj = service.find(id);
 		return ResponseEntity.ok().body(obj);
 	}
-
 }
