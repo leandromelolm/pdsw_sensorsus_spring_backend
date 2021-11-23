@@ -17,16 +17,16 @@ public class Usuario implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	@Id
-	@Column(name = "ID_USUARIO")
+	@Column
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private Integer id;
 	@NotNull
 	@NotBlank
-	@Column(name= "NOME")
+	@Column
 	private String nomeCompleto;
 	@NotNull
 	@NotBlank
-	@Column(name= "USERNAME")
+	@Column
 	private String username;
 	@NotNull
 	@NotBlank
@@ -39,9 +39,7 @@ public class Usuario implements Serializable {
 		
 	}
 	
-	
-	
-	public Usuario(long id, String nomeCompleto, String username, String senha, String email) {
+	public Usuario(Integer id, String nomeCompleto, String username, String senha, String email) {
 		super();
 		this.id = id;
 		this.nomeCompleto = nomeCompleto;
@@ -49,12 +47,12 @@ public class Usuario implements Serializable {
 		this.senha = senha;
 		this.email = email;
 	}
+	
 
-
-	public long getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public String getNomeCompleto() {
@@ -107,6 +105,13 @@ public class Usuario implements Serializable {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "Usuario [id=" + id + ", nomeCompleto=" + nomeCompleto + ", username=" + username + ", senha=" + senha
+				+ ", email=" + email + "]";
+	}
+	
 	
 	
 	
