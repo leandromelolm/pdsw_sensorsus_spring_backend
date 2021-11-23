@@ -1,32 +1,35 @@
 package br.com.sensorsus.sensorsus.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import org.hibernate.validator.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
+
+import br.com.sensorsus.sensorsus.model.enums.TipoUsuario;
 
 @Entity
 public class Usuario implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
-	@Id
-	@Column
+	
+	@Id	
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	@NotNull
-	@NotBlank
-	@Column
+	@NotBlank	
 	private String nomeCompleto;
 	@NotNull
-	@NotBlank
-	@Column
+	@NotBlank	
 	private String username;
 	@NotNull
 	@NotBlank
@@ -35,17 +38,24 @@ public class Usuario implements Serializable {
 	@NotBlank
 	private String email;
 	
+	private Integer tipo;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy="usuario")
+	private List<AvaliacaoEstabelecimento> avaliacoesE = new ArrayList<>();
+	
 	public Usuario()  {
 		
 	}
 	
-	public Usuario(Integer id, String nomeCompleto, String username, String senha, String email) {
+	public Usuario(Integer id, String nomeCompleto, String username, String senha, String email, TipoUsuario tipo) {
 		super();
 		this.id = id;
 		this.nomeCompleto = nomeCompleto;
 		this.username = username;
 		this.senha = senha;
 		this.email = email;
+		this.tipo = tipo.getCod();
 	}	
 
 	public Integer getId() {
@@ -78,9 +88,24 @@ public class Usuario implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
-
 	
+	public TipoUsuario getTipo() {
+		return TipoUsuario.toEnum(tipo);
+	}
+
+	public void setTipo(TipoUsuario tipo) {
+		this.tipo = tipo.getCod();
+	}
+
+	public List<AvaliacaoEstabelecimento> getAvaliacoesE() {
+		return avaliacoesE;
+	}
+
+	public void setAvaliacoesE(List<AvaliacaoEstabelecimento> avaliacoesE) {
+		this.avaliacoesE = avaliacoesE;
+	}
+	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
