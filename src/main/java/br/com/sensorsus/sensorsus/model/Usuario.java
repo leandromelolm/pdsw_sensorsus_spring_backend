@@ -38,7 +38,7 @@ public class Usuario implements Serializable {
 	@NotBlank
 	private String email;
 	
-	private Integer tipo;
+	private Integer tipoUsuario;
 	
 	@JsonIgnore
 	@OneToMany(mappedBy="usuario")
@@ -48,14 +48,14 @@ public class Usuario implements Serializable {
 		
 	}
 	
-	public Usuario(Integer id, String nomeCompleto, String username, String senha, String email, TipoUsuario tipo) {
+	public Usuario(Integer id, String nomeCompleto, String username, String senha, String email, TipoUsuario tipoUsuario) {
 		super();
 		this.id = id;
 		this.nomeCompleto = nomeCompleto;
 		this.username = username;
 		this.senha = senha;
 		this.email = email;
-		this.tipo = tipo.getCod();
+		this.tipoUsuario = tipoUsuario.getCod();
 	}	
 
 	public Integer getId() {
@@ -90,11 +90,11 @@ public class Usuario implements Serializable {
 	}
 	
 	public TipoUsuario getTipo() {
-		return TipoUsuario.toEnum(tipo);
+		return TipoUsuario.toEnum(tipoUsuario);
 	}
 
 	public void setTipo(TipoUsuario tipo) {
-		this.tipo = tipo.getCod();
+		this.tipoUsuario = tipo.getCod();
 	}
 
 	public List<AvaliacaoEstabelecimento> getAvaliacoesE() {
