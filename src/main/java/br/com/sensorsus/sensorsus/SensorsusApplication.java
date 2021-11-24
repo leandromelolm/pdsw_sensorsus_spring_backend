@@ -9,11 +9,15 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import br.com.sensorsus.sensorsus.model.AvaliacaoEstabelecimento;
+import br.com.sensorsus.sensorsus.model.Cidade;
 import br.com.sensorsus.sensorsus.model.Estabelecimento;
+import br.com.sensorsus.sensorsus.model.Estado;
 import br.com.sensorsus.sensorsus.model.Usuario;
 import br.com.sensorsus.sensorsus.model.enums.TipoUsuario;
 import br.com.sensorsus.sensorsus.repositories.AvaliacaoEstabelecimentoRepository;
+import br.com.sensorsus.sensorsus.repositories.CidadeRepository;
 import br.com.sensorsus.sensorsus.repositories.EstabelecimentoRepository;
+import br.com.sensorsus.sensorsus.repositories.EstadoRepository;
 import br.com.sensorsus.sensorsus.repositories.UsuarioRepository;
 
 @SpringBootApplication
@@ -25,6 +29,10 @@ public class SensorsusApplication implements CommandLineRunner {
 	private AvaliacaoEstabelecimentoRepository avaliacaoEstabelecimentoReposity;
 	@Autowired
 	private EstabelecimentoRepository estabelecimentoReposity;
+	@Autowired
+	private EstadoRepository estadoRepository;
+	@Autowired
+	private CidadeRepository cidadeRepository;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(SensorsusApplication.class, args);
@@ -50,10 +58,29 @@ public class SensorsusApplication implements CommandLineRunner {
 		AvaliacaoEstabelecimento avE3 = new AvaliacaoEstabelecimento(null, sdf.parse("25/10/2021 10:35"),"Mais ou menos",2.6, user3, e1);
 		AvaliacaoEstabelecimento avE4 = new AvaliacaoEstabelecimento(null, sdf.parse("23/11/2021 11:10"),"Foi Bom o atendimento, mas poderia ser melhor",3.5, user4, e3);
 		AvaliacaoEstabelecimento avE5 = new AvaliacaoEstabelecimento(null, sdf.parse("23/11/2021 11:10"),"Atendimento TOP",5.0, user4, e1);
-		
+				
 		usuarioReposity.saveAll(Arrays.asList(user1,user2,user3,user4));
 		estabelecimentoReposity.saveAll(Arrays.asList(e1,e2,e3,e4));
 		avaliacaoEstabelecimentoReposity.saveAll(Arrays.asList(avE1,avE2,avE3,avE5,avE4));
+		
+		
+		Estado est1 = new Estado(null, "PERNAMBUCO");
+		Estado est2 = new Estado(null, "PARAIBA");
+		
+		Cidade c1 = new Cidade(null, "Recife", est1);
+		Cidade c2 = new Cidade(null, "João Pessoa", est2);
+		Cidade c3 = new Cidade(null, "Campina Grande", est2);
+		Cidade c4 = new Cidade(null, "Jaboatão", est1);
+		Cidade c5 = new Cidade(null, "Camaragibe", est1);
+		Cidade c6 = new Cidade(null, "Paulista", est1);
+		Cidade c7 = new Cidade(null, "Olinda", est1);
+		
+		
+		est1.getCidades().addAll(Arrays.asList(c1, c4, c5, c6, c7));
+		est2.getCidades().addAll(Arrays.asList(c2, c3));
+
+		estadoRepository.saveAll(Arrays.asList(est1, est2));
+		cidadeRepository.saveAll(Arrays.asList(c1, c2, c3, c4, c5, c6, c7));
 	}
 
 }
