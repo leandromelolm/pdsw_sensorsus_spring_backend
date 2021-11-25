@@ -2,13 +2,17 @@ package br.com.sensorsus.sensorsus.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -29,6 +33,11 @@ public class Estabelecimento implements Serializable {
 	@OneToMany(mappedBy="estabelecimento")
 	private List<AvaliacaoEstabelecimento> avaliacao = new ArrayList<>();
 	
+    @OneToOne(cascade=CascadeType.ALL, mappedBy ="estabelecimento")
+	private Endereco endereco;
+	
+//	private Set<String> telefones = new HashSet<>();
+
 	public Estabelecimento() {
 		
 	}	
@@ -41,7 +50,7 @@ public class Estabelecimento implements Serializable {
 		this.codCnes = codCnes;
 		this.descricao = descricao;
 		this.orgaoGestor = orgaoGestor;
-		this.naturezaJuridica = naturezaJuridica;
+		this.naturezaJuridica = naturezaJuridica;		
 	}
 
 	public Integer getId() {
@@ -99,6 +108,22 @@ public class Estabelecimento implements Serializable {
 	public void setAvaliacao(List<AvaliacaoEstabelecimento> avaliacao) {
 		this.avaliacao = avaliacao;
 	}
+	
+	public Endereco getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
+	}
+	
+//	public Set<String> getTelefones() {
+//		return telefones;
+//	}
+//
+//	public void setTelefones(Set<String> telefones) {
+//		this.telefones = telefones;
+//	}
 
 	@Override
 	public int hashCode() {
