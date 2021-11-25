@@ -44,6 +44,10 @@ public class Usuario implements Serializable {
 	@OneToMany(mappedBy="usuario")
 	private List<AvaliacaoEstabelecimento> avaliacoesE = new ArrayList<>();
 	
+	@JsonIgnore
+	@OneToMany(mappedBy="usuario")
+	private List<AvaliacaoServico> avaliacoesServico = new ArrayList<>();
+	
 	public Usuario()  {
 		
 	}

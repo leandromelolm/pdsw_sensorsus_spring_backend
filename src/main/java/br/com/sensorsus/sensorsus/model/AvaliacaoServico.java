@@ -13,7 +13,7 @@ import javax.persistence.ManyToOne;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
-public class AvaliacaoEstabelecimento implements Serializable {
+public class AvaliacaoServico implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -30,22 +30,22 @@ public class AvaliacaoEstabelecimento implements Serializable {
 	private Usuario usuario;
 	
 	@ManyToOne
-	@JoinColumn(name="estabelecimento_id")
-	private Estabelecimento estabelecimento;
+	@JoinColumn(name="servico_id")
+	private Servico servico;
 	
-	public AvaliacaoEstabelecimento() {	
+	public AvaliacaoServico() {	
 		
 	}
 
-	public AvaliacaoEstabelecimento(Integer idAvaliacao, Date dataCriacao, String descricao, Double classificacao,
-			Usuario usuario, Estabelecimento estabelecimento) {
+	public AvaliacaoServico(Integer idAvaliacao, Date dataCriacao, String descricao, Double classificacao,
+			Usuario usuario, Servico servico) {
 		super();
 		this.idAvaliacao = idAvaliacao;
 		this.dataCriacao = dataCriacao;
 		this.descricao = descricao;
 		this.classificacao = classificacao;
 		this.usuario = usuario;
-		this.estabelecimento = estabelecimento;
+		this.servico = servico;
 	}
 
 	public Integer getIdAvaliacao() {
@@ -104,7 +104,7 @@ public class AvaliacaoEstabelecimento implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		AvaliacaoEstabelecimento other = (AvaliacaoEstabelecimento) obj;
+		AvaliacaoServico other = (AvaliacaoServico) obj;
 		if (idAvaliacao == null) {
 			if (other.idAvaliacao != null)
 				return false;

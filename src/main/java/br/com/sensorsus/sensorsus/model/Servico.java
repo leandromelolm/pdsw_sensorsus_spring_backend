@@ -1,6 +1,8 @@
 package br.com.sensorsus.sensorsus.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,6 +10,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Servico implements Serializable {
@@ -22,6 +27,10 @@ public class Servico implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="estabelecimento_id")
 	Estabelecimento estabelecimento;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy="servico")
+	private List<AvaliacaoServico> avaliacoes = new ArrayList<>();
 
 	public Servico() {
 

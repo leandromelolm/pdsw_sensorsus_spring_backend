@@ -43,6 +43,7 @@ public class Estabelecimento implements Serializable {
     @CollectionTable(name ="TELEFONE")
 	private Set<String> telefones = new HashSet<>();
     
+    @JsonIgnore
     @OneToMany(mappedBy = "estabelecimento")    
     private List<Servico> servicos = new ArrayList<>();
 
