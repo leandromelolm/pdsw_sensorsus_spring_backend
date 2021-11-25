@@ -13,6 +13,7 @@ import br.com.sensorsus.sensorsus.model.Cidade;
 import br.com.sensorsus.sensorsus.model.Endereco;
 import br.com.sensorsus.sensorsus.model.Estabelecimento;
 import br.com.sensorsus.sensorsus.model.Estado;
+import br.com.sensorsus.sensorsus.model.Servico;
 import br.com.sensorsus.sensorsus.model.Usuario;
 import br.com.sensorsus.sensorsus.model.enums.TipoUsuario;
 import br.com.sensorsus.sensorsus.repositories.AvaliacaoEstabelecimentoRepository;
@@ -20,6 +21,7 @@ import br.com.sensorsus.sensorsus.repositories.CidadeRepository;
 import br.com.sensorsus.sensorsus.repositories.EnderecoRepository;
 import br.com.sensorsus.sensorsus.repositories.EstabelecimentoRepository;
 import br.com.sensorsus.sensorsus.repositories.EstadoRepository;
+import br.com.sensorsus.sensorsus.repositories.ServicoRepository;
 import br.com.sensorsus.sensorsus.repositories.UsuarioRepository;
 
 @SpringBootApplication
@@ -31,6 +33,8 @@ public class SensorsusApplication implements CommandLineRunner {
 	private AvaliacaoEstabelecimentoRepository avaliacaoEstabelecimentoReposity;
 	@Autowired
 	private EstabelecimentoRepository estabelecimentoReposity;
+	@Autowired
+	private ServicoRepository servicoReposity;
 	@Autowired
 	private EnderecoRepository enderecoRepository;
 	@Autowired
@@ -82,6 +86,23 @@ public class SensorsusApplication implements CommandLineRunner {
 		
 		estabelecimentoReposity.saveAll(Arrays.asList(e1,e2,e3,e4));
 		enderecoRepository.saveAll(Arrays.asList(end1, end2, end3, end4));
+		
+				
+		Servico serv1 = new Servico(null, "Emergência adulta", e1);
+		Servico serv2 = new Servico(null, "Hemodiálise", e1);
+		Servico serv3 = new Servico(null, "Emergencia pediátrica", e2);
+		Servico serv4 = new Servico(null, "UTI neonatal", e2);
+		Servico serv5 = new Servico(null, "Emergencia pediátrica", e3);
+		Servico serv6 = new Servico(null, "Odontologia", e3);
+		Servico serv7 = new Servico(null, "Pronto atendimento", e3);
+		Servico serv8 = new Servico(null, "Oncologia", e4);
+		
+		e1.getServicos().addAll(Arrays.asList(serv1,serv2));
+		e2.getServicos().addAll(Arrays.asList(serv3,serv4));
+		e3.getServicos().addAll(Arrays.asList(serv5,serv6, serv7));
+		e4.getServicos().addAll(Arrays.asList(serv8));
+		
+		servicoReposity.saveAll(Arrays.asList(serv1, serv2, serv3, serv4, serv5, serv6, serv7, serv8));
 		
 		
 		Usuario user1 = new Usuario(null,"usuario1 test1", "userTest1", "55555" , "test1@test.com", TipoUsuario.ADMIN);

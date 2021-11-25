@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.CollectionTable;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,6 +20,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Estabelecimento implements Serializable {
+	
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -31,12 +34,17 @@ public class Estabelecimento implements Serializable {
 	
 	@JsonIgnore
 	@OneToMany(mappedBy="estabelecimento")
-	private List<AvaliacaoEstabelecimento> avaliacao = new ArrayList<>();
+	private List<AvaliacaoEstabelecimento> avaliacoes = new ArrayList<>();
 	
     @OneToOne(cascade=CascadeType.ALL, mappedBy ="estabelecimento")
 	private Endereco endereco;
 	
-//	private Set<String> telefones = new HashSet<>();
+    @ElementCollection
+    @CollectionTable(name ="TELEFONE")
+	private Set<String> telefones = new HashSet<>();
+    
+    @OneToMany(mappedBy = "estabelecimento")    
+    private List<Servico> servicos = new ArrayList<>();
 
 	public Estabelecimento() {
 		
@@ -102,11 +110,11 @@ public class Estabelecimento implements Serializable {
 	}
 	
 	public List<AvaliacaoEstabelecimento> getAvaliacao() {
-		return avaliacao;
+		return avaliacoes;
 	}
 
 	public void setAvaliacao(List<AvaliacaoEstabelecimento> avaliacao) {
-		this.avaliacao = avaliacao;
+		this.avaliacoes = avaliacao;
 	}
 	
 	public Endereco getEndereco() {
@@ -117,13 +125,21 @@ public class Estabelecimento implements Serializable {
 		this.endereco = endereco;
 	}
 	
-//	public Set<String> getTelefones() {
-//		return telefones;
-//	}
-//
-//	public void setTelefones(Set<String> telefones) {
-//		this.telefones = telefones;
-//	}
+	public Set<String> getTelefones() {
+		return telefones;
+	}
+
+	public void setTelefones(Set<String> telefones) {
+		this.telefones = telefones;
+	}
+	
+	public List<Servico> getServicos() {
+		return servicos;
+	}
+
+	public void setServicos(List<Servico> servicos) {
+		this.servicos = servicos;
+	}
 
 	@Override
 	public int hashCode() {
