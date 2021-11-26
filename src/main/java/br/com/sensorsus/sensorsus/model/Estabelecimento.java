@@ -34,7 +34,7 @@ public class Estabelecimento implements Serializable {
 	private String orgaoGestor;
 	private String naturezaJuridica;
 	
-	@JsonIgnore
+//	@JsonIgnore
 	@OneToMany(mappedBy="estabelecimento")
 	private List<AvaliacaoEstabelecimento> avaliacoes = new ArrayList<>();
 	
