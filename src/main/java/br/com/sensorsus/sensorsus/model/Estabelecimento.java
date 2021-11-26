@@ -17,8 +17,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.databind.annotation.JsonValueInstantiator;
 
 @Entity
 public class Estabelecimento implements Serializable {
@@ -36,9 +34,8 @@ public class Estabelecimento implements Serializable {
 	
 //	@JsonIgnore
 	@OneToMany(mappedBy="estabelecimento")
-	private List<AvaliacaoEstabelecimento> avaliacoes = new ArrayList<>();
+	private List<AvaliacaoEstabelecimento> avaliacoes = new ArrayList<>();	
 	
-	@JsonManagedReference
 	@OneToOne(cascade=CascadeType.ALL, mappedBy ="estabelecimento")
 	private Endereco endereco;
 	

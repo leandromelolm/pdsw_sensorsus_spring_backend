@@ -76,6 +76,7 @@ public class SensorsusApplication implements CommandLineRunner {
 		Estabelecimento estab2 = new Estabelecimento(null, "Hospital Beta", 55555, " Olinda", "Estadual", "Administracão pública");		
 		Estabelecimento estab3 = new Estabelecimento(null, "Hospital Omega", 88888, " Jaboatao", "Municipal", "Filantropico");
 		Estabelecimento estab4 = new Estabelecimento(null, "Hospital Delta", 599911, " Recife", "Federal", "Administracão pública");
+		Estabelecimento estab5 = new Estabelecimento(null, "Hospital Salva Todos", 599911, " Recife", "Federal", "Administracão pública");
 		
 		Endereco end1 = new Endereco(null, "Avenida Principal", 1000, "Bairro", "Proximo a Rodovia", "70999000", estab1, c4 );
 		estab1.setEndereco(end1);
@@ -89,7 +90,7 @@ public class SensorsusApplication implements CommandLineRunner {
 		Endereco end4 = new Endereco(null, "Avenida Teste ", 4000, "Bairro novo", "Em algum lugar perto de alguma coisa", "77999555", estab4, c2 );
 		estab4.setEndereco(end4);
 		
-		estabelecimentoReposity.saveAll(Arrays.asList(estab1, estab2, estab3, estab4));
+		estabelecimentoReposity.saveAll(Arrays.asList(estab1, estab2, estab3, estab4, estab5));
 		enderecoRepository.saveAll(Arrays.asList(end1, end2, end3, end4));
 		
 				
@@ -124,9 +125,10 @@ public class SensorsusApplication implements CommandLineRunner {
 		AvaliacaoEstabelecimento avE2 = new AvaliacaoEstabelecimento(null, sdf.parse("30/10/2021 10:33"),"Atendimento Ruim",2.2, user1, estab4);
 		AvaliacaoEstabelecimento avE3 = new AvaliacaoEstabelecimento(null, sdf.parse("25/10/2021 10:35"),"Mais ou menos",2.6, user3, estab1);
 		AvaliacaoEstabelecimento avE4 = new AvaliacaoEstabelecimento(null, sdf.parse("23/11/2021 11:10"),"Foi Bom o atendimento, mas poderia ser melhor",3.5, user4, estab2);
-		AvaliacaoEstabelecimento avE5 = new AvaliacaoEstabelecimento(null, sdf.parse("23/11/2021 11:10"),"Atendimento TOP",5.0, user4, estab1);		
+		AvaliacaoEstabelecimento avE5 = new AvaliacaoEstabelecimento(null, sdf.parse("23/11/2021 11:10"),"Atendimento TOP",5.0, user4, estab1);
+		AvaliacaoEstabelecimento avE6 = new AvaliacaoEstabelecimento(null, sdf.parse("11/11/2021 11:10"),"Hospital Omega muito bom",5.0, user4, estab3);
 				
-		avaliacaoEstabelecimentoReposity.saveAll(Arrays.asList(avE1,avE2,avE3,avE5,avE4));
+		avaliacaoEstabelecimentoReposity.saveAll(Arrays.asList(avE1, avE2, avE3, avE4, avE5, avE6));
 		
 		
 		AvaliacaoServico avServ1 = new AvaliacaoServico(null, sdf.parse("30/09/2021 10:31"),"Muito Bom",5.0, user1, serv8);
