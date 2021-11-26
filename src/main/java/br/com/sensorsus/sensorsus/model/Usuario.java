@@ -31,6 +31,7 @@ public class Usuario implements Serializable {
 	@NotNull
 	@NotBlank	
 	private String username;
+	@JsonIgnore
 	@NotNull
 	@NotBlank
 	private String senha;
