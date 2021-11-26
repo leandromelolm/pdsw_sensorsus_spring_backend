@@ -17,6 +17,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.databind.annotation.JsonValueInstantiator;
 
 @Entity
 public class Estabelecimento implements Serializable {
@@ -36,17 +38,18 @@ public class Estabelecimento implements Serializable {
 	@OneToMany(mappedBy="estabelecimento")
 	private List<AvaliacaoEstabelecimento> avaliacoes = new ArrayList<>();
 	
-    @OneToOne(cascade=CascadeType.ALL, mappedBy ="estabelecimento")
+	@JsonManagedReference
+	@OneToOne(cascade=CascadeType.ALL, mappedBy ="estabelecimento")
 	private Endereco endereco;
 	
-    @ElementCollection
-    @CollectionTable(name ="TELEFONE")
+	@ElementCollection
+	@CollectionTable(name ="TELEFONE")
 	private Set<String> telefones = new HashSet<>();
-    
-    @JsonIgnore
-    @OneToMany(mappedBy = "estabelecimento")    
+	
+	@JsonIgnore
+    @OneToMany(mappedBy = "estabelecimento")
     private List<Servico> servicos = new ArrayList<>();
-
+	
 	public Estabelecimento() {
 		
 	}	

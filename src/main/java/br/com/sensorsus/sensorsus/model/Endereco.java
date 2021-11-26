@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -21,22 +22,23 @@ public class Endereco implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
-    @Column(length = 150, nullable = false)
-    private String logradouro;
-    @Column(length = 6, nullable = false)
-    private Integer numero;
-    @Column(length = 100, nullable = false)
-    private String bairro;
-    @Column(length = 250, nullable = false)
-    private String complemento;
-    @Column(length = 20, nullable = false)    
-    private String cep;
-    
-    @JsonIgnore
+	@Column(length = 150, nullable = false)
+	private String logradouro;
+	@Column(length = 6, nullable = false)
+	private Integer numero;
+	@Column(length = 100, nullable = false)
+	private String bairro;
+	@Column(length = 250, nullable = false)
+	private String complemento;
+	@Column(length = 20, nullable = false)
+	private String cep;
+	
+	@JsonBackReference
 	@OneToOne
-	@JoinColumn(name="estabelecimento_id")	
-    private Estabelecimento estabelecimento;
-    
+	@JoinColumn(name="estabelecimento_id")
+	private Estabelecimento estabelecimento;
+	
+	
 	@ManyToOne
 	@JoinColumn(name="cidade_id")
 	private Cidade cidade;
