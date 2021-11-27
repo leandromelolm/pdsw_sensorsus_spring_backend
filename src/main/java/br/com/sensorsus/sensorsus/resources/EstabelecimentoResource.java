@@ -1,7 +1,6 @@
 package br.com.sensorsus.sensorsus.resources;
 
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.sensorsus.sensorsus.dto.EstabelecimentoAvaliacaoDTO;
 import br.com.sensorsus.sensorsus.dto.EstabelecimentoDTO;
 import br.com.sensorsus.sensorsus.model.Estabelecimento;
 import br.com.sensorsus.sensorsus.services.EstabelecimentoService;
@@ -28,10 +28,19 @@ public class EstabelecimentoResource {
 		return ResponseEntity.ok().body(obj);
 	}
 	
+	@RequestMapping(value="/avaliacoes", method=RequestMethod.GET)
+	public ResponseEntity<List<EstabelecimentoAvaliacaoDTO>> findAvaliacao() {
+		List<Estabelecimento> list = service.findAvaliacao();
+		List<EstabelecimentoAvaliacaoDTO> listAvalicaoDto = list.stream().map(obj -> new EstabelecimentoAvaliacaoDTO(obj)).collect(Collectors.toList());
+		return ResponseEntity.ok().body(listAvalicaoDto);
+	}
+	
 	@RequestMapping(method=RequestMethod.GET)
 	public ResponseEntity<List<EstabelecimentoDTO>> findAll() {
 		List<Estabelecimento> list = service.findAll();
 		List<EstabelecimentoDTO> listDto = list.stream().map(obj -> new EstabelecimentoDTO(obj)).collect(Collectors.toList());
 		return ResponseEntity.ok().body(listDto);
 	}
+	
+	
 }
