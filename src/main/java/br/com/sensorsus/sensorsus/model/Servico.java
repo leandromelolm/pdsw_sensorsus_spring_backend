@@ -22,15 +22,15 @@ public class Servico implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private String nome;
+	private String nome;	
 	
 	@ManyToOne
 	@JoinColumn(name="estabelecimento_id")
 	Estabelecimento estabelecimento;
 	
-	@JsonIgnore
+//	@JsonIgnore
 	@OneToMany(mappedBy="servico")
-	private List<AvaliacaoServico> avaliacoes = new ArrayList<>();
+	private List<AvaliacaoServico> avaliacoesServico = new ArrayList<>();
 
 	public Servico() {
 
@@ -65,6 +65,14 @@ public class Servico implements Serializable {
 
 	public void setEstabelecimento(Estabelecimento estabelecimento) {
 		this.estabelecimento = estabelecimento;
+	}
+
+	public List<AvaliacaoServico> getAvaliacoesServico() {
+		return avaliacoesServico;
+	}
+
+	public void setAvaliacoesServico(List<AvaliacaoServico> avaliacoesServico) {
+		this.avaliacoesServico = avaliacoesServico;
 	}
 
 	@Override

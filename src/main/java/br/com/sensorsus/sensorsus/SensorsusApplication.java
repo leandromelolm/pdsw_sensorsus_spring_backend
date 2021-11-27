@@ -121,23 +121,29 @@ public class SensorsusApplication implements CommandLineRunner {
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");		
 		
-		AvaliacaoEstabelecimento avE1 = new AvaliacaoEstabelecimento(null, sdf.parse("30/09/2021 10:31"),"Muito Bom",4.0, user2, estab1);
-		AvaliacaoEstabelecimento avE2 = new AvaliacaoEstabelecimento(null, sdf.parse("30/10/2021 10:33"),"Atendimento Ruim",2.2, user1, estab4);
-		AvaliacaoEstabelecimento avE3 = new AvaliacaoEstabelecimento(null, sdf.parse("25/10/2021 10:35"),"Mais ou menos",2.6, user3, estab1);
-		AvaliacaoEstabelecimento avE4 = new AvaliacaoEstabelecimento(null, sdf.parse("23/11/2021 11:10"),"Foi Bom o atendimento, mas poderia ser melhor",3.5, user4, estab2);
-		AvaliacaoEstabelecimento avE5 = new AvaliacaoEstabelecimento(null, sdf.parse("23/11/2021 11:10"),"Atendimento TOP",5.0, user4, estab1);
+		AvaliacaoEstabelecimento avE1 = new AvaliacaoEstabelecimento(null, sdf.parse("30/09/2021 10:31"),"Hospital Muito Bom",4.0, user2, estab1);
+		AvaliacaoEstabelecimento avE2 = new AvaliacaoEstabelecimento(null, sdf.parse("30/10/2021 10:33"),"Hospital Atendimento Ruim",2.2, user1, estab4);
+		AvaliacaoEstabelecimento avE3 = new AvaliacaoEstabelecimento(null, sdf.parse("25/10/2021 10:35"),"Hospital Mais ou menos",2.6, user3, estab1);
+		AvaliacaoEstabelecimento avE4 = new AvaliacaoEstabelecimento(null, sdf.parse("23/11/2021 11:10"),"Hospital Foi Bom o atendimento, mas poderia ser melhor",3.5, user4, estab2);
+		AvaliacaoEstabelecimento avE5 = new AvaliacaoEstabelecimento(null, sdf.parse("23/11/2021 11:10"),"Hospital Atendimento TOP",5.0, user4, estab1);
 		AvaliacaoEstabelecimento avE6 = new AvaliacaoEstabelecimento(null, sdf.parse("11/11/2021 11:10"),"Hospital Omega muito bom",5.0, user4, estab3);
+		AvaliacaoEstabelecimento avE7 = new AvaliacaoEstabelecimento(null, sdf.parse("11/11/2021 11:10"),"Hospital Omega muito bom 7",5.0, user4, estab3);
+		AvaliacaoEstabelecimento avE8 = new AvaliacaoEstabelecimento(null, sdf.parse("11/11/2021 11:10"),"Hospital Omega muito bom 8",5.0, user4, estab3);
+		AvaliacaoEstabelecimento avE9 = new AvaliacaoEstabelecimento(null, sdf.parse("11/11/2021 11:10"),"Hospital Omega muito bom 9",5.0, user4, estab3);
+		AvaliacaoEstabelecimento avE10 = new AvaliacaoEstabelecimento(null, sdf.parse("11/11/2021 11:10"),"Hospital Omega muito bom10 ",5.0, user4, estab2);
+		AvaliacaoEstabelecimento avE11 = new AvaliacaoEstabelecimento(null, sdf.parse("11/11/2021 11:10"),"Hospital Omega muito bom 11",5.0, user4, estab2);
+		AvaliacaoEstabelecimento avE12 = new AvaliacaoEstabelecimento(null, sdf.parse("11/11/2021 11:10"),"Hospital Omega muito bom 12",5.0, user4, estab1);
 				
-		avaliacaoEstabelecimentoReposity.saveAll(Arrays.asList(avE1, avE2, avE3, avE4, avE5, avE6));
+		avaliacaoEstabelecimentoReposity.saveAll(Arrays.asList(avE1, avE2, avE3, avE4, avE5, avE6, avE7, avE8, avE9, avE10, avE11, avE12));
 		
 		
-		AvaliacaoServico avServ1 = new AvaliacaoServico(null, sdf.parse("30/09/2021 10:31"),"Muito Bom",5.0, user1, serv8);
-		AvaliacaoServico avServ2 = new AvaliacaoServico(null, sdf.parse("30/09/2021 10:31"),"Ruim",1.5, user1, serv2);
-		AvaliacaoServico avServ3 = new AvaliacaoServico(null, sdf.parse("30/09/2021 10:31"),"Não muito Legal",3.0, user2, serv5);
-		AvaliacaoServico avServ4 = new AvaliacaoServico(null, sdf.parse("30/09/2021 10:31"),"Não sei responder",0.0, user3, serv6);
-		AvaliacaoServico avServ5 = new AvaliacaoServico(null, sdf.parse("30/09/2021 10:31"),"Atendimento demorado",3.0, user4, serv7);
-		AvaliacaoServico avServ6 = new AvaliacaoServico(null, sdf.parse("28/09/2021 10:31"),"Full HD",4.9, user4, serv7);
-		AvaliacaoServico avServ7 = new AvaliacaoServico(null, sdf.parse("29/09/2021 10:31"),"atendimento ótimo",4.5, user1, serv5);
+		AvaliacaoServico avServ1 = new AvaliacaoServico(null, sdf.parse("30/09/2021 10:31"),"serviço Muito Bom",5.0, user1, serv8);
+		AvaliacaoServico avServ2 = new AvaliacaoServico(null, sdf.parse("30/09/2021 10:31"),"E um serviço Ruim",1.5, user1, serv2);
+		AvaliacaoServico avServ3 = new AvaliacaoServico(null, sdf.parse("30/09/2021 10:31"),"Esse serviço Não é muito Legal",3.0, user2, serv5);
+		AvaliacaoServico avServ4 = new AvaliacaoServico(null, sdf.parse("30/09/2021 10:31"),"serviço Não sei responder",0.0, user3, serv6);
+		AvaliacaoServico avServ5 = new AvaliacaoServico(null, sdf.parse("30/09/2021 10:31"),"serviço Atendimento demorado",3.0, user4, serv7);
+		AvaliacaoServico avServ6 = new AvaliacaoServico(null, sdf.parse("28/09/2021 10:31"),"serviço Full HD",4.9, user4, serv7);
+		AvaliacaoServico avServ7 = new AvaliacaoServico(null, sdf.parse("29/09/2021 10:31"),"serviçoatendimento ótimo",4.5, user1, serv5);
 		
 		avaliacaoServicoRepository.saveAll(Arrays.asList(avServ1, avServ2, avServ3, avServ4, avServ5, avServ6, avServ7));
 	}
