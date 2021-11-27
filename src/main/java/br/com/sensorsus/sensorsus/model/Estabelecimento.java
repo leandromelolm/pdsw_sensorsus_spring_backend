@@ -32,10 +32,6 @@ public class Estabelecimento implements Serializable {
 	private String orgaoGestor;
 	private String naturezaJuridica;
 	
-	@JsonIgnore
-	@OneToMany(mappedBy="estabelecimento")
-	private List<AvaliacaoEstabelecimento> avaliacoes = new ArrayList<>();	
-		
 	@OneToOne(cascade=CascadeType.ALL, mappedBy ="estabelecimento")
 	private Endereco endereco;
 	
@@ -46,6 +42,10 @@ public class Estabelecimento implements Serializable {
 	@JsonIgnore
     @OneToMany(mappedBy = "estabelecimento")
     private List<Servico> servicos = new ArrayList<>();
+	
+//	@JsonIgnore
+	@OneToMany(mappedBy="estabelecimento")
+	private List<AvaliacaoEstabelecimento> avaliacoes = new ArrayList<>();
 	
 	public Estabelecimento() {
 		
@@ -110,14 +110,6 @@ public class Estabelecimento implements Serializable {
 		this.naturezaJuridica = naturezaJuridica;
 	}
 	
-	public List<AvaliacaoEstabelecimento> getAvaliacoes() {
-		return avaliacoes;
-	}
-
-	public void setAvaliacoes(List<AvaliacaoEstabelecimento> avaliacoes) {
-		this.avaliacoes = avaliacoes;
-	}
-	
 	public Endereco getEndereco() {
 		return endereco;
 	}
@@ -142,6 +134,13 @@ public class Estabelecimento implements Serializable {
 		this.servicos = servicos;
 	}
 	
+	public List<AvaliacaoEstabelecimento> getAvaliacoes() {
+		return avaliacoes;
+	}
+
+	public void setAvaliacoes(List<AvaliacaoEstabelecimento> avaliacoes) {
+		this.avaliacoes = avaliacoes;
+	}
 
 	@Override
 	public int hashCode() {

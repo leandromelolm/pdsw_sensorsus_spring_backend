@@ -26,7 +26,7 @@ public class Servico implements Serializable {
 
 	@ManyToOne
 	@JoinColumn(name="estabelecimento_id")
-	Estabelecimento estabelecimento;
+	private Estabelecimento estabelecimento;
 	
 	@JsonIgnore
 	@OneToMany(mappedBy="servico")

@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class AvaliacaoEstabelecimento implements Serializable {
@@ -29,9 +30,10 @@ public class AvaliacaoEstabelecimento implements Serializable {
 	@JoinColumn(name="usuario_id")
 	private Usuario usuario;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="estabelecimento_id")
-	private Estabelecimento estabelecimento;
+	private Estabelecimento estabelecimento;	
 	
 	public AvaliacaoEstabelecimento() {	
 		
@@ -88,8 +90,6 @@ public class AvaliacaoEstabelecimento implements Serializable {
 		this.usuario = usuario;
 	}
 	
-	
-
 	public Estabelecimento getEstabelecimento() {
 		return estabelecimento;
 	}
@@ -97,6 +97,7 @@ public class AvaliacaoEstabelecimento implements Serializable {
 	public void setEstabelecimento(Estabelecimento estabelecimento) {
 		this.estabelecimento = estabelecimento;
 	}
+	
 
 	@Override
 	public int hashCode() {
@@ -121,6 +122,6 @@ public class AvaliacaoEstabelecimento implements Serializable {
 		} else if (!idAvaliacao.equals(other.idAvaliacao))
 			return false;
 		return true;
-	}
+	}	
 
 }
