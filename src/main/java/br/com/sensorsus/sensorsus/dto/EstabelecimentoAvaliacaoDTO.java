@@ -18,6 +18,7 @@ public class EstabelecimentoAvaliacaoDTO implements Serializable {
 	private Integer codCnes;
 	
 	private List<AvaliacaoEstabelecimento> avaliacoes = new ArrayList<>();
+//	private List<AvaliacaoEstabelecimentoDTO> avaliacoesDTO = new ArrayList<>();
 	
 	public EstabelecimentoAvaliacaoDTO() {		
 	}
@@ -26,7 +27,14 @@ public class EstabelecimentoAvaliacaoDTO implements Serializable {
 		id = obj.getId();
 		nome = obj.getNome();
 		codCnes = obj.getCodCnes();
-		setAvaliacoes(obj.getAvaliacoes());
+		
+//		setAvaliacoes(obj.getAvaliacoes());
+		
+		avaliacoes = obj.getAvaliacoes();
+		
+//		setAvaliacoesDTO(obj.getAvaliacoes());
+		
+//		avaliacoesDTO = obj.getAvaliacoes();
 	}
 
 	public Integer getId() {
@@ -60,6 +68,14 @@ public class EstabelecimentoAvaliacaoDTO implements Serializable {
 	public void setAvaliacoes(List<AvaliacaoEstabelecimento> avaliacoes) {
 		this.avaliacoes = avaliacoes;
 	}
+
+//	public List<AvaliacaoEstabelecimentoDTO> getAvaliacoesDTO() {
+//		return avaliacoesDTO;
+//	}
+//
+//	public void setAvaliacoesDTO(List<AvaliacaoEstabelecimentoDTO> avaliacoesDTO) {
+//		this.avaliacoesDTO = avaliacoesDTO;
+//	}
 	
 	
 

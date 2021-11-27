@@ -25,20 +25,27 @@ public class Usuario implements Serializable {
 	@Id	
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	
+	@JsonIgnore
 	@NotNull
 	@NotBlank	
 	private String nomeCompleto;
+	
 	@NotNull
 	@NotBlank	
 	private String username;
+	
 	@JsonIgnore
 	@NotNull
 	@NotBlank
 	private String senha;
+	
+	@JsonIgnore
 	@NotNull
 	@NotBlank
-	private String email;
+	private String email;	
 	
+	@JsonIgnore
 	private Integer tipoUsuario;
 	
 	@JsonIgnore
@@ -53,7 +60,8 @@ public class Usuario implements Serializable {
 		
 	}
 	
-	public Usuario(Integer id, String nomeCompleto, String username, String senha, String email, TipoUsuario tipoUsuario) {
+	public Usuario(Integer id, String nomeCompleto, String username, 
+			String senha, String email, TipoUsuario tipoUsuario) {
 		super();
 		this.id = id;
 		this.nomeCompleto = nomeCompleto;
@@ -116,6 +124,15 @@ public class Usuario implements Serializable {
 
 	public void setAvaliacoesServico(List<AvaliacaoServico> avaliacoesServico) {
 		this.avaliacoesServico = avaliacoesServico;
+	}
+	
+	
+	public Integer getTipoUsuario() {
+		return tipoUsuario;
+	}
+
+	public void setTipoUsuario(Integer tipoUsuario) {
+		this.tipoUsuario = tipoUsuario;
 	}
 
 	@Override
