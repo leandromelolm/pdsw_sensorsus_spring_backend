@@ -28,9 +28,10 @@ public class EstabelecimentoResource {
 		return ResponseEntity.ok().body(obj);
 	}
 	
+	//**listando todos estabelecimentos e suas respectivas avaliacões  com DTO - EndPoint '/estabelecimento/avaliacoes'*/
 	@RequestMapping(value="/avaliacoes", method=RequestMethod.GET)
 	public ResponseEntity<List<EstabelecimentoAvaliacaoDTO>> findAvaliacao() {
-		List<Estabelecimento> list = service.findAvaliacao();
+		List<Estabelecimento> list = service.findAll();
 		List<EstabelecimentoAvaliacaoDTO> listAvalicaoDto = list.stream().map(obj -> new EstabelecimentoAvaliacaoDTO(obj)).collect(Collectors.toList());
 		return ResponseEntity.ok().body(listAvalicaoDto);
 	}

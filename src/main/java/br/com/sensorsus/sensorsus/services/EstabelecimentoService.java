@@ -27,9 +27,4 @@ public class EstabelecimentoService {
 		return repo.findAll();
 	}
 
-	public List<Estabelecimento> findAvaliacao() {
-
-		return repo.findAll();
-	}
-
 }

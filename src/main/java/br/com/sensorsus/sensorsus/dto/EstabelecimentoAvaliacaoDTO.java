@@ -2,13 +2,13 @@ package br.com.sensorsus.sensorsus.dto;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+
 
 import br.com.sensorsus.sensorsus.model.AvaliacaoEstabelecimento;
 import br.com.sensorsus.sensorsus.model.Estabelecimento;
 
+/**Data Transfer Object (DTO)*/
 public class EstabelecimentoAvaliacaoDTO implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
