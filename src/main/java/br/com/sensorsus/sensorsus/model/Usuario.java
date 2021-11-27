@@ -110,6 +110,13 @@ public class Usuario implements Serializable {
 		this.avaliacoesE = avaliacoesE;
 	}
 	
+	public List<AvaliacaoServico> getAvaliacoesServico() {
+		return avaliacoesServico;
+	}
+
+	public void setAvaliacoesServico(List<AvaliacaoServico> avaliacoesServico) {
+		this.avaliacoesServico = avaliacoesServico;
+	}
 
 	@Override
 	public int hashCode() {

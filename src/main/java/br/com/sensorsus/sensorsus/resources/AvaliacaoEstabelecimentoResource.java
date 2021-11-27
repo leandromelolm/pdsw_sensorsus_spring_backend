@@ -11,7 +11,7 @@ import br.com.sensorsus.sensorsus.model.AvaliacaoEstabelecimento;
 import br.com.sensorsus.sensorsus.services.AvaliacaoEstabelecimentoService;
 
 @RestController
-@RequestMapping(value="/avaliacaoestabelecimentos")
+@RequestMapping(value="/avaliacoesestabelecimentos")
 public class AvaliacaoEstabelecimentoResource {
 	
 	@Autowired

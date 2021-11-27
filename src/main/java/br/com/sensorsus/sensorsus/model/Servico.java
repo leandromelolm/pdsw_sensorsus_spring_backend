@@ -22,13 +22,13 @@ public class Servico implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private String nome;	
-	
+	private String nome;
+
 	@ManyToOne
 	@JoinColumn(name="estabelecimento_id")
 	Estabelecimento estabelecimento;
 	
-//	@JsonIgnore
+	@JsonIgnore
 	@OneToMany(mappedBy="servico")
 	private List<AvaliacaoServico> avaliacoesServico = new ArrayList<>();
 

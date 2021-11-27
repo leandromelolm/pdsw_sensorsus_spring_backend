@@ -33,6 +33,8 @@ public class AvaliacaoServico implements Serializable {
 	@JoinColumn(name="servico_id")
 	private Servico servico;
 	
+	
+	
 	public AvaliacaoServico() {	
 		
 	}
@@ -86,6 +88,14 @@ public class AvaliacaoServico implements Serializable {
 
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
+	}	
+
+	public Servico getServico() {
+		return servico;
+	}
+
+	public void setServico(Servico servico) {
+		this.servico = servico;
 	}
 
 	@Override
