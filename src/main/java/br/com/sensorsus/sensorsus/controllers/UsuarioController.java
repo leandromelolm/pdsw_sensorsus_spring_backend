@@ -1,4 +1,4 @@
-package br.com.sensorsus.sensorsus.resources;
+package br.com.sensorsus.sensorsus.controllers;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,18 +15,19 @@ import br.com.sensorsus.sensorsus.model.Usuario;
 import br.com.sensorsus.sensorsus.services.UsuarioService;
 
 @RestController
-@RequestMapping(value="/usuarios")
-public class UsuarioResource {
-	
+@RequestMapping(value = "/usuarios")
+public class UsuarioController {
+
 	@Autowired
 	private UsuarioService service;
-	
-	@RequestMapping(value="/{id}", method=RequestMethod.GET)
+
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> find(@PathVariable Integer id) {
 		Usuario obj = service.find(id);
 		return ResponseEntity.ok().body(obj);
 	}
-	@RequestMapping(method=RequestMethod.GET)
+
+	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<UsuarioDTO>> findAll() {
 		List<Usuario> list = service.findAll();
 		List<UsuarioDTO> listDto = list.stream().map(obj -> new UsuarioDTO(obj)).collect(Collectors.toList());

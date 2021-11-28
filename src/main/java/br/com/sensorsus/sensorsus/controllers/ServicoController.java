@@ -1,4 +1,4 @@
-package br.com.sensorsus.sensorsus.resources;
+package br.com.sensorsus.sensorsus.controllers;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,29 +18,31 @@ import br.com.sensorsus.sensorsus.model.Servico;
 import br.com.sensorsus.sensorsus.services.ServicoService;
 
 @RestController
-@RequestMapping(value="/servicos")
-public class ServicoResource {
-	
+@RequestMapping(value = "/servicos")
+public class ServicoController {
+
 	@Autowired
 	private ServicoService service;
-	
-	@RequestMapping(value="/{id}", method=RequestMethod.GET)
+
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> find(@PathVariable Integer id) {
 		Servico obj = service.find(id);
 		return ResponseEntity.ok().body(obj);
 	}
-	
-	//**listando todos estabelecimentos e suas respectivas avaliacões  com DTO - EndPoint '/estabelecimento/avaliacoes'*/
-	@RequestMapping(value="/avaliacoes", method=RequestMethod.GET)
+
+	// **listando todos estabelecimentos e suas respectivas avaliacões com DTO -
+	// EndPoint '/estabelecimento/avaliacoes'*/
+	@RequestMapping(value = "/avaliacoes", method = RequestMethod.GET)
 	public ResponseEntity<List<ServicoAvaliacaoDTO>> findAvaliacao() {
 		List<Servico> list = service.findAll();
-		List<ServicoAvaliacaoDTO> listAvalicaoDto = list.stream().map(obj -> new ServicoAvaliacaoDTO(obj)).collect(Collectors.toList());
+		List<ServicoAvaliacaoDTO> listAvalicaoDto = list.stream().map(obj -> new ServicoAvaliacaoDTO(obj))
+				.collect(Collectors.toList());
 		return ResponseEntity.ok().body(listAvalicaoDto);
 	}
-	
-	@RequestMapping(method=RequestMethod.GET)
+
+	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<ServicoDTO>> findAll() {
-		List<Servico> list = service.findAll();		
+		List<Servico> list = service.findAll();
 		List<ServicoDTO> listDto = list.stream().map(obj -> new ServicoDTO(obj)).collect(Collectors.toList());
 		return ResponseEntity.ok().body(listDto);
 	}

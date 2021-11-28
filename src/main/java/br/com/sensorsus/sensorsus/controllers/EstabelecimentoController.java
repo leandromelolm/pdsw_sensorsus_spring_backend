@@ -1,4 +1,4 @@
-package br.com.sensorsus.sensorsus.resources;
+package br.com.sensorsus.sensorsus.controllers;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,32 +16,34 @@ import br.com.sensorsus.sensorsus.model.Estabelecimento;
 import br.com.sensorsus.sensorsus.services.EstabelecimentoService;
 
 @RestController
-@RequestMapping(value="/estabelecimentos")
-public class EstabelecimentoResource {
-	
+@RequestMapping(value = "/estabelecimentos")
+public class EstabelecimentoController {
+
 	@Autowired
 	private EstabelecimentoService service;
-	
-	@RequestMapping(value="/{id}", method=RequestMethod.GET)
+
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> find(@PathVariable Integer id) {
 		Estabelecimento obj = service.find(id);
 		return ResponseEntity.ok().body(obj);
 	}
-	
-	//**listando todos estabelecimentos e suas respectivas avaliacões  com DTO - EndPoint '/estabelecimento/avaliacoes'*/
-	@RequestMapping(value="/avaliacoes", method=RequestMethod.GET)
+
+	// **listando todos estabelecimentos e suas respectivas avaliacões com DTO -
+	// EndPoint '/estabelecimento/avaliacoes'*/
+	@RequestMapping(value = "/avaliacoes", method = RequestMethod.GET)
 	public ResponseEntity<List<EstabelecimentoAvaliacaoDTO>> findAvaliacao() {
 		List<Estabelecimento> list = service.findAll();
-		List<EstabelecimentoAvaliacaoDTO> listAvalicaoDto = list.stream().map(obj -> new EstabelecimentoAvaliacaoDTO(obj)).collect(Collectors.toList());
+		List<EstabelecimentoAvaliacaoDTO> listAvalicaoDto = list.stream()
+				.map(obj -> new EstabelecimentoAvaliacaoDTO(obj)).collect(Collectors.toList());
 		return ResponseEntity.ok().body(listAvalicaoDto);
 	}
-	
-	@RequestMapping(method=RequestMethod.GET)
+
+	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<EstabelecimentoDTO>> findAll() {
 		List<Estabelecimento> list = service.findAll();
-		List<EstabelecimentoDTO> listDto = list.stream().map(obj -> new EstabelecimentoDTO(obj)).collect(Collectors.toList());
+		List<EstabelecimentoDTO> listDto = list.stream().map(obj -> new EstabelecimentoDTO(obj))
+				.collect(Collectors.toList());
 		return ResponseEntity.ok().body(listDto);
 	}
-	
-	
+
 }

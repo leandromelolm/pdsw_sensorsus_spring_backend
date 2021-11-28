@@ -1,4 +1,4 @@
-package br.com.sensorsus.sensorsus.resources;
+package br.com.sensorsus.sensorsus.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -11,13 +11,13 @@ import br.com.sensorsus.sensorsus.model.AvaliacaoServico;
 import br.com.sensorsus.sensorsus.services.AvaliacaoServicoService;
 
 @RestController
-@RequestMapping(value="/avaliacoesservicos")
-public class AvaliacaoServicoResource {
-	
+@RequestMapping(value = "/avaliacoesservicos")
+public class AvaliacaoServicoController {
+
 	@Autowired
 	private AvaliacaoServicoService service;
-	
-	@RequestMapping(value="/{id}", method=RequestMethod.GET)
+
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> find(@PathVariable Integer id) {
 		AvaliacaoServico obj = service.find(id);
 		return ResponseEntity.ok().body(obj);
