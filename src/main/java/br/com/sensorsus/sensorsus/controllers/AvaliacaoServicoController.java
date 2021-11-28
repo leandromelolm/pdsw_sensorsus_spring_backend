@@ -16,9 +16,9 @@ public class AvaliacaoServicoController {
 
 	@Autowired
 	private AvaliacaoServicoService service;
-
 	
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	
+	@RequestMapping(value = "/teste/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> find(@PathVariable Integer id) {
 		AvaliacaoServico obj = service.find(id);
 		return ResponseEntity.ok().body(obj);

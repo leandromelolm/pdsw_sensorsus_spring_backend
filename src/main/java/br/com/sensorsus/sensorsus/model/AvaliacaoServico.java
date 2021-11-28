@@ -34,8 +34,7 @@ public class AvaliacaoServico implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="servico_id")
 	private Servico servico;
-	
-	
+		
 	
 	public AvaliacaoServico() {	
 		

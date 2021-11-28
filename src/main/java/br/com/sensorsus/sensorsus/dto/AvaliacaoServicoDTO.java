@@ -13,7 +13,7 @@ public class AvaliacaoServicoDTO implements Serializable {
 	
 	private Integer id;
 	private String nome;
-	private String estabelecimento;
+	private String nomeEstabelecimento;
 	
 	private List<AvaliacaoServico> avaliacoesServico = new ArrayList<>();
 	
@@ -26,6 +26,7 @@ public class AvaliacaoServicoDTO implements Serializable {
 		id = obj.getId();
 		nome = obj.getNome();
 		setEstabelecimento(obj.getEstabelecimento().getNome());
+		
 		avaliacoesServico = obj.getAvaliacoesServico();
 	}
 
@@ -46,11 +47,11 @@ public class AvaliacaoServicoDTO implements Serializable {
 	}
 
 	public String getEstabelecimento() {
-		return estabelecimento;
+		return nomeEstabelecimento;
 	}
 
 	public void setEstabelecimento(String estabelecimento) {
-		this.estabelecimento = estabelecimento;
+		this.nomeEstabelecimento = estabelecimento;
 	}
 
 	public List<AvaliacaoServico> getAvaliacoesServico() {
@@ -60,6 +61,12 @@ public class AvaliacaoServicoDTO implements Serializable {
 	public void setAvaliacoesServico(List<AvaliacaoServico> avaliacoesServico) {
 		this.avaliacoesServico = avaliacoesServico;
 	}
-	
-	
+
+	public String getNomeEstabelecimento() {
+		return nomeEstabelecimento;
+	}
+
+	public void setNomeEstabelecimento(String nomeEstabelecimento) {
+		this.nomeEstabelecimento = nomeEstabelecimento;
+	}
 }
