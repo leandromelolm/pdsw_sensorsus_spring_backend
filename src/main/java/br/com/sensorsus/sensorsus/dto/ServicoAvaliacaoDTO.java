@@ -1,5 +1,65 @@
 package br.com.sensorsus.sensorsus.dto;
 
-public class ServicoAvaliacaoDTO {
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
+import br.com.sensorsus.sensorsus.model.AvaliacaoServico;
+import br.com.sensorsus.sensorsus.model.Servico;
+
+public class ServicoAvaliacaoDTO implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+	
+	private Integer id;
+	private String nome;
+	private String estabelecimento;
+	
+	private List<AvaliacaoServico> avaliacoesServico = new ArrayList<>();
+	
+	
+	public ServicoAvaliacaoDTO() {
+		
+	}
+	
+	public ServicoAvaliacaoDTO(Servico obj) {
+		id = obj.getId();
+		nome = obj.getNome();
+		setEstabelecimento(obj.getEstabelecimento().getNome());
+		avaliacoesServico = obj.getAvaliacoesServico();
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getEstabelecimento() {
+		return estabelecimento;
+	}
+
+	public void setEstabelecimento(String estabelecimento) {
+		this.estabelecimento = estabelecimento;
+	}
+
+	public List<AvaliacaoServico> getAvaliacoesServico() {
+		return avaliacoesServico;
+	}
+
+	public void setAvaliacoesServico(List<AvaliacaoServico> avaliacoesServico) {
+		this.avaliacoesServico = avaliacoesServico;
+	}
+	
+	
 }
