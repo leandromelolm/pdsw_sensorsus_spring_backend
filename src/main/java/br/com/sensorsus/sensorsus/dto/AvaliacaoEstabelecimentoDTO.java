@@ -1,78 +1,74 @@
-//package br.com.sensorsus.sensorsus.dto;
-//
-//import java.io.Serializable;
-//import java.util.Date;
-//
-//import com.fasterxml.jackson.annotation.JsonFormat;
-//
-//import br.com.sensorsus.sensorsus.model.AvaliacaoEstabelecimento;
-//import br.com.sensorsus.sensorsus.model.Usuario;
-//
-//
-//public class AvaliacaoEstabelecimentoDTO implements Serializable {
-//	
-//	private static final long serialVersionUID = 1L;
-//	
-//	private Integer idAvaliacao;
-//	@JsonFormat(pattern="dd/MM/yyyy HH:mm")
-//	private Date dataCriacao;
-//	private String descricao;
-//	private Double classificacao;
-//	
-//	private String usuarioNome;
-//
-//	public AvaliacaoEstabelecimentoDTO() {
-//		
-//	}
-//	
-//	public AvaliacaoEstabelecimentoDTO(AvaliacaoEstabelecimento obj, Usuario objUser) {
-//		idAvaliacao = obj.getIdAvaliacao();
-//		
-//		classificacao = obj.getClassificacao();
-//		usuarioNome = objUser.getUsername();
-//	}
-//
-//	public Integer getIdAvaliacao() {
-//		return idAvaliacao;
-//	}
-//
-//	public void setIdAvaliacao(Integer idAvaliacao) {
-//		this.idAvaliacao = idAvaliacao;
-//	}
-//
-//	public Date getDataCriacao() {
-//		return dataCriacao;
-//	}
-//
-//	public void setDataCriacao(Date dataCriacao) {
-//		this.dataCriacao = dataCriacao;
-//	}
-//
-//	public String getDescricao() {
-//		return descricao;
-//	}
-//
-//	public void setDescricao(String descricao) {
-//		this.descricao = descricao;
-//	}
-//
-//	public Double getClassificacao() {
-//		return classificacao;
-//	}
-//
-//	public void setClassificacao(Double classificacao) {
-//		this.classificacao = classificacao;
-//	}
-//
-//	public String getUsuarioNome() {
-//		return usuarioNome;
+package br.com.sensorsus.sensorsus.dto;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+
+import br.com.sensorsus.sensorsus.model.AvaliacaoEstabelecimento;
+import br.com.sensorsus.sensorsus.model.Estabelecimento;
+
+/**Data Transfer Object (DTO)*/
+public class AvaliacaoEstabelecimentoDTO implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
+	
+	private Integer id;
+	private String nome;
+	private Integer codCnes;
+	
+	private List<AvaliacaoEstabelecimento> avaliacoes = new ArrayList<>();
+	
+	public AvaliacaoEstabelecimentoDTO() {		
+	}
+	
+	public AvaliacaoEstabelecimentoDTO(Estabelecimento obj) {
+		id = obj.getId();
+		nome = obj.getNome();
+		codCnes = obj.getCodCnes();	
+		avaliacoes = obj.getAvaliacoes();
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public Integer getCodCnes() {
+		return codCnes;
+	}
+
+	public void setCodCnes(Integer codCnes) {
+		this.codCnes = codCnes;
+	}
+
+	public List<AvaliacaoEstabelecimento> getAvaliacoes() {
+		return avaliacoes;
+	}
+
+	public void setAvaliacoes(List<AvaliacaoEstabelecimento> avaliacoes) {
+		this.avaliacoes = avaliacoes;
+	}
+
+//	public List<AvaliacaoEstabelecimentoDTO> getAvaliacoesDTO() {
+//		return avaliacoesDTO;
 //	}
 //
-//	public void setUsuarioNome(String usuarioNome) {
-//		this.usuarioNome = usuarioNome;
+//	public void setAvaliacoesDTO(List<AvaliacaoEstabelecimentoDTO> avaliacoesDTO) {
+//		this.avaliacoesDTO = avaliacoesDTO;
 //	}
-//	
-//	
-//	
-//
-//}
+	
+	
+
+}
