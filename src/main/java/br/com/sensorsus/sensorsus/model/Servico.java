@@ -23,6 +23,7 @@ public class Servico implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
+	
 
 	@ManyToOne
 	@JoinColumn(name="estabelecimento_id")

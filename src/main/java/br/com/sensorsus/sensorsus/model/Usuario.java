@@ -124,8 +124,7 @@ public class Usuario implements Serializable {
 
 	public void setAvaliacoesServico(List<AvaliacaoServico> avaliacoesServico) {
 		this.avaliacoesServico = avaliacoesServico;
-	}
-	
+	}	
 	
 	public Integer getTipoUsuario() {
 		return tipoUsuario;

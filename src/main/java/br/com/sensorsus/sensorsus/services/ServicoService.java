@@ -1,5 +1,6 @@
 package br.com.sensorsus.sensorsus.services;
 
+import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,11 @@ public class ServicoService {
 		Optional<Servico> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Servico.class.getName()));
+	}
+
+	public List<Servico> findAll() {
+		
+		return repo.findAll();
 	}
 
 

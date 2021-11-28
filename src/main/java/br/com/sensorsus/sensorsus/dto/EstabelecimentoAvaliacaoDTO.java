@@ -18,7 +18,6 @@ public class EstabelecimentoAvaliacaoDTO implements Serializable {
 	private Integer codCnes;
 	
 	private List<AvaliacaoEstabelecimento> avaliacoes = new ArrayList<>();
-//	private List<AvaliacaoEstabelecimentoDTO> avaliacoesDTO = new ArrayList<>();
 	
 	public EstabelecimentoAvaliacaoDTO() {		
 	}
@@ -26,15 +25,8 @@ public class EstabelecimentoAvaliacaoDTO implements Serializable {
 	public EstabelecimentoAvaliacaoDTO(Estabelecimento obj) {
 		id = obj.getId();
 		nome = obj.getNome();
-		codCnes = obj.getCodCnes();
-		
-//		setAvaliacoes(obj.getAvaliacoes());
-		
+		codCnes = obj.getCodCnes();	
 		avaliacoes = obj.getAvaliacoes();
-		
-//		setAvaliacoesDTO(obj.getAvaliacoes());
-		
-//		avaliacoesDTO = obj.getAvaliacoes();
 	}
 
 	public Integer getId() {
