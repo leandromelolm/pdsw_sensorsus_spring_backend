@@ -6,7 +6,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.sensorsus.sensorsus.dto.UsuarioNewDTO;
 import br.com.sensorsus.sensorsus.model.Usuario;
+import br.com.sensorsus.sensorsus.model.enums.TipoUsuario;
 import br.com.sensorsus.sensorsus.repositories.UsuarioRepository;
 import br.com.sensorsus.sensorsus.services.exceptions.ObjectNotFoundException;
 
@@ -25,6 +27,16 @@ public class UsuarioService {
 	public List<Usuario> findAll() {
 		// TODO Auto-generated method stub
 		return repo.findAll();
+	}
+	
+	public Usuario insert(Usuario obj) {
+		obj.setId(null);
+		return repo.save(obj);
+	}
+
+	public Usuario fromDTO(UsuarioNewDTO objDto) {
+		Usuario user = new Usuario(null, objDto.getNomeCompleto(), objDto.getUsername(), objDto.getSenha(), objDto.getEmail(),TipoUsuario.DEFAULT); // O último parametro 'tipoUsuario' que está sendo passado é o padrão. Para o usuário passar e tipo no cadastro o parametro deve ser mudando para 'TipoUsuario.toEnum(objDto.getTipoUsuario()'
+		return user;
 	}
 
 }
