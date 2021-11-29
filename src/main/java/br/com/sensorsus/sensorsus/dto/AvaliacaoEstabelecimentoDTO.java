@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import br.com.sensorsus.sensorsus.model.AvaliacaoEstabelecimento;
 import br.com.sensorsus.sensorsus.model.Estabelecimento;
 
@@ -25,7 +24,7 @@ public class AvaliacaoEstabelecimentoDTO implements Serializable {
 	public AvaliacaoEstabelecimentoDTO(Estabelecimento obj) {
 		id = obj.getId();
 		nome = obj.getNome();
-		codCnes = obj.getCodCnes();	
+		codCnes = obj.getCodCnes();		
 		avaliacoes = obj.getAvaliacoes();
 	}
 
@@ -60,15 +59,5 @@ public class AvaliacaoEstabelecimentoDTO implements Serializable {
 	public void setAvaliacoes(List<AvaliacaoEstabelecimento> avaliacoes) {
 		this.avaliacoes = avaliacoes;
 	}
-
-//	public List<AvaliacaoEstabelecimentoDTO> getAvaliacoesDTO() {
-//		return avaliacoesDTO;
-//	}
-//
-//	public void setAvaliacoesDTO(List<AvaliacaoEstabelecimentoDTO> avaliacoesDTO) {
-//		this.avaliacoesDTO = avaliacoesDTO;
-//	}
-	
-	
 
 }

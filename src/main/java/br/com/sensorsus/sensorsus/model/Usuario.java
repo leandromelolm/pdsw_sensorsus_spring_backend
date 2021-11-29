@@ -22,6 +22,7 @@ public class Usuario implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
+	@JsonIgnore
 	@Id	
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
@@ -47,7 +48,7 @@ public class Usuario implements Serializable {
 	
 	@JsonIgnore
 	private Integer tipoUsuario;
-	
+		
 	@JsonIgnore
 	@OneToMany(mappedBy="usuario")
 	private List<AvaliacaoEstabelecimento> avaliacoesE = new ArrayList<>();
@@ -106,8 +107,8 @@ public class Usuario implements Serializable {
 		return TipoUsuario.toEnum(tipoUsuario);
 	}
 
-	public void setTipo(TipoUsuario tipo) {
-		this.tipoUsuario = tipo.getCod();
+	public void setTipo(TipoUsuario typeuser) {
+		this.tipoUsuario = typeuser.getCod();
 	}
 
 	public List<AvaliacaoEstabelecimento> getAvaliacoesE() {
@@ -160,8 +161,6 @@ public class Usuario implements Serializable {
 		return true;
 	}
 	
-	
-
 	@Override
 	public String toString() {
 		return "Usuario [id=" + id + ", nomeCompleto=" + nomeCompleto + ", username=" + username + ", senha=" + senha
