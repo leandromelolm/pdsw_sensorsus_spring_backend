@@ -1,34 +1,13 @@
 package br.com.sensorsus.sensorsus;
 
-import java.text.SimpleDateFormat;
-import java.util.Arrays;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import br.com.sensorsus.sensorsus.model.AvaliacaoEstabelecimento;
-import br.com.sensorsus.sensorsus.model.AvaliacaoServico;
-import br.com.sensorsus.sensorsus.model.Cidade;
-import br.com.sensorsus.sensorsus.model.Endereco;
-import br.com.sensorsus.sensorsus.model.Estabelecimento;
-import br.com.sensorsus.sensorsus.model.Estado;
-import br.com.sensorsus.sensorsus.model.Servico;
-import br.com.sensorsus.sensorsus.model.Usuario;
-import br.com.sensorsus.sensorsus.model.enums.TipoUsuario;
-import br.com.sensorsus.sensorsus.repositories.AvaliacaoEstabelecimentoRepository;
-import br.com.sensorsus.sensorsus.repositories.AvaliacaoServicoRepository;
-import br.com.sensorsus.sensorsus.repositories.CidadeRepository;
-import br.com.sensorsus.sensorsus.repositories.EnderecoRepository;
-import br.com.sensorsus.sensorsus.repositories.EstabelecimentoRepository;
-import br.com.sensorsus.sensorsus.repositories.EstadoRepository;
-import br.com.sensorsus.sensorsus.repositories.ServicoRepository;
-import br.com.sensorsus.sensorsus.repositories.UsuarioRepository;
-
 @SpringBootApplication
 public class SensorsusApplication implements CommandLineRunner {
 	
+	/*
 	@Autowired
 	private UsuarioRepository usuarioReposity;
 	@Autowired
@@ -45,6 +24,7 @@ public class SensorsusApplication implements CommandLineRunner {
 	private AvaliacaoEstabelecimentoRepository avaliacaoEstabelecimentoReposity;
 	@Autowired
 	private AvaliacaoServicoRepository avaliacaoServicoRepository;
+	*/
 	
 	
 	public static void main(String[] args) {
@@ -53,6 +33,8 @@ public class SensorsusApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
+		
+	/*
 		
 		Estado est1 = new Estado(null, "PERNAMBUCO");
 		Estado est2 = new Estado(null, "PARAIBA");
@@ -158,6 +140,9 @@ public class SensorsusApplication implements CommandLineRunner {
 		AvaliacaoServico avServ11 = new AvaliacaoServico(null, sdf.parse("29/09/2021 10:31"),"serviçoatendimento wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww",4.5, user3, serv1);
 		
 		avaliacaoServicoRepository.saveAll(Arrays.asList(avServ1, avServ2, avServ3, avServ4, avServ5, avServ6, avServ7, avServ8, avServ9, avServ10, avServ11));
+	
+	*/
+	
 	}
 
 }
