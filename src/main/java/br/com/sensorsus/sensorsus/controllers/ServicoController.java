@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.sensorsus.sensorsus.dto.AvaliacaoServicoDTO;
+import br.com.sensorsus.sensorsus.dto.ServicoAvaliacaoDTO;
 import br.com.sensorsus.sensorsus.dto.ServicoDTO;
 import br.com.sensorsus.sensorsus.model.Servico;
 import br.com.sensorsus.sensorsus.services.ServicoService;
@@ -24,7 +25,7 @@ public class ServicoController {
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> find(@PathVariable Integer id) {
-		Servico obj = service.find(id);
+		ServicoAvaliacaoDTO obj = service.findById(id);
 		return ResponseEntity.ok().body(obj);
 	}
 
