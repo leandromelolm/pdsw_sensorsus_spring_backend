@@ -51,7 +51,8 @@ public class EstabelecimentoController {
 	
 	@RequestMapping(value = "/pesquisa" , method = RequestMethod.GET)
 //	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<Page<EstabelecimentoDTO>> findPage(
+//	public ResponseEntity<Page<EstabelecimentoDTO>> findPage(
+	public ResponseEntity<Page<Estabelecimento>> findPage(
 			@RequestParam(value="nome", defaultValue="") String nome, 
 			@RequestParam(value="page", defaultValue="0") Integer page, 
 			@RequestParam(value="linesPerPage", defaultValue="24") Integer linesPerPage, 
@@ -60,8 +61,10 @@ public class EstabelecimentoController {
 		String nomeDecoded = URL.decodeParam(nome);
 
 		Page<Estabelecimento> list = service.search(nomeDecoded, page, linesPerPage, orderBy, direction);
-		Page<EstabelecimentoDTO> listDto = list.map(obj -> new EstabelecimentoDTO(obj));  
-		return ResponseEntity.ok().body(listDto);
+//		Page<EstabelecimentoDTO> listDto = list.map(obj -> new EstabelecimentoDTO(obj)); 
+		
+//		return ResponseEntity.ok().body(listDto);
+		return ResponseEntity.ok().body(list);
 	}
 
 }
