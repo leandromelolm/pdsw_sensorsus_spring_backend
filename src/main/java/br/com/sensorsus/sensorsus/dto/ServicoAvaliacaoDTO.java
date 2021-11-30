@@ -21,18 +21,12 @@ public class ServicoAvaliacaoDTO implements Serializable {
 		
 	}
 
-	public ServicoAvaliacaoDTO(ServicoDTO obj) {		
-		idServico = obj.getId();
-		nomeServico = obj.getNome();
-//		nomeEstabelecimento = obj.getEstabelecimento().getNome();
-		nomeEstabelecimento = obj.getEstabelecimento();
-	}
-
 	public ServicoAvaliacaoDTO(Servico obj) {
 		idServico = obj.getId();
 		nomeServico = obj.getNome();
-		avaliacoesServico = obj.getAvaliacoesServico();
 		nomeEstabelecimento = obj.getEstabelecimento().getNome();
+		avaliacoesServico = obj.getAvaliacoesServico();
+		
 	}
 
 	public Integer getIdServico() {
