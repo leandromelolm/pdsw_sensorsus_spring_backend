@@ -38,7 +38,7 @@ public class UsuarioController {
 		return ResponseEntity.ok().body(listDto);
 	}
 	
-	@RequestMapping(method = RequestMethod.POST)
+	@RequestMapping(value = "/new", method = RequestMethod.POST)
 	public ResponseEntity<Void> insert(@RequestBody UsuarioNewDTO objDto){
 		Usuario obj = service.fromDTO(objDto);
 		obj = service.insert(obj);
