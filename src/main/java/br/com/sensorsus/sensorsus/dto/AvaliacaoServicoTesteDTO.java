@@ -5,7 +5,7 @@ import java.util.Date;
 
 import br.com.sensorsus.sensorsus.model.AvaliacaoServico;
 
-public class AvaliacaoServicoNEWDTO implements Serializable {
+public class AvaliacaoServicoTesteDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -18,11 +18,11 @@ public class AvaliacaoServicoNEWDTO implements Serializable {
 	private Double classificacao;
 	private String nomeUsuario;
 	
-	public AvaliacaoServicoNEWDTO() {
+	public AvaliacaoServicoTesteDTO() {
 		
 	}
 	
-	public AvaliacaoServicoNEWDTO(AvaliacaoServico obj) {
+	public AvaliacaoServicoTesteDTO(AvaliacaoServico obj) {
 		idAvaliacao = obj.getIdAvaliacao();
 		nomeServico = obj.getServico().getNome();
 		nomeEstabelecimento = obj.getServico().getEstabelecimento().getNome();

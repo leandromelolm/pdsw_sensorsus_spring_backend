@@ -30,4 +30,6 @@ public class AvaliacaoEstabelecimentoController {
 		List<AvaliacaoEstabelecimento> list = service.findAll();
 		return ResponseEntity.ok().body(list);
 	}
+	
+	
 }
