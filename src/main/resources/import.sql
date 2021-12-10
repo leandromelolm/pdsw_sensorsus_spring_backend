@@ -3,7 +3,7 @@ INSERT INTO usuario (email, nome_completo, senha, tipo_usuario, username) VALUE 
 
 
 INSERT INTO avaliacao_estabelecimento ( classificacao, data_criacao, descricao, estabelecimento_id, usuario_id) VALUE ( 4.0, "2021-09-30 10:31:00", "Hospital Muito Bom esse alfaSSSSSSSSSS", 1, 4);
-INSERT INTO avaliacao_estabelecimento ( classificacao, data_criacao, descricao, estabelecimento_id, usuario_id) VALUE (4.0,"2021-09-30 10:31:00","Hospital AAAAAAAAAAAAAAAAAAAAAAA",1,4);
+INSERT INTO avaliacao_estabelecimento ( classificacao, data_criacao, descricao, estabelecimento_id, usuario_id) VALUE (4.0,"2021-09-30 10:31:00","Hospital AAAAAAAAAAAAAAAAAAAAAAA",1,5);
 INSERT INTO  avaliacao_estabelecimento (classificacao,data_criacao,descricao,estabelecimento_id,usuario_id) VALUE(2.2,"2021-10-30 10:33:00","Hospital BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB",4,3);
 INSERT INTO  avaliacao_estabelecimento (classificacao,data_criacao,descricao,estabelecimento_id,usuario_id) VALUE(2.6,"2021-10-25 10:35:00","Hospital CCCCCCCCCCCCCCCCCCCCCCCCCCC",1,5);
 INSERT INTO  avaliacao_estabelecimento (classificacao,data_criacao,descricao,estabelecimento_id,usuario_id) VALUE(3.5,"2021-11-23 11:10:00","h Beta DDDDDDDDDDDDDDDDDDDDDDDDD",2,6);

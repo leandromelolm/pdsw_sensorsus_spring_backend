@@ -25,14 +25,16 @@ public class EstabelecimentoController {
 	@Autowired
 	private EstabelecimentoService service;
 
+	/* exibi um único estabelecimento (o passado por id), com endereço e todas as avaliacões do mesmo */
+	/*  EndPoint estabelecimentos/{id}  */
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> find(@PathVariable Integer id) {
 		Estabelecimento obj = service.find(id);
 		return ResponseEntity.ok().body(obj);
 	}
 
-	// **listando todos estabelecimentos e suas respectivas avaliacões com DTO -
-	// EndPoint '/estabelecimento/avaliacoes'*/
+	/* listando todos estabelecimentos e suas respectivas avaliacões - com DTO */
+	/* EndPoint /estabelecimentos/avaliacoes */
 	@RequestMapping(value = "/avaliacoes", method = RequestMethod.GET)
 	public ResponseEntity<List<AvaliacaoEstabelecimentoDTO>> findAvaliacao() {
 		List<Estabelecimento> list = service.findAll();
@@ -41,7 +43,9 @@ public class EstabelecimentoController {
 		return ResponseEntity.ok().body(listAvalicaoDto);
 	}
 
-	@RequestMapping(method = RequestMethod.GET)
+	/* listando todos estabelecimentos e suas respectivos endereços - com DTO */
+	/*  EndPoint estabelecimentos/enderecos  */
+	@RequestMapping(value = "/enderecos" ,method = RequestMethod.GET)
 	public ResponseEntity<List<EstabelecimentoDTO>> findAll() {
 		List<Estabelecimento> list = service.findAll();
 		List<EstabelecimentoDTO> listDto = list.stream().map(obj -> new EstabelecimentoDTO(obj))
@@ -49,21 +53,19 @@ public class EstabelecimentoController {
 		return ResponseEntity.ok().body(listDto);
 	}
 	
-	@RequestMapping(value = "/pesquisa" , method = RequestMethod.GET)
-//	@RequestMapping(method = RequestMethod.GET)
-//	public ResponseEntity<Page<EstabelecimentoDTO>> findPage(
+	/* Pesquisa por estabelecimentos - resultado é o nome do estabelecimento e as suas avaliações */
+	/* EndPoint /estabelecimentos/?nome=pesquisa_aqui  */	
+	/* EndPoint /estabelecimentos/?page=0 */
+	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<Page<Estabelecimento>> findPage(
 			@RequestParam(value="nome", defaultValue="") String nome, 
 			@RequestParam(value="page", defaultValue="0") Integer page, 
-			@RequestParam(value="linesPerPage", defaultValue="24") Integer linesPerPage, 
+			@RequestParam(value="linesPerPage", defaultValue="10") Integer linesPerPage, 
 			@RequestParam(value="orderBy", defaultValue="nome") String orderBy, 
 			@RequestParam(value="direction", defaultValue="ASC") String direction) {
 		String nomeDecoded = URL.decodeParam(nome);
 
 		Page<Estabelecimento> list = service.search(nomeDecoded, page, linesPerPage, orderBy, direction);
-//		Page<EstabelecimentoDTO> listDto = list.map(obj -> new EstabelecimentoDTO(obj)); 
-		
-//		return ResponseEntity.ok().body(listDto);
 		return ResponseEntity.ok().body(list);
 	}
 

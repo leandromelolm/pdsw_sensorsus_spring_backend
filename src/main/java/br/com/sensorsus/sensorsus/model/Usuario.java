@@ -39,12 +39,12 @@ public class Usuario implements Serializable {
 	@JsonIgnore
 	@NotNull
 	@NotBlank
-	private String senha;
+	private String email;
 	
 	@JsonIgnore
 	@NotNull
 	@NotBlank
-	private String email;	
+	private String senha;	
 	
 	@JsonIgnore
 	private Integer tipoUsuario;
@@ -67,8 +67,8 @@ public class Usuario implements Serializable {
 		this.id = id;
 		this.nomeCompleto = nomeCompleto;
 		this.username = username;
-		this.senha = senha;
 		this.email = email;
+		this.senha = senha;
 		this.tipoUsuario = tipoUsuario.getCod();
 	}	
 
@@ -90,17 +90,18 @@ public class Usuario implements Serializable {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	public String getSenha() {
-		return senha;
-	}
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}
+	
 	public String getEmail() {
 		return email;
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	public String getSenha() {
+		return senha;
+	}
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 	
 	public TipoUsuario getTipo() {

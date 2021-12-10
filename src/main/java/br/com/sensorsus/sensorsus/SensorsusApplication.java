@@ -75,11 +75,11 @@ public class SensorsusApplication implements CommandLineRunner {
 //		cidadeRepository.saveAll(Arrays.asList(c1, c2, c3, c4, c5, c6, c7));
 		
 				
-//		Estabelecimento estab1 = new Estabelecimento(null, "Hospital Agamenom Maga", 33232, " Recife", "Municipal", "Administracão pública");
-//		Estabelecimento estab2 = new Estabelecimento(null, "Hospital Restaurado para sempre", 55555, " Olinda", "Estadual", "Administracão pública");		
-//		Estabelecimento estab3 = new Estabelecimento(null, "Hospital de Springfild", 88888, " Jaboatao", "Municipal", "Filantropico");
-//		Estabelecimento estab4 = new Estabelecimento(null, "Hospital do IFPE", 599911, " Recife", "Federal", "Administracão pública");
-//		Estabelecimento estab5 = new Estabelecimento(null, "Hospital Camaragibe Forever", 599911, " Recife", "Federal", "Administracão pública");
+//		Estabelecimento estab1 = new Estabelecimento(null, "Hospital Bis", 33232, " Recife", "Municipal", "Administracão pública");
+//		Estabelecimento estab2 = new Estabelecimento(null, "Hospital Wakanda ", 55555, " Olinda", "Estadual", "Administracão pública");		
+//		Estabelecimento estab3 = new Estabelecimento(null, "HCB Coracao", 88888, " Jaboatao", "Municipal", "Filantropico");
+//		Estabelecimento estab4 = new Estabelecimento(null, "UPA do alto do morro ", 599911, " Recife", "Federal", "Administracão pública");
+//		Estabelecimento estab5 = new Estabelecimento(null, "UPA baixa rio lago", 599911, " Recife", "Federal", "Administracão pública");
 //		
 //		Endereco end1 = new Endereco(null, "Avenida Principal", 1000, "Bairro", "Proximo a Rodovia", "70999000", estab1, c4 );
 //		estab1.setEndereco(end1);

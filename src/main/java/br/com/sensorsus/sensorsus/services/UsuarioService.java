@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.com.sensorsus.sensorsus.dto.UsuarioNewDTO;
 import br.com.sensorsus.sensorsus.model.Usuario;
@@ -29,6 +30,7 @@ public class UsuarioService {
 		return repo.findAll();
 	}
 	
+	@Transactional
 	public Usuario insert(Usuario obj) {
 		obj.setId(null);
 		return repo.save(obj);

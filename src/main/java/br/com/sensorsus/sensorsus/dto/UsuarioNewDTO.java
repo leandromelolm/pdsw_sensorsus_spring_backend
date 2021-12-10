@@ -8,8 +8,8 @@ public class UsuarioNewDTO implements Serializable {
 
 	private String nomeCompleto;
 	private String username;
-	private String senha;
 	private String email;
+	private String senha;
 	private Integer tipoUsuario;
 	
 	public UsuarioNewDTO() {
@@ -31,6 +31,14 @@ public class UsuarioNewDTO implements Serializable {
 	public void setUsername(String username) {
 		this.username = username;
 	}
+	
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
 	public String getSenha() {
 		return senha;
@@ -38,14 +46,6 @@ public class UsuarioNewDTO implements Serializable {
 
 	public void setSenha(String senha) {
 		this.senha = senha;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
 	}
 
 	public Integer getTipoUsuario() {
