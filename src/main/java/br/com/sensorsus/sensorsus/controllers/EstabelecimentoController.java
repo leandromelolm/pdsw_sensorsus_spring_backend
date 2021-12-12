@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.sensorsus.sensorsus.controllers.utils.URL;
-import br.com.sensorsus.sensorsus.dto.AvaliacaoEstabelecimentoDTO;
+import br.com.sensorsus.sensorsus.dto.EstabelecimentoAvaliacoesDTO;
 import br.com.sensorsus.sensorsus.dto.EstabelecimentoDTO;
 import br.com.sensorsus.sensorsus.model.Estabelecimento;
 import br.com.sensorsus.sensorsus.services.EstabelecimentoService;
@@ -36,10 +36,10 @@ public class EstabelecimentoController {
 	/* listando todos estabelecimentos e suas respectivas avaliacões - com DTO */
 	/* EndPoint /estabelecimentos/avaliacoes */
 	@RequestMapping(value = "/avaliacoes", method = RequestMethod.GET)
-	public ResponseEntity<List<AvaliacaoEstabelecimentoDTO>> findAvaliacao() {
+	public ResponseEntity<List<EstabelecimentoAvaliacoesDTO>> findAvaliacao() {
 		List<Estabelecimento> list = service.findAll();
-		List<AvaliacaoEstabelecimentoDTO> listAvalicaoDto = list.stream()
-				.map(obj -> new AvaliacaoEstabelecimentoDTO(obj)).collect(Collectors.toList());
+		List<EstabelecimentoAvaliacoesDTO> listAvalicaoDto = list.stream()
+				.map(obj -> new EstabelecimentoAvaliacoesDTO(obj)).collect(Collectors.toList());
 		return ResponseEntity.ok().body(listAvalicaoDto);
 	}
 

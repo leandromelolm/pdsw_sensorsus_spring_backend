@@ -4,7 +4,6 @@ package br.com.sensorsus.sensorsus.dto;
 import java.io.Serializable;
 
 import br.com.sensorsus.sensorsus.model.Usuario;
-import br.com.sensorsus.sensorsus.model.enums.TipoUsuario;
 
 public class UsuarioDTO implements Serializable {
 	

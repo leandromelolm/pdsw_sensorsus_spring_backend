@@ -22,7 +22,9 @@ public class ServicoController {
 
 	@Autowired
 	private ServicoService service;
-
+	
+	/* lista um serviço cadastrado e sua avaliações feitas pelos usuários*/
+	/* endpoint /servicos/{id} */
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> find(@PathVariable Integer id) {
 		ServicoAvaliacaoDTO obj = service.findById(id);
@@ -38,7 +40,9 @@ public class ServicoController {
 				.collect(Collectors.toList());
 		return ResponseEntity.ok().body(listAvalicaoDto);
 	}
-
+	
+	/* lista todos os serviços cadastrados e o estabelecimento que presta o serviço*/
+	/* endpoint /servicos */
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<ServicoDTO>> findAll() {
 		List<Servico> list = service.findAll();

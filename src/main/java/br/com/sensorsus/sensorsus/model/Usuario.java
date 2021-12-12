@@ -70,7 +70,17 @@ public class Usuario implements Serializable {
 		this.email = email;
 		this.senha = senha;
 		this.tipoUsuario = tipoUsuario.getCod();
-	}	
+	}
+	
+	public Usuario(Integer id, String nomeCompleto, String username, 
+			String senha, String email) {
+		super();
+		this.id = id;
+		this.nomeCompleto = nomeCompleto;
+		this.username = username;
+		this.email = email;
+		this.senha = senha;		
+	}
 
 	public Integer getId() {
 		return id;

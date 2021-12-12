@@ -8,7 +8,7 @@ import br.com.sensorsus.sensorsus.model.AvaliacaoEstabelecimento;
 import br.com.sensorsus.sensorsus.model.Estabelecimento;
 
 /**Data Transfer Object (DTO)*/
-public class AvaliacaoEstabelecimentoDTO implements Serializable {
+public class EstabelecimentoAvaliacoesDTO implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -18,10 +18,10 @@ public class AvaliacaoEstabelecimentoDTO implements Serializable {
 	
 	private List<AvaliacaoEstabelecimento> avaliacoes = new ArrayList<>();
 	
-	public AvaliacaoEstabelecimentoDTO() {		
+	public EstabelecimentoAvaliacoesDTO() {		
 	}
 	
-	public AvaliacaoEstabelecimentoDTO(Estabelecimento obj) {
+	public EstabelecimentoAvaliacoesDTO(Estabelecimento obj) {
 		id = obj.getId();
 		nome = obj.getNome();
 		codCnes = obj.getCodCnes();		
