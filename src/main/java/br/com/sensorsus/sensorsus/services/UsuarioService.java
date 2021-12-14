@@ -23,13 +23,12 @@ public class UsuarioService {
 	private UsuarioRepository repo;
 	
 	public Usuario find(Integer id) {
-		Optional<Usuario> obj = repo.findById(id);
+		Optional<Usuario> obj = repo.findById(id);		
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Usuario.class.getName()));
 	}
 
-	public List<Usuario> findAll() {
-		// TODO Auto-generated method stub
+	public List<Usuario> findAll() {		
 		return repo.findAll();
 	}
 	
@@ -40,9 +39,7 @@ public class UsuarioService {
 	}
 
 	public Usuario fromDTO(UsuarioNewDTO objDto) {
-//		Usuario user = new Usuario(null, objDto.getNomeCompleto(), objDto.getUsername(), objDto.getSenha(), objDto.getEmail(),TipoUsuario.DEFAULT); // O último parametro 'tipoUsuario' que está sendo passado é o padrão. Para o tipo ser passado no cadastro o parametro deve ser mudando para 'TipoUsuario.toEnum(objDto.getTipoUsuario()'
 		Usuario user = new Usuario(null, objDto.getNomeCompleto(), objDto.getUsername(), objDto.getEmail(), pe.encode(objDto.getSenha()));
 		return user;
 	}
-
 }
