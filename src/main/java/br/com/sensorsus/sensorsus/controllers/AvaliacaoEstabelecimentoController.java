@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,6 +36,7 @@ public class AvaliacaoEstabelecimentoController {
 		return ResponseEntity.ok().body(list);
 	}
 	
+	@PreAuthorize("hasAnyRole('STANDARD')")
 	@RequestMapping(value = "/new", method = RequestMethod.POST)
 	public ResponseEntity<Void> insert(@RequestBody AvaliacaoEstabelecimentoNewDTO objDto){
 		AvaliacaoEstabelecimento obj = service.fromDTO(objDto);

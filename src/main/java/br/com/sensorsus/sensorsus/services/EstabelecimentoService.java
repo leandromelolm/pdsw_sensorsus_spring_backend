@@ -25,8 +25,7 @@ public class EstabelecimentoService {
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Estabelecimento.class.getName()));
 	}
 
-	public List<Estabelecimento> findAll() {
-		
+	public List<Estabelecimento> findAll() {		
 		return repo.findAll();
 	}
 	
