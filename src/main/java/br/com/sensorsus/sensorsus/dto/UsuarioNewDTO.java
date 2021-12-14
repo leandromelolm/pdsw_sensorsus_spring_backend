@@ -2,18 +2,29 @@ package br.com.sensorsus.sensorsus.dto;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.NotEmpty;
+
+import org.hibernate.validator.constraints.Length;
+
 public class UsuarioNewDTO implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
-
-	private String nomeCompleto;
-	private String username;
-	private String email;
-	private String senha;
-	private Integer tipoUsuario;
 	
-	public UsuarioNewDTO() {
-		
+	@NotEmpty(message="Preenchimento obrigatório")
+	@Length(min=5, max=120, message="O tamanho deve ser entre 5 e 120 caracteres")
+	private String nomeCompleto;
+	
+	@NotEmpty(message="Preenchimento obrigatório")
+	@Length(min=5, max=20, message="O tamanho deve ser entre 5 e 20 caracteres")
+	private String username;
+	
+	@NotEmpty(message="Preenchimento obrigatório")
+	private String email;
+	
+	@NotEmpty(message="Preenchimento obrigatório")
+	private String senha;
+	
+	public UsuarioNewDTO() {		
 	}
 
 	public String getNomeCompleto() {
@@ -46,14 +57,5 @@ public class UsuarioNewDTO implements Serializable {
 
 	public void setSenha(String senha) {
 		this.senha = senha;
-	}
-
-	public Integer getTipoUsuario() {
-		return tipoUsuario;
-	}
-
-	public void setTipoUsuario(Integer tipoUsuario) {
-		this.tipoUsuario = tipoUsuario;
 	}	
-	
 }

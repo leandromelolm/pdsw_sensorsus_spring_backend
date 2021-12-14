@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -30,18 +31,16 @@ public class Usuario implements Serializable {
 	@NotBlank	
 	private String nomeCompleto;
 	
-	@NotNull
-	@NotBlank	
+	
+	@NotBlank
+	@Column(unique=true)
 	private String username;
 	
 	@JsonIgnore
-	@NotNull
-	@NotBlank
+	@Column(unique=true)
 	private String email;
 	
 	@JsonIgnore
-	@NotNull
-	@NotBlank
 	private String senha;	
 		
 	@JsonIgnore
@@ -56,8 +55,7 @@ public class Usuario implements Serializable {
 		
 	}
 	
-	public Usuario(Integer id, String nomeCompleto, String username, 
-			String senha, String email) {
+	public Usuario(Integer id, String nomeCompleto, String username, String email, String senha) {
 		super();
 		this.id = id;
 		this.nomeCompleto = nomeCompleto;

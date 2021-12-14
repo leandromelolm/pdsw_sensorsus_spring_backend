@@ -53,9 +53,9 @@ public class UsuarioController {
  * JSON USANDO POST /usuarios/new
 {    
     "nomeCompleto": "Mike Silva Santos",
-    "username": "Mike2",
-    "senha": "123456",
-    "email": "test10test@test.com"   
+    "username": "Mike2",    
+    "email": "test10test@test.com",
+    "senha": "123456"   
 }
  * 
  * 

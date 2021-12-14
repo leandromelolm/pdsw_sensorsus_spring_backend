@@ -14,19 +14,17 @@ public class UsuarioDTO implements Serializable {
 	private String username;
 	private String email;
 //	private String senha;
-//	private TipoUsuario tipoUsuario;
 	
-	public UsuarioDTO() {
-		
+	public UsuarioDTO() {		
 	}
+	
 	public UsuarioDTO(Usuario obj) {
 		id = obj.getId();
 		nomeCompleto = obj.getNomeCompleto();
 		username = obj.getUsername();
-		email = obj.getEmail();
-//		tipoUsuario = obj.getTipo();
-		
+		email = obj.getEmail();		
 	}
+	
 	public Integer getId() {
 		return id;
 	}
@@ -51,10 +49,4 @@ public class UsuarioDTO implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-//	public TipoUsuario getTipoUsuario() {
-//		return tipoUsuario;
-//	}
-//	public void setTipoUsuario(TipoUsuario tipoUsuario) {
-//		this.tipoUsuario = tipoUsuario;
-//	}
 }

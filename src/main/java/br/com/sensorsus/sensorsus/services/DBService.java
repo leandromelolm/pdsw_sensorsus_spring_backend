@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.com.sensorsus.sensorsus.model.AvaliacaoEstabelecimento;
@@ -15,7 +16,6 @@ import br.com.sensorsus.sensorsus.model.Estabelecimento;
 import br.com.sensorsus.sensorsus.model.Estado;
 import br.com.sensorsus.sensorsus.model.Servico;
 import br.com.sensorsus.sensorsus.model.Usuario;
-import br.com.sensorsus.sensorsus.model.enums.TipoUsuario;
 import br.com.sensorsus.sensorsus.repositories.AvaliacaoEstabelecimentoRepository;
 import br.com.sensorsus.sensorsus.repositories.AvaliacaoServicoRepository;
 import br.com.sensorsus.sensorsus.repositories.CidadeRepository;
@@ -28,6 +28,8 @@ import br.com.sensorsus.sensorsus.repositories.UsuarioRepository;
 @Service
 public class DBService {
 	
+	@Autowired
+	private BCryptPasswordEncoder pe;	
 	@Autowired
 	private UsuarioRepository usuarioReposity;
 	@Autowired
@@ -131,15 +133,15 @@ public class DBService {
 		servicoReposity.saveAll(Arrays.asList(serv1, serv2, serv3, serv4, serv5, serv6, serv7, serv8));
 		
 		
-		Usuario user1 = new Usuario(null,"Pratik Skaggs", "Skaggs", "55555" , "test1@test.com");
-		Usuario user2 = new Usuario(null,"Ajani Harding", "Harding", "22222" , "test2@test.com");
-		Usuario user3 = new Usuario(null,"Lewis Vangon", "Lews", "2222222" , "test333@test.com");
-		Usuario user4 = new Usuario(null,"Salvador Dali", "Dali4", "123444454" , "test4test@test.com");
-		Usuario user5 = new Usuario(null,"Vinaya Justino", "Justino", "123444454" , "test5test@test.com");
-		Usuario user6 = new Usuario(null,"Caetano Muriel", "Muriel", "123444454" , "test6test@test.com");
-		Usuario user7 = new Usuario(null,"Chipison Johannessen", "Johannessen", "123444454" , "test7test@test.com");
-		Usuario user8 = new Usuario(null,"Alex Gansa", "Gansa", "123444454" , "test8test@test.com");
-		Usuario user9 = new Usuario(null,"Howard Gordon", "Gordon", "123444454" , "test9test@test.com");
+		Usuario user1 = new Usuario(null,"Pratik Skaggs", "Skaggs", "test1@test.com", pe.encode("123456"));
+		Usuario user2 = new Usuario(null,"Ajani Harding", "Harding", "test2@test.com", pe.encode("222222"));
+		Usuario user3 = new Usuario(null,"Lewis Vangon", "Lews", "test333@test.com", pe.encode("333333"));
+		Usuario user4 = new Usuario(null,"Salvador Dali", "Dali4", "test4test@test.com", pe.encode("123456"));
+		Usuario user5 = new Usuario(null,"Vinaya Justino", "Justino", "test5test@test.com", pe.encode("555555"));
+		Usuario user6 = new Usuario(null,"Caetano Muriel", "Muriel", "test6test@test.com", pe.encode("6666666"));
+		Usuario user7 = new Usuario(null,"Chipison Johannessen", "Johannessen", "test7test@test.com", pe.encode("7777776"));
+		Usuario user8 = new Usuario(null,"Alex Gansa", "Gansa", "test8test@test.com", pe.encode("888888BA"));
+		Usuario user9 = new Usuario(null,"Howard Gordon", "Gordon", "test9test@test.com", pe.encode("999WWWWW"));
 		
 		
 		usuarioReposity.saveAll(Arrays.asList(user1, user2, user3, user4, user5, user6, user7, user8, user9));
