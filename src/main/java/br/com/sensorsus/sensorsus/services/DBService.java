@@ -16,6 +16,7 @@ import br.com.sensorsus.sensorsus.model.Estabelecimento;
 import br.com.sensorsus.sensorsus.model.Estado;
 import br.com.sensorsus.sensorsus.model.Servico;
 import br.com.sensorsus.sensorsus.model.Usuario;
+import br.com.sensorsus.sensorsus.model.enums.Perfil;
 import br.com.sensorsus.sensorsus.repositories.AvaliacaoEstabelecimentoRepository;
 import br.com.sensorsus.sensorsus.repositories.AvaliacaoServicoRepository;
 import br.com.sensorsus.sensorsus.repositories.CidadeRepository;
@@ -141,7 +142,9 @@ public class DBService {
 		Usuario user6 = new Usuario(null,"Caetano Muriel", "Muriel", "test6test@test.com", pe.encode("6666666"));
 		Usuario user7 = new Usuario(null,"Chipison Johannessen", "Johannessen", "test7test@test.com", pe.encode("7777776"));
 		Usuario user8 = new Usuario(null,"Alex Gansa", "Gansa", "test8test@test.com", pe.encode("888888BA"));
-		Usuario user9 = new Usuario(null,"Howard Gordon", "Gordon", "test9test@test.com", pe.encode("999WWWWW"));
+		
+		Usuario user9 = new Usuario(null,"Howard Gordon", "Gordon", "test9@test.com", pe.encode("999WWWWW"));
+		user9.addPerfil(Perfil.ADMIN);
 		
 		
 		usuarioReposity.saveAll(Arrays.asList(user1, user2, user3, user4, user5, user6, user7, user8, user9));

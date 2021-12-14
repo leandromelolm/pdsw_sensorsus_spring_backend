@@ -2,10 +2,16 @@ package br.com.sensorsus.sensorsus.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,6 +21,8 @@ import org.hibernate.validator.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
+
+import br.com.sensorsus.sensorsus.model.enums.Perfil;
 
 @Entity
 public class Usuario implements Serializable {
@@ -41,7 +49,12 @@ public class Usuario implements Serializable {
 	private String email;
 	
 	@JsonIgnore
-	private String senha;	
+	private String senha;
+	
+	@JsonIgnore
+	@ElementCollection(fetch=FetchType.EAGER)
+	@CollectionTable(name="PERFIS")
+	private Set<Integer> perfis = new HashSet<>();
 		
 	@JsonIgnore
 	@OneToMany(mappedBy="usuario")
@@ -52,7 +65,7 @@ public class Usuario implements Serializable {
 	private List<AvaliacaoServico> avaliacoesServico = new ArrayList<>();
 	
 	public Usuario()  {
-		
+		addPerfil(Perfil.STANDARD);
 	}
 	
 	public Usuario(Integer id, String nomeCompleto, String username, String email, String senha) {
@@ -61,7 +74,8 @@ public class Usuario implements Serializable {
 		this.nomeCompleto = nomeCompleto;
 		this.username = username;
 		this.email = email;
-		this.senha = senha;		
+		this.senha = senha;
+		addPerfil(Perfil.STANDARD);
 	}
 
 	public Integer getId() {
@@ -94,6 +108,14 @@ public class Usuario implements Serializable {
 	}
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+	
+	public Set<Perfil> getPerfis() {
+		return perfis.stream().map(x -> Perfil.toEnum(x)).collect(Collectors.toSet());
+	}
+
+	public void addPerfil(Perfil perfil) {
+		perfis.add(perfil.getCod());
 	}
 
 	public List<AvaliacaoEstabelecimento> getAvaliacoesE() {
