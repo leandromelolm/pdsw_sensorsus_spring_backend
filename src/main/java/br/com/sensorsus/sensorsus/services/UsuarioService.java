@@ -37,7 +37,8 @@ public class UsuarioService {
 	}
 
 	public Usuario fromDTO(UsuarioNewDTO objDto) {
-		Usuario user = new Usuario(null, objDto.getNomeCompleto(), objDto.getUsername(), objDto.getSenha(), objDto.getEmail(),TipoUsuario.DEFAULT); // O último parametro 'tipoUsuario' que está sendo passado é o padrão. Para o tipo ser passado no cadastro o parametro deve ser mudando para 'TipoUsuario.toEnum(objDto.getTipoUsuario()'
+//		Usuario user = new Usuario(null, objDto.getNomeCompleto(), objDto.getUsername(), objDto.getSenha(), objDto.getEmail(),TipoUsuario.DEFAULT); // O último parametro 'tipoUsuario' que está sendo passado é o padrão. Para o tipo ser passado no cadastro o parametro deve ser mudando para 'TipoUsuario.toEnum(objDto.getTipoUsuario()'
+		Usuario user = new Usuario(null, objDto.getNomeCompleto(), objDto.getUsername(), objDto.getSenha(), objDto.getEmail());
 		return user;
 	}
 

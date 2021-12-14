@@ -131,15 +131,15 @@ public class DBService {
 		servicoReposity.saveAll(Arrays.asList(serv1, serv2, serv3, serv4, serv5, serv6, serv7, serv8));
 		
 		
-		Usuario user1 = new Usuario(null,"usuario1 test1", "userTest1", "55555" , "test1@test.com", TipoUsuario.ADMIN);
-		Usuario user2 = new Usuario(null,"usuario2 test2", "userTest2", "22222" , "test2@test.com",TipoUsuario.DEFAULT);
-		Usuario user3 = new Usuario(null,"Lewis Hamilton", "Hamilton", "2222222" , "test333@test.com",TipoUsuario.DEFAULT);
-		Usuario user4 = new Usuario(null,"Fernando Alonso", "Alonso", "123444454" , "test4test@test.com",TipoUsuario.DEFAULT);
-		Usuario user5 = new Usuario(null,"Ronaldinho Gaucho", "Ronald", "123444454" , "test5test@test.com",TipoUsuario.DEFAULT);
-		Usuario user6 = new Usuario(null,"Rubens Barrichello", "Barrichello", "123444454" , "test6test@test.com",TipoUsuario.DEFAULT);
-		Usuario user7 = new Usuario(null,"Chip Johannessen", "Johannessen", "123444454" , "test6test@test.com",TipoUsuario.DEFAULT);
-		Usuario user8 = new Usuario(null,"Alex Gansa", "Gansa", "123444454" , "test6test@test.com",TipoUsuario.DEFAULT);
-		Usuario user9 = new Usuario(null,"Howard Gordon", "Gordon", "123444454" , "test6test@test.com",TipoUsuario.DEFAULT);
+		Usuario user1 = new Usuario(null,"Pratik Skaggs", "Skaggs", "55555" , "test1@test.com");
+		Usuario user2 = new Usuario(null,"Ajani Harding", "Harding", "22222" , "test2@test.com");
+		Usuario user3 = new Usuario(null,"Lewis Vangon", "Lews", "2222222" , "test333@test.com");
+		Usuario user4 = new Usuario(null,"Salvador Dali", "Dali4", "123444454" , "test4test@test.com");
+		Usuario user5 = new Usuario(null,"Vinaya Justino", "Justino", "123444454" , "test5test@test.com");
+		Usuario user6 = new Usuario(null,"Caetano Muriel", "Muriel", "123444454" , "test6test@test.com");
+		Usuario user7 = new Usuario(null,"Chipison Johannessen", "Johannessen", "123444454" , "test7test@test.com");
+		Usuario user8 = new Usuario(null,"Alex Gansa", "Gansa", "123444454" , "test8test@test.com");
+		Usuario user9 = new Usuario(null,"Howard Gordon", "Gordon", "123444454" , "test9test@test.com");
 		
 		
 		usuarioReposity.saveAll(Arrays.asList(user1, user2, user3, user4, user5, user6, user7, user8, user9));

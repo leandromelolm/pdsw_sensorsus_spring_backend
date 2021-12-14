@@ -15,8 +15,6 @@ import org.hibernate.validator.constraints.NotBlank;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 
-import br.com.sensorsus.sensorsus.model.enums.TipoUsuario;
-
 @Entity
 public class Usuario implements Serializable {
 	
@@ -45,9 +43,6 @@ public class Usuario implements Serializable {
 	@NotNull
 	@NotBlank
 	private String senha;	
-	
-	@JsonIgnore
-	private Integer tipoUsuario;
 		
 	@JsonIgnore
 	@OneToMany(mappedBy="usuario")
@@ -59,17 +54,6 @@ public class Usuario implements Serializable {
 	
 	public Usuario()  {
 		
-	}
-	
-	public Usuario(Integer id, String nomeCompleto, String username, 
-			String senha, String email, TipoUsuario tipoUsuario) {
-		super();
-		this.id = id;
-		this.nomeCompleto = nomeCompleto;
-		this.username = username;
-		this.email = email;
-		this.senha = senha;
-		this.tipoUsuario = tipoUsuario.getCod();
 	}
 	
 	public Usuario(Integer id, String nomeCompleto, String username, 
@@ -113,14 +97,6 @@ public class Usuario implements Serializable {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-	
-	public TipoUsuario getTipo() {
-		return TipoUsuario.toEnum(tipoUsuario);
-	}
-
-	public void setTipo(TipoUsuario typeuser) {
-		this.tipoUsuario = typeuser.getCod();
-	}
 
 	public List<AvaliacaoEstabelecimento> getAvaliacoesE() {
 		return avaliacoesE;
@@ -137,14 +113,6 @@ public class Usuario implements Serializable {
 	public void setAvaliacoesServico(List<AvaliacaoServico> avaliacoesServico) {
 		this.avaliacoesServico = avaliacoesServico;
 	}	
-	
-	public Integer getTipoUsuario() {
-		return tipoUsuario;
-	}
-
-	public void setTipoUsuario(Integer tipoUsuario) {
-		this.tipoUsuario = tipoUsuario;
-	}
 
 	@Override
 	public int hashCode() {

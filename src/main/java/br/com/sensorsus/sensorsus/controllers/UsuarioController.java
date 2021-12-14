@@ -47,3 +47,16 @@ public class UsuarioController {
 		return ResponseEntity.created(uri).build();
 	}
 }
+
+/*
+ * 
+ * JSON USANDO POST /usuarios/new
+{    
+    "nomeCompleto": "Mike Silva Santos",
+    "username": "Mike2",
+    "senha": "123456",
+    "email": "test10test@test.com"   
+}
+ * 
+ * 
+ * */
