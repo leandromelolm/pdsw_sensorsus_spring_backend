@@ -43,7 +43,7 @@ public class EstabelecimentoController {
 		return ResponseEntity.ok().body(listAvalicaoDto);
 	}
 
-	/* listando todos estabelecimentos e suas respectivos endereços - com DTO */
+	/* listando todos estabelecimentos e seu respectivos endereços - com DTO */
 	/*  EndPoint estabelecimentos/enderecos  */
 	@RequestMapping(value = "/enderecos" ,method = RequestMethod.GET)
 	public ResponseEntity<List<EstabelecimentoDTO>> findAll() {

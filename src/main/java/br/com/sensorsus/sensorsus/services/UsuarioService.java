@@ -23,10 +23,12 @@ public class UsuarioService {
 	private UsuarioRepository repo;
 	
 	public Usuario find(Integer id) {
-		Optional<Usuario> obj = repo.findById(id);		
+		Optional<Usuario> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Usuario.class.getName()));
 	}
+	
+	
 
 	public List<Usuario> findAll() {		
 		return repo.findAll();
