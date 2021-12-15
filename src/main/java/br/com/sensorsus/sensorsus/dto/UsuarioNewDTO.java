@@ -16,7 +16,7 @@ public class UsuarioNewDTO implements Serializable {
 	
 	@NotEmpty(message="Preenchimento obrigatório")
 	@Length(min=5, max=20, message="O tamanho deve ser entre 5 e 20 caracteres")
-	private String username;
+	private String nickname;
 	
 	@NotEmpty(message="Preenchimento obrigatório")
 	private String email;
@@ -35,12 +35,12 @@ public class UsuarioNewDTO implements Serializable {
 		this.nomeCompleto = nomeCompleto;
 	}
 
-	public String getUsername() {
-		return username;
+	public String getNickname() {
+		return nickname;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 	
 	public String getEmail() {

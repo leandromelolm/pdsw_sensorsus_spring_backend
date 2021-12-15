@@ -11,7 +11,7 @@ public class UsuarioDTO implements Serializable {
 	
 	private Integer id;
 	private String nomeCompleto;
-	private String username;
+	private String nickname;
 	private String email;
 //	private String senha;
 	
@@ -21,7 +21,7 @@ public class UsuarioDTO implements Serializable {
 	public UsuarioDTO(Usuario obj) {
 		id = obj.getId();
 		nomeCompleto = obj.getNomeCompleto();
-		username = obj.getUsername();
+		nickname = obj.getNickname();
 		email = obj.getEmail();		
 	}
 	
@@ -37,11 +37,11 @@ public class UsuarioDTO implements Serializable {
 	public void setNomeCompleto(String nomeCompleto) {
 		this.nomeCompleto = nomeCompleto;
 	}
-	public String getUsername() {
-		return username;
+	public String getNickname() {
+		return nickname;
 	}
-	public void setUsername(String username) {
-		this.username = username;
+	public void setNickname(String username) {
+		this.nickname = username;
 	}
 	public String getEmail() {
 		return email;

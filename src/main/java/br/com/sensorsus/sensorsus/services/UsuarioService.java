@@ -39,7 +39,7 @@ public class UsuarioService {
 	}
 
 	public Usuario fromDTO(UsuarioNewDTO objDto) {
-		Usuario user = new Usuario(null, objDto.getNomeCompleto(), objDto.getUsername(), objDto.getEmail(), pe.encode(objDto.getSenha()));
+		Usuario user = new Usuario(null, objDto.getNomeCompleto(), objDto.getNickname(), objDto.getEmail(), pe.encode(objDto.getSenha()));
 		return user;
 	}
 }

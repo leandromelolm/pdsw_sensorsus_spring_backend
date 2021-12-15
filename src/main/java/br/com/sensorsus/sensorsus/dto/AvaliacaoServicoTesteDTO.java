@@ -16,7 +16,7 @@ public class AvaliacaoServicoTesteDTO implements Serializable {
 	private Date dataCriacao;
 	private String descricao;
 	private Double classificacao;
-	private String nomeUsuario;
+	private String nickname;
 	
 	public AvaliacaoServicoTesteDTO() {
 		
@@ -29,7 +29,7 @@ public class AvaliacaoServicoTesteDTO implements Serializable {
 		dataCriacao = obj.getDataCriacao();
 		descricao = obj.getDescricao();
 		classificacao = obj.getClassificacao();
-		nomeUsuario = obj.getUsuario().getUsername();
+		nickname = obj.getUsuario().getNickname();
 	}
 
 	public Integer getIdAvaliacao() {
@@ -80,11 +80,11 @@ public class AvaliacaoServicoTesteDTO implements Serializable {
 		this.classificacao = classificacao;
 	}
 
-	public String getNomeUsuario() {
-		return nomeUsuario;
+	public String getNickname() {
+		return nickname;
 	}
 
-	public void setNomeUsuario(String nomeUsuario) {
-		this.nomeUsuario = nomeUsuario;
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 }

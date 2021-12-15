@@ -42,7 +42,7 @@ public class Usuario implements Serializable {
 	
 	@NotBlank
 	@Column(unique=true)
-	private String username;
+	private String nickname; //apelido
 	
 	@JsonIgnore
 	@Column(unique=true)
@@ -68,11 +68,11 @@ public class Usuario implements Serializable {
 		addPerfil(Perfil.STANDARD);
 	}
 	
-	public Usuario(Integer id, String nomeCompleto, String username, String email, String senha) {
+	public Usuario(Integer id, String nomeCompleto, String nickname, String email, String senha) {
 		super();
 		this.id = id;
 		this.nomeCompleto = nomeCompleto;
-		this.username = username;
+		this.nickname = nickname;
 		this.email = email;
 		this.senha = senha;
 		addPerfil(Perfil.STANDARD);
@@ -90,11 +90,11 @@ public class Usuario implements Serializable {
 	public void setNomeCompleto(String nomeCompleto) {
 		this.nomeCompleto = nomeCompleto;
 	}
-	public String getUsername() {
-		return username;
+	public String getNickname() {
+		return nickname;
 	}
-	public void setUsername(String username) {
-		this.username = username;
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 	
 	public String getEmail() {
@@ -162,7 +162,7 @@ public class Usuario implements Serializable {
 	
 	@Override
 	public String toString() {
-		return "Usuario [id=" + id + ", nomeCompleto=" + nomeCompleto + ", username=" + username + ", senha=" + senha
+		return "Usuario [id=" + id + ", nomeCompleto=" + nomeCompleto + ", nickname=" + nickname + ", senha=" + senha
 				+ ", email=" + email + "]";
 	}
 	
