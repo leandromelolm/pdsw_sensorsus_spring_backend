@@ -11,7 +11,10 @@ import org.springframework.transaction.annotation.Transactional;
 import br.com.sensorsus.sensorsus.dto.UsuarioDTO;
 import br.com.sensorsus.sensorsus.dto.UsuarioNewDTO;
 import br.com.sensorsus.sensorsus.model.Usuario;
+import br.com.sensorsus.sensorsus.model.enums.Perfil;
 import br.com.sensorsus.sensorsus.repositories.UsuarioRepository;
+import br.com.sensorsus.sensorsus.security.UserSS;
+import br.com.sensorsus.sensorsus.services.exceptions.AuthorizationException;
 import br.com.sensorsus.sensorsus.services.exceptions.ObjectNotFoundException;
 
 @Service
@@ -24,12 +27,20 @@ public class UsuarioService {
 	private UsuarioRepository repo;
 	
 	public Usuario find(Integer id) {
+		UserSS user = UserService.authenticated();
+		if (user==null || !user.hasRole(Perfil.ADMIN) && !id.equals(user.getId())) {
+			throw new AuthorizationException("Acesso negado");
+		}
 		Optional<Usuario> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Usuario.class.getName()));
 	}
 	
 	public UsuarioDTO buscar(Integer id) {
+		UserSS user = UserService.authenticated();
+		if (user==null || !user.hasRole(Perfil.ADMIN) && !id.equals(user.getId())) {
+			throw new AuthorizationException("Acesso negado");
+		}
 		Usuario usuario = repo.findById(id).orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Usuario.class.getName()));
 		return toUsuarioDTO(usuario);
