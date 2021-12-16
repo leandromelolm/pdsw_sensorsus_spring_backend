@@ -136,14 +136,14 @@ public class DBService {
 		
 		Usuario user1 = new Usuario(null,"Pratik Skaggs", "Skaggs", "test1@test.com", pe.encode("123456"));
 		Usuario user2 = new Usuario(null,"Ajani Harding", "Harding", "test2@test.com", pe.encode("222222"));
-		Usuario user3 = new Usuario(null,"Lewis Vangon", "Lews", "test333@test.com", pe.encode("333333"));
+		Usuario user3 = new Usuario(null,"Lewis Vangon", "Lews", "test3test@test.com", pe.encode("333333"));
 		Usuario user4 = new Usuario(null,"Salvador Dali", "Dali4", "test4test@test.com", pe.encode("123456"));
 		Usuario user5 = new Usuario(null,"Vinaya Justino", "Justino", "test5test@test.com", pe.encode("555555"));
 		Usuario user6 = new Usuario(null,"Caetano Muriel", "Muriel", "test6test@test.com", pe.encode("6666666"));
-		Usuario user7 = new Usuario(null,"Chipison Johannessen", "Johannessen", "test7test@test.com", pe.encode("7777776"));
-		Usuario user8 = new Usuario(null,"Alex Gansa", "Gansa", "test8test@test.com", pe.encode("111111"));
+		Usuario user7 = new Usuario(null,"Chipison Johannessen", "Johannessen", "test7test@test.com", pe.encode("654321"));
+		Usuario user8 = new Usuario(null,"Alex Gansa", "Gansa", "test8test@test.com", pe.encode("888888"));
 		
-		Usuario user9 = new Usuario(null,"Howard Gordon", "Gordon", "test9@test.com", pe.encode("999WWWWW"));
+		Usuario user9 = new Usuario(null,"Howard Gordon", "Gordon", "test9test@test.com", pe.encode("999999"));
 		user9.addPerfil(Perfil.ADMIN);
 		
 		

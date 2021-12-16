@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -28,8 +29,8 @@ public class UsuarioController {
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> find(@PathVariable Integer id) {
-		UsuarioDTO usuario = usuarioservice.find(id);
-		return ResponseEntity.ok().body(usuario);
+		UsuarioDTO usuarioDto = usuarioservice.find(id);
+		return ResponseEntity.ok().body(usuarioDto);
 		/*
 		 * 
 		 * Método GET: Usuario por ID. Exibe ID, NOME, NICKNAME, EMAIL
@@ -81,6 +82,18 @@ public class UsuarioController {
 		 * */		
 	}
 	
+	@RequestMapping(value="/email", method=RequestMethod.GET)
+	public ResponseEntity<?> find(@RequestParam(value="value") String email) {
+		UsuarioDTO usuarioDto = usuarioservice.findByEmail(email);
+		return ResponseEntity.ok().body(usuarioDto);
+		/*
+		 * 
+		 * Método GET: Busca usuario por email. Exibe ID, NOME, NICKNAME, EMAIL
+		 * Endpoint: /usuarios/email?value=test1@test.com // No exemplo o usuário test1@test.com recupera suas informações
+		 * 
+		 * OBS. Usuario com perfil Standard pode fazer busca somente dele mesmo. Necessário está autorizado com token
+		 * */
+	}
 	
 	@RequestMapping(value = "/new", method = RequestMethod.POST)
 	public ResponseEntity<Void> insert(@RequestBody UsuarioNewDTO objDto){

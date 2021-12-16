@@ -40,6 +40,21 @@ public class UsuarioService {
 		return repo.findAll();
 	}
 	
+	public UsuarioDTO findByEmail(String email) {
+		
+		UserSS user = UserService.authenticated();
+		if (user == null || !user.hasRole(Perfil.ADMIN) && !email.equals(user.getUsername())) {
+			throw new AuthorizationException("Acesso negado");
+		}
+
+		Usuario obj = repo.findByEmail(email);
+		if (obj == null) {
+			throw new ObjectNotFoundException(
+					"Objeto não encontrado! Id: " + user.getId() + ", Tipo: " + Usuario.class.getName());
+		}
+		return toUsuarioDTO(obj);
+	}
+	
 	public Usuario findNickName(Integer id) {
 		UserSS user = UserService.authenticated();
 		if (user==null || !user.hasRole(Perfil.ADMIN) && !id.equals(user.getId())) {
