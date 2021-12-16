@@ -25,22 +25,10 @@ public class UsuarioController {
 
 	@Autowired
 	private UsuarioService usuarioservice;
-
-	@RequestMapping(value = "/nickname/{id}", method = RequestMethod.GET)
-	public ResponseEntity<?> find(@PathVariable Integer id) {
-		Usuario obj = usuarioservice.find(id);
-		return ResponseEntity.ok().body(obj);
-		/*
-		 * 
-		 * Método GET: Usuario por ID. Exibe somente NICKNAME
-		 * Endpoint: /usuarios/nickname/{id}
-		 * 
-		 * */
-	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ResponseEntity<?> buscar(@PathVariable Integer id) {
-		UsuarioDTO usuario = usuarioservice.buscar(id);
+	public ResponseEntity<?> find(@PathVariable Integer id) {
+		UsuarioDTO usuario = usuarioservice.find(id);
 		return ResponseEntity.ok().body(usuario);
 		/*
 		 * 
@@ -62,6 +50,18 @@ public class UsuarioController {
 		 * Endpoint: /usuarios
 		 * 
 		 * @PreAuthorize("hasAnyRole('ADMIN')") //Autorização de endpoint para perfil especifico - Perfil ADMIN: apenas usuário ADMIN poderá ter acesso ao endpoint
+		 * 
+		 * */
+	}
+	
+	@RequestMapping(value = "/nickname/{id}", method = RequestMethod.GET)
+	public ResponseEntity<?> findNickName(@PathVariable Integer id) {
+		Usuario obj = usuarioservice.findNickName(id);
+		return ResponseEntity.ok().body(obj);
+		/*
+		 * 
+		 * Método GET: Usuario por ID. Exibe somente NICKNAME
+		 * Endpoint: /usuarios/nickname/{id}
 		 * 
 		 * */
 	}

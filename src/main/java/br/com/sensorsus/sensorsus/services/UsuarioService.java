@@ -26,17 +26,7 @@ public class UsuarioService {
 	@Autowired
 	private UsuarioRepository repo;
 	
-	public Usuario find(Integer id) {
-		UserSS user = UserService.authenticated();
-		if (user==null || !user.hasRole(Perfil.ADMIN) && !id.equals(user.getId())) {
-			throw new AuthorizationException("Acesso negado");
-		}
-		Optional<Usuario> obj = repo.findById(id);
-		return obj.orElseThrow(() -> new ObjectNotFoundException(
-				"Objeto não encontrado! Id: " + id + ", Tipo: " + Usuario.class.getName()));
-	}
-	
-	public UsuarioDTO buscar(Integer id) {
+	public UsuarioDTO find(Integer id) {
 		UserSS user = UserService.authenticated();
 		if (user==null || !user.hasRole(Perfil.ADMIN) && !id.equals(user.getId())) {
 			throw new AuthorizationException("Acesso negado");
@@ -48,6 +38,16 @@ public class UsuarioService {
 
 	public List<Usuario> findAll() {		
 		return repo.findAll();
+	}
+	
+	public Usuario findNickName(Integer id) {
+		UserSS user = UserService.authenticated();
+		if (user==null || !user.hasRole(Perfil.ADMIN) && !id.equals(user.getId())) {
+			throw new AuthorizationException("Acesso negado");
+		}
+		Optional<Usuario> obj = repo.findById(id);
+		return obj.orElseThrow(() -> new ObjectNotFoundException(
+				"Objeto não encontrado! Id: " + id + ", Tipo: " + Usuario.class.getName()));
 	}
 	
 	@Transactional

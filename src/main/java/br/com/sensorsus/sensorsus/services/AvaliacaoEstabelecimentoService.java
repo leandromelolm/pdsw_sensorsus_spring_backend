@@ -41,12 +41,23 @@ public class AvaliacaoEstabelecimentoService {
 		return repo.save(obj);
 	}
 
+//	public AvaliacaoEstabelecimento fromDTO(AvaliacaoEstabelecimentoNewDTO objDto) {
+//		UserSS user = UserService.authenticated();
+//		if (user==null || !user.hasRole(Perfil.ADMIN) && !objDto.getUsuarioId().equals(user.getId())) {
+//			throw new AuthorizationException("Acesso negado");
+//		}
+//		Usuario usuario = new Usuario(objDto.getUsuarioId(), null, null, null, null);
+//		Estabelecimento estab = new Estabelecimento(objDto.getEstabelecimentoId(), null, null, null, null, null);
+//		AvaliacaoEstabelecimento avalEstab = new AvaliacaoEstabelecimento(null, objDto.getDataCriacao(), objDto.getDescricao(), objDto.getClassificacao(), usuario, estab);
+//		return avalEstab;
+//	}
+	
 	public AvaliacaoEstabelecimento fromDTO(AvaliacaoEstabelecimentoNewDTO objDto) {
 		UserSS user = UserService.authenticated();
 		if (user==null || !user.hasRole(Perfil.ADMIN) && !objDto.getUsuarioId().equals(user.getId())) {
 			throw new AuthorizationException("Acesso negado");
 		}
-		Usuario usuario = new Usuario(objDto.getUsuarioId(), null, null, null, null);
+		Usuario usuario = new Usuario(objDto.getUsuarioId(), null, null, user.getUsername(), null);
 		Estabelecimento estab = new Estabelecimento(objDto.getEstabelecimentoId(), null, null, null, null, null);
 		AvaliacaoEstabelecimento avalEstab = new AvaliacaoEstabelecimento(null, objDto.getDataCriacao(), objDto.getDescricao(), objDto.getClassificacao(), usuario, estab);
 		return avalEstab;
