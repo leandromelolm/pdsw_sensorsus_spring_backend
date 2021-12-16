@@ -23,17 +23,35 @@ public class AvaliacaoEstabelecimentoController {
 
 	@Autowired
 	private AvaliacaoEstabelecimentoService service;
-
+	
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> find(@PathVariable Integer id) {
 		AvaliacaoEstabelecimento obj = service.find(id);
 		return ResponseEntity.ok().body(obj);
+		/*
+		 * 
+		 * Método GET: Exibe somente a avaliação de estabelecimento passada por {id}, com: IDAVALIACAO, DATACRIACAO, DESCRICAO, CLASSIFICACAO, USUARIO_NICKNAME
+		 * Endpoint: /avaliacoesestabelecimentos/{id}
+		 * 
+		 * @PreAuthorize("hasAnyRole('ADMIN')") ////Autorização de endpoint para perfil especifico - ADMIN: apenas usuário admin poderá ter acesso ao endpoint
+		 * 
+		 * */
 	}
-
+	
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<AvaliacaoEstabelecimento>> findAll() {
 		List<AvaliacaoEstabelecimento> list = service.findAll();
 		return ResponseEntity.ok().body(list);
+		/*
+		 * 
+		 * Método GET: Exibe lista de avaliações de estabelecimento com: IDAVALIACAO, DATACRIACAO, DESCRICAO, CLASSIFICACAO, USUARIO_NICKNAME
+		 * Endpoint: /avaliacoesestabelecimentos
+		 * 
+		 * @PreAuthorize("hasAnyRole('ADMIN')") ////Autorização de endpoint para perfil especifico - ADMIN: apenas usuário admin poderá ter acesso ao endpoint
+		 * 
+		 * */
 	}
 	
 	@PreAuthorize("hasAnyRole('STANDARD')")
@@ -44,18 +62,23 @@ public class AvaliacaoEstabelecimentoController {
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
 				.path("/{id}").buildAndExpand(obj.getIdAvaliacao()).toUri();
 		return ResponseEntity.created(uri).build();
-	}
-	
+		/*
+		 *
+		 * Método POST: cria uma avaliação de um estabelecimento
+		 * Endpoint: /avaliacoesestabelecimentos/new
+		 * Formato do JSON exemplo:
+		 * 
+		  	{    
+    			"descricao": "TESTE JSON POST inserindo uma nova avaliação no estabelecimento ",
+    			"classificacao": "4.1",
+    			"usuarioId": "2",
+    			"estabelecimentoId": "5"  
+			}
+			 
+		 * obs. Só consegue criar uma avaliação se passar o usuarioId dele próprio(id do usuario autenticado).
+		 * 
+		 * @PreAuthorize("hasAnyRole('STANDARD')") ////Autorização de endpoint para perfil especifico
+		 * 
+		 * */
+	}	
 }
-
-/*
- * 
- * JSON USANDO POST /avaliacoesestabelecimentos/new
-{    
-    "descricao": "TESTE JSON POST inserindo uma nova avaliação no estabelecimento ",
-    "classificacao": "4.1",
-    "usuarioId": "2",
-    "estabelecimentoId": "5"  
-}
- * 
- * */

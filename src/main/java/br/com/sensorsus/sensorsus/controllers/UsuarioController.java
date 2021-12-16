@@ -32,8 +32,8 @@ public class UsuarioController {
 		return ResponseEntity.ok().body(obj);
 		/*
 		 * 
-		 * GET Usuario por ID. Exibe somente NICKNAME
-		 * /usuarios/nickname/{id}
+		 * Método GET: Usuario por ID. Exibe somente NICKNAME
+		 * Endpoint: /usuarios/nickname/{id}
 		 * 
 		 * */
 	}
@@ -44,8 +44,8 @@ public class UsuarioController {
 		return ResponseEntity.ok().body(usuario);
 		/*
 		 * 
-		 * GET Usuario por ID. Exibe ID, NOME, NICKNAME, EMAIL
-		 * /usuarios/{id}
+		 * Método GET: Usuario por ID. Exibe ID, NOME, NICKNAME, EMAIL
+		 * Endpoint: /usuarios/{id}
 		 * 
 		 * */
 	}
@@ -58,8 +58,10 @@ public class UsuarioController {
 		return ResponseEntity.ok().body(listDto);
 		/*
 		 * 
-		 * GET exibe lista de todos Usuarios com ID, NOME, USERNAME, EMAIL
-		 * /usuarios
+		 * Método GET: exibe lista de todos Usuarios com ID, NOME, NICKNAME, EMAIL
+		 * Endpoint: /usuarios
+		 * 
+		 * @PreAuthorize("hasAnyRole('ADMIN')") //Autorização de endpoint para perfil especifico - Perfil ADMIN: apenas usuário ADMIN poderá ter acesso ao endpoint
 		 * 
 		 * */
 	}
@@ -71,8 +73,10 @@ public class UsuarioController {
 		return ResponseEntity.ok().body(list);
 		/*
 		 * 
-		 * GET exibe Lista de todos Usuarios com somente o NICKNAME (APELIDO)
-		 * /usuarios/nickname
+		 * Método GET: exibe Lista de todos Usuarios com somente o NICKNAME (APELIDO)
+		 * Endpoint: /usuarios/nickname
+		 * 
+		 * @PreAuthorize("hasAnyRole('ADMIN')") //Autorização de endpoint para perfil especifico
 		 * 
 		 * */		
 	}
@@ -85,19 +89,19 @@ public class UsuarioController {
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
 				.path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
+		/*
+		 * 
+		 * Método POST: cria um novo usuário
+		 * Endpoint: /usuarios/new
+		 * Formato do JSON exemplo:
+		 * 
+		 	{    
+    			"nomeCompleto": "Michelangelo di Lodovico Buonarroti Simoni",
+    			"nickname": "Michelangelo",    
+    			"email": "Michelangelo_sensorsus@gmail.com",
+    			"senha": "123456"   
+			}
+		 * 
+		 * */	
 	}	
 }
-
-
-/*
- * 
- * JSON USANDO POST /usuarios/new
-{    
-    "nomeCompleto": "Mike Silva Santos",
-    "nickname": "Mike2",    
-    "email": "test10test@test.com",
-    "senha": "123456"   
-}
- * 
- * 
- * */
