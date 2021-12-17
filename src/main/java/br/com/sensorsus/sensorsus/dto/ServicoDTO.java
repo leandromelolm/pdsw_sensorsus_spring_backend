@@ -8,41 +8,41 @@ public class ServicoDTO implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
-	private Integer id;
-	private String nome;
+	private Integer idServico;
+	private String nomeServico;
 	
-	private String estabelecimento;
+	private String nomeEstabelecimento;
 		
 	public ServicoDTO() {		
 	}
 	
 	public ServicoDTO(Servico obj) {
-		id = obj.getId();
-		nome = obj.getNome();
-		setEstabelecimento(obj.getEstabelecimento().getNome());
+		idServico = obj.getId();
+		nomeServico = obj.getNome();
+		setNomeEstabelecimento(obj.getEstabelecimento().getNome());
 	}
 
-	public Integer getId() {
-		return id;
+	public Integer getIdServico() {
+		return idServico;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setIdServico(Integer id) {
+		this.idServico = id;
 	}
 
-	public String getNome() {
-		return nome;
+	public String getNomeServico() {
+		return nomeServico;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setNomeServico(String nome) {
+		this.nomeServico = nome;
 	}
 
-	public String getEstabelecimento() {
-		return estabelecimento;
+	public String getNomeEstabelecimento() {
+		return nomeEstabelecimento;
 	}
 
-	public void setEstabelecimento(String estabelecimento) {
-		this.estabelecimento = estabelecimento;
+	public void setNomeEstabelecimento(String estabelecimento) {
+		this.nomeEstabelecimento = estabelecimento;
 	}	
 }

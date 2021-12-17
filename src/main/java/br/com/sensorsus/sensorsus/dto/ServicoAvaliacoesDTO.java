@@ -7,7 +7,7 @@ import java.util.List;
 import br.com.sensorsus.sensorsus.model.AvaliacaoServico;
 import br.com.sensorsus.sensorsus.model.Servico;
 
-public class ServicoAvaliacaoDTO implements Serializable {
+public class ServicoAvaliacoesDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;	
 	
@@ -17,11 +17,11 @@ public class ServicoAvaliacaoDTO implements Serializable {
 	
 	private List<AvaliacaoServico> avaliacoesServico = new ArrayList<>();
 	
-	public ServicoAvaliacaoDTO() {
+	public ServicoAvaliacoesDTO() {
 		
 	}
 
-	public ServicoAvaliacaoDTO(Servico obj) {
+	public ServicoAvaliacoesDTO(Servico obj) {
 		idServico = obj.getId();
 		nomeServico = obj.getNome();
 		nomeEstabelecimento = obj.getEstabelecimento().getNome();

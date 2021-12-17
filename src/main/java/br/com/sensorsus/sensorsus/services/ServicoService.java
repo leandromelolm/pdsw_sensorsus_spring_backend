@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.sensorsus.sensorsus.dto.ServicoAvaliacaoDTO;
+import br.com.sensorsus.sensorsus.dto.ServicoAvaliacoesDTO;
 import br.com.sensorsus.sensorsus.model.Servico;
 import br.com.sensorsus.sensorsus.repositories.ServicoRepository;
 
@@ -18,9 +18,9 @@ public class ServicoService {
 
 	
 	@Transactional(readOnly = true)
-	public ServicoAvaliacaoDTO findById(Integer id) {
+	public ServicoAvaliacoesDTO findById(Integer id) {
 		Servico obj = repo.findById(id).get();
-		ServicoAvaliacaoDTO dto = new ServicoAvaliacaoDTO(obj);
+		ServicoAvaliacoesDTO dto = new ServicoAvaliacoesDTO(obj);
 		return dto;
 	}
 

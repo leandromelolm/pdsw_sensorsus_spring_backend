@@ -1,65 +1,51 @@
 package br.com.sensorsus.sensorsus.dto;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Date;
 
 import br.com.sensorsus.sensorsus.model.AvaliacaoServico;
-import br.com.sensorsus.sensorsus.model.Servico;
 
 public class AvaliacaoServicoDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	private Integer id;
-	private String nome;
+	private Integer idAvaliacao;
+	private String nomeServico;
 	private String nomeEstabelecimento;
 	
-	private List<AvaliacaoServico> avaliacoesServico = new ArrayList<>();
-	
+	private Date dataCriacao;
+	private String descricao;
+	private Double classificacao;
+	private String nickname;
 	
 	public AvaliacaoServicoDTO() {
 		
 	}
 	
-	public AvaliacaoServicoDTO(Servico obj) {
-		id = obj.getId();
-		nome = obj.getNome();
-		setEstabelecimento(obj.getEstabelecimento().getNome());
-		
-		avaliacoesServico = obj.getAvaliacoesServico();
+	public AvaliacaoServicoDTO(AvaliacaoServico obj) {
+		idAvaliacao = obj.getIdAvaliacao();
+		nomeServico = obj.getServico().getNome();
+		nomeEstabelecimento = obj.getServico().getEstabelecimento().getNome();
+		dataCriacao = obj.getDataCriacao();
+		descricao = obj.getDescricao();
+		classificacao = obj.getClassificacao();
+		nickname = obj.getUsuario().getNickname();
 	}
 
-	public Integer getId() {
-		return id;
+	public Integer getIdAvaliacao() {
+		return idAvaliacao;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setIdAvaliacao(Integer idAvaliacao) {
+		this.idAvaliacao = idAvaliacao;
 	}
 
-	public String getNome() {
-		return nome;
+	public String getNomeServico() {
+		return nomeServico;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public String getEstabelecimento() {
-		return nomeEstabelecimento;
-	}
-
-	public void setEstabelecimento(String estabelecimento) {
-		this.nomeEstabelecimento = estabelecimento;
-	}
-
-	public List<AvaliacaoServico> getAvaliacoesServico() {
-		return avaliacoesServico;
-	}
-
-	public void setAvaliacoesServico(List<AvaliacaoServico> avaliacoesServico) {
-		this.avaliacoesServico = avaliacoesServico;
+	public void setNomeServico(String nomeServico) {
+		this.nomeServico = nomeServico;
 	}
 
 	public String getNomeEstabelecimento() {
@@ -68,5 +54,37 @@ public class AvaliacaoServicoDTO implements Serializable {
 
 	public void setNomeEstabelecimento(String nomeEstabelecimento) {
 		this.nomeEstabelecimento = nomeEstabelecimento;
+	}
+
+	public Date getDataCriacao() {
+		return dataCriacao;
+	}
+
+	public void setDataCriacao(Date dataCriacao) {
+		this.dataCriacao = dataCriacao;
+	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+	public Double getClassificacao() {
+		return classificacao;
+	}
+
+	public void setClassificacao(Double classificacao) {
+		this.classificacao = classificacao;
+	}
+
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 }
