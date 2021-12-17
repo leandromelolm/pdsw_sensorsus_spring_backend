@@ -57,7 +57,7 @@ public class AvaliacaoEstabelecimentoController {
 	@PreAuthorize("hasAnyRole('STANDARD')")
 	@RequestMapping(value = "/new", method = RequestMethod.POST)
 	public ResponseEntity<Void> insert(@RequestBody AvaliacaoEstabelecimentoNewDTO objDto){
-		AvaliacaoEstabelecimento obj = service.fromDTO(objDto);
+		AvaliacaoEstabelecimento obj = service.fromAEDTO(objDto);
 		obj = service.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
 				.path("/{id}").buildAndExpand(obj.getIdAvaliacao()).toUri();
@@ -66,16 +66,17 @@ public class AvaliacaoEstabelecimentoController {
 		 *
 		 * Método POST: cria uma avaliação de um estabelecimento
 		 * Endpoint: /avaliacoesestabelecimentos/new
-		 * Formato do JSON exemplo:
 		 * 
-		  	{    
+		 * Formato do JSON, exemplo:
+		 * 
+		 	{
     			"descricao": "TESTE JSON POST inserindo uma nova avaliação no estabelecimento ",
     			"classificacao": "4.1",
-    			"usuarioId": "2",
-    			"estabelecimentoId": "5"  
+    			"usuarioEmail":"test5test@test.com",
+    			"estabelecimentoId": "12"
 			}
 			 
-		 * obs. Só consegue criar uma avaliação se passar o usuarioId dele próprio(id do usuario autenticado).
+		 * OBS. Para criar uma avaliação é preciso inserir no Headers Authorization o token recebido na autenticação. Na criação da avaliação é necessário o usuario passar seu email de login.
 		 * 
 		 * @PreAuthorize("hasAnyRole('STANDARD')") ////Autorização de endpoint para perfil especifico
 		 * 

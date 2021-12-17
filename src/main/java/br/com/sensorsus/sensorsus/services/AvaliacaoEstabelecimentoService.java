@@ -41,26 +41,54 @@ public class AvaliacaoEstabelecimentoService {
 		return repo.save(obj);
 	}
 
-//	public AvaliacaoEstabelecimento fromDTO(AvaliacaoEstabelecimentoNewDTO objDto) {
-//		UserSS user = UserService.authenticated();
-//		if (user==null || !user.hasRole(Perfil.ADMIN) && !objDto.getUsuarioId().equals(user.getId())) {
-//			throw new AuthorizationException("Acesso negado");
-//		}
-//		Usuario usuario = new Usuario(objDto.getUsuarioId(), null, null, null, null);
-//		Estabelecimento estab = new Estabelecimento(objDto.getEstabelecimentoId(), null, null, null, null, null);
-//		AvaliacaoEstabelecimento avalEstab = new AvaliacaoEstabelecimento(null, objDto.getDataCriacao(), objDto.getDescricao(), objDto.getClassificacao(), usuario, estab);
-//		return avalEstab;
-//	}
-	
 	public AvaliacaoEstabelecimento fromDTO(AvaliacaoEstabelecimentoNewDTO objDto) {
 		UserSS user = UserService.authenticated();
 		if (user==null || !user.hasRole(Perfil.ADMIN) && !objDto.getUsuarioId().equals(user.getId())) {
 			throw new AuthorizationException("Acesso negado");
 		}
-		Usuario usuario = new Usuario(objDto.getUsuarioId(), null, null, user.getUsername(), null);
+		Usuario usuario = new Usuario(objDto.getUsuarioId(), null, null, null, null);
 		Estabelecimento estab = new Estabelecimento(objDto.getEstabelecimentoId(), null, null, null, null, null);
 		AvaliacaoEstabelecimento avalEstab = new AvaliacaoEstabelecimento(null, objDto.getDataCriacao(), objDto.getDescricao(), objDto.getClassificacao(), usuario, estab);
 		return avalEstab;
+		/*
+		 * 
+		 * Formato do JSON, exemplo:
+		 * 
+		   {   
+    			"descricao": "TESTE JSON POST nova avaliação",
+    			"classificacao": "4.1",
+    			"usuarioId": "5",
+    			"estabelecimentoId": "11"  
+			}
+		 * 
+		 * OBS. Para criar uma avaliação é preciso inserir no Headers Authorization o token recebido na autenticação. Na criação da avaliação é necessário o usuario insira seu id.
+		 * 
+		 * */
+	
+	
 	}
-
+	
+	public AvaliacaoEstabelecimento fromAEDTO(AvaliacaoEstabelecimentoNewDTO objDto) {
+		UserSS user = UserService.authenticated();
+		if (user==null || !user.hasRole(Perfil.ADMIN) && !objDto.getUsuarioEmail().equals(user.getUsername())) {
+			throw new AuthorizationException("Acesso negado");
+		}
+		Usuario usuario = new Usuario(user.getId(), null, null,objDto.getUsuarioEmail(), null);
+		Estabelecimento estab = new Estabelecimento(objDto.getEstabelecimentoId(), null, null, null, null, null);
+		AvaliacaoEstabelecimento avalEstab = new AvaliacaoEstabelecimento(null, objDto.getDataCriacao(), objDto.getDescricao(), objDto.getClassificacao(), usuario, estab);
+		return avalEstab;
+		/*
+		 * Formato do JSON, exemplo:
+		 * 		
+		 	{
+    			"descricao": "TESTE JSON POST inserindo uma nova avaliação no estabelecimento ",
+    			"classificacao": "4.1",
+    			"usuarioEmail":"test5test@test.com",
+    			"estabelecimentoId": "12"
+			}
+		 *  
+		 *  OBS. Para criar uma avaliação é preciso inserir no Headers Authorization o token recebido na autenticação. Na criação da avaliação é necessário o usuario passar seu email de login.
+		 *  
+		 * */
+	}
 }

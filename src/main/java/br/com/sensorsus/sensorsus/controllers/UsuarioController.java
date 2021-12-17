@@ -106,6 +106,7 @@ public class UsuarioController {
 		 * 
 		 * Método POST: cria um novo usuário
 		 * Endpoint: /usuarios/new
+		 * 
 		 * Formato do JSON exemplo:
 		 * 
 		 	{    

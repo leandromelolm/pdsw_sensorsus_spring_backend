@@ -14,6 +14,8 @@ public class AvaliacaoEstabelecimentoNewDTO implements Serializable {
 	private Integer usuarioId;
 	private Integer estabelecimentoId;
 	
+	private String usuarioEmail;
+	
 	public AvaliacaoEstabelecimentoNewDTO() {		
 	}
 
@@ -55,6 +57,14 @@ public class AvaliacaoEstabelecimentoNewDTO implements Serializable {
 
 	public void setEstabelecimentoId(Integer estabelecimentoId) {
 		this.estabelecimentoId = estabelecimentoId;
+	}
+
+	public String getUsuarioEmail() {
+		return usuarioEmail;
+	}
+
+	public void setUsuarioEmail(String usuarioEmail) {
+		this.usuarioEmail = usuarioEmail;
 	}
 	
 }
