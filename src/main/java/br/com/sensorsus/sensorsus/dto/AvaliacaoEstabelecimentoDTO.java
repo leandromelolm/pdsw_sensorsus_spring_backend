@@ -3,6 +3,10 @@ package br.com.sensorsus.sensorsus.dto;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import br.com.sensorsus.sensorsus.model.AvaliacaoEstabelecimento;
+
 public class AvaliacaoEstabelecimentoDTO implements Serializable {	
 	private static final long serialVersionUID = 1L;
 	
@@ -11,6 +15,7 @@ public class AvaliacaoEstabelecimentoDTO implements Serializable {
 	private Integer estabelecimentoId;
 	private String nomeEstabelecimento;
 	
+	@JsonFormat(pattern="dd/MM/yyyy HH:mm")
 	private Date dataCriacao;
 	private String descricao;
 	private Double classificacao;	
@@ -18,8 +23,17 @@ public class AvaliacaoEstabelecimentoDTO implements Serializable {
 	private Integer usuarioId;
 	private String apelido;
 	
-	public AvaliacaoEstabelecimentoDTO() {		
+	public AvaliacaoEstabelecimentoDTO(AvaliacaoEstabelecimento obj) {
+		idAvaliacao = obj.getIdAvaliacao();
+		estabelecimentoId = obj.getEstabelecimento().getId();
+		nomeEstabelecimento = obj.getEstabelecimento().getNome();
+		dataCriacao = obj.getDataCriacao();
+		descricao = obj.getDescricao();
+		classificacao = obj.getClassificacao();
+		usuarioId = obj.getUsuario().getId();
+		apelido = obj.getUsuario().getNickname();
 	}
+	
 	public Integer getIdAvaliacao() {
 		return idAvaliacao;
 	}

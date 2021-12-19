@@ -79,7 +79,7 @@ public class DBService {
 		Estabelecimento estab10 = new Estabelecimento(null, "HCP ", 3333, " Recife", "Federal", "Administracão pública");
 		Estabelecimento estab11 = new Estabelecimento(null, "HB2", 35445, " Recife", "Federal", "Administracão pública");
 		Estabelecimento estab12 = new Estabelecimento(null, "Hospital de Camaragib", 76444, " Recife", "Federal", "Administracão pública");
-		Estabelecimento estab13 = new Estabelecimento(null, "UPA Pedro2", 600, " Recife", "Federal", "Administracão pública");
+		Estabelecimento estab13 = new Estabelecimento(null, "UPA pdsw", 600, " Recife", "Federal", "Administracão pública");
 		Estabelecimento estab14 = new Estabelecimento(null, "Pronto Socorro Villa Grande ", 27554, " Recife", "Federal", "Administracão pública");
 		
 		Endereco end1 = new Endereco(null, "Avenida Principal", 1000, "Bairro", "Proximo a Rodovia", "70999000", estab1, c4 );		
@@ -152,10 +152,10 @@ public class DBService {
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");		
 		
-		AvaliacaoEstabelecimento avE1 = new AvaliacaoEstabelecimento(null, sdf.parse("30/09/2021 10:31"),"Hospital Muito Bom esse",4.0, user2, estab1);
+		AvaliacaoEstabelecimento avE1 = new AvaliacaoEstabelecimento(null, sdf.parse("30/09/2021 10:31"),"Hospital Muito Bom atendimento",4.0, user2, estab1);
 		AvaliacaoEstabelecimento avE2 = new AvaliacaoEstabelecimento(null, sdf.parse("30/10/2021 10:33"),"Hospital Atendimento Ruim",2.2, user1, estab4);
-		AvaliacaoEstabelecimento avE3 = new AvaliacaoEstabelecimento(null, sdf.parse("25/10/2021 10:35"),"Hospital Mais ou menos",2.6, user3, estab1);
-		AvaliacaoEstabelecimento avE4 = new AvaliacaoEstabelecimento(null, sdf.parse("23/11/2021 11:10"),"Foi Bom o atendimento, mas poderia ser melhor",3.5, user4, estab2);
+		AvaliacaoEstabelecimento avE3 = new AvaliacaoEstabelecimento(null, sdf.parse("25/10/2021 10:35"),"Hospital teve um atendimento mais ou menos",2.6, user3, estab1);
+		AvaliacaoEstabelecimento avE4 = new AvaliacaoEstabelecimento(null, sdf.parse("23/11/2021 11:10"),"Foi bom o atendimento, mas poderia ser melhor",3.5, user4, estab2);
 		AvaliacaoEstabelecimento avE5 = new AvaliacaoEstabelecimento(null, sdf.parse("11/11/2021 11:10"),"Hospital Atendimento TOP",5.0, user4, estab1);
 		AvaliacaoEstabelecimento avE6 = new AvaliacaoEstabelecimento(null, sdf.parse("12/11/2021 11:10"),"Hospital muito bom",5.0, user4, estab3);
 		AvaliacaoEstabelecimento avE7 = new AvaliacaoEstabelecimento(null, sdf.parse("13/11/2021 11:10"),"Hospital ja foi melhor 7",5.0, user3, estab3);
@@ -165,10 +165,16 @@ public class DBService {
 		AvaliacaoEstabelecimento avE11 = new AvaliacaoEstabelecimento(null, sdf.parse("17/11/2021 11:10"),"Hospital muito bom 11",5.0, user8, estab2);
 		AvaliacaoEstabelecimento avE12 = new AvaliacaoEstabelecimento(null, sdf.parse("18/11/2021 11:10"),"Atendimento Fast",5.0, user9, estab1);
 		AvaliacaoEstabelecimento avE13 = new AvaliacaoEstabelecimento(null, sdf.parse("19/11/2021 11:10"),"Hospital tem um atendimento rapido",5.0, user4, estab5);
-		AvaliacaoEstabelecimento avE14 = new AvaliacaoEstabelecimento(null, sdf.parse("11/11/2021 11:10"),"Hospital atendimento fraco demais",1.0, user1, estab5);
-		AvaliacaoEstabelecimento avE15 = new AvaliacaoEstabelecimento(null, sdf.parse("21/11/2021 11:10"),"Atendimento demorado",1.0, user1, estab10);
+		AvaliacaoEstabelecimento avE14 = new AvaliacaoEstabelecimento(null, sdf.parse("11/11/2021 11:10"),"atendimento fraco demais",1.0, user1, estab5);
+		AvaliacaoEstabelecimento avE15 = new AvaliacaoEstabelecimento(null, sdf.parse("01/12/2021 11:10"),"Atendimento demorado",1.0, user1, estab10);
+		AvaliacaoEstabelecimento avE16 = new AvaliacaoEstabelecimento(null, sdf.parse("29/11/2021 12:00"),"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",3.0, user9, estab13);
+		AvaliacaoEstabelecimento avE17 = new AvaliacaoEstabelecimento(null, sdf.parse("23/11/2021 11:10"),"bbbbbbbbb bbbbbbbbbbbbbb bbbbbbbbbbbbbbbbbbbbbb",4.0, user2, estab13);
+		AvaliacaoEstabelecimento avE18 = new AvaliacaoEstabelecimento(null, sdf.parse("25/11/2021 11:10"),"",5.0, user6, estab13);
+		AvaliacaoEstabelecimento avE19 = new AvaliacaoEstabelecimento(null, sdf.parse("29/11/2021 11:10"),"Avaliação é o substantivo feminino que significa ato de avaliar, ou remete para o efeito essa avaliação. Pode ser sinônimo de estimativa ou apreciação. Uma avaliação pode ser a estimativa do valor de alguma coisa ou de algum trabalho.",1.0, user4, estab7);
+		AvaliacaoEstabelecimento avE20 = new AvaliacaoEstabelecimento(null, sdf.parse("21/02/2021 11:10"),"cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",4.0, user8, estab7);
+		AvaliacaoEstabelecimento avE21 = new AvaliacaoEstabelecimento(null, sdf.parse("29/11/2021 9:00"),"ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",2.0, user3, estab13);
 					
-		avaliacaoEstabelecimentoReposity.saveAll(Arrays.asList(avE1, avE2, avE3, avE4, avE5, avE6, avE7, avE8, avE9, avE10, avE11, avE12, avE13, avE14, avE15));
+		avaliacaoEstabelecimentoReposity.saveAll(Arrays.asList(avE1, avE2, avE3, avE4, avE5, avE6, avE7, avE8, avE9, avE10, avE11, avE12, avE13, avE14, avE15, avE16, avE17, avE18, avE19, avE20, avE21));
 		
 		
 		AvaliacaoServico avServ1 = new AvaliacaoServico(null, sdf.parse("30/09/2021 10:31"),"serviço Muito Bom",5.0, user1, serv8);

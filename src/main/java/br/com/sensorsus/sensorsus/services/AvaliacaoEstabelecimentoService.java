@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -100,7 +103,7 @@ public class AvaliacaoEstabelecimentoService {
 	}
 	
 	private AvaliacaoEstabelecimentoDTO toAvalEstabDTO (AvaliacaoEstabelecimento ae) {
-		var aeDto = new AvaliacaoEstabelecimentoDTO();
+		var aeDto = new AvaliacaoEstabelecimentoDTO(ae);
 		aeDto.setIdAvaliacao(ae.getIdAvaliacao());
 		aeDto.setClassificacao(ae.getClassificacao());
 		aeDto.setDescricao(ae.getDescricao());
@@ -110,5 +113,13 @@ public class AvaliacaoEstabelecimentoService {
 		aeDto.setUsuarioId(ae.getUsuario().getId());
 		aeDto.setApelido(ae.getUsuario().getNickname());
 		return aeDto;
+	}
+
+	public Page<AvaliacaoEstabelecimento> search(String estabelecimento, Integer page, Integer linesPerPage,
+			String orderBy, String direction) {
+		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
+		
+//		return repo.findByEstabelecimento(estabelecimento, pageRequest);
+		return repo.search(estabelecimento, pageRequest);
 	} 
 }

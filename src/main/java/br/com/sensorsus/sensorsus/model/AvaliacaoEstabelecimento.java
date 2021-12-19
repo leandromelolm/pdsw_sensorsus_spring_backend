@@ -21,8 +21,10 @@ public class AvaliacaoEstabelecimento implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idAvaliacao;
+	
 	@JsonFormat(pattern="dd/MM/yyyy HH:mm")
 	private Date dataCriacao;
+	
 	private String descricao;
 	private Double classificacao;
 	

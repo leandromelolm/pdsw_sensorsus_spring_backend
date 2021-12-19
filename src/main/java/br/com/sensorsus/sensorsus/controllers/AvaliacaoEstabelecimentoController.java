@@ -4,15 +4,18 @@ import java.net.URI;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import br.com.sensorsus.sensorsus.controllers.utils.URL;
 import br.com.sensorsus.sensorsus.dto.AvaliacaoEstabelecimentoDTO;
 import br.com.sensorsus.sensorsus.dto.AvaliacaoEstabelecimentoNewDTO;
 import br.com.sensorsus.sensorsus.model.AvaliacaoEstabelecimento;
@@ -32,8 +35,8 @@ public class AvaliacaoEstabelecimentoController {
 		return ResponseEntity.ok().body(obj);
 		/*
 		 * 
-		 * Método GET: Exibe somente a avaliação de estabelecimento passada por {id}, com: IDAVALIACAO, DATACRIACAO, DESCRICAO, CLASSIFICACAO, USUARIO_NICKNAME
-		 * Endpoint: /avaliacoesestabelecimentos/{id}
+		 * [GET]: Exibe somente a avaliação de estabelecimento passada por {id}, com: IDAVALIACAO, DATACRIACAO, DESCRICAO, CLASSIFICACAO, USUARIO_NICKNAME
+		 * Endpoint:  http://{host-url}/api/avaliacoes/{id}
 		 * 
 		 * @PreAuthorize("hasAnyRole('ADMIN')") ////Autorização de endpoint para perfil especifico - ADMIN: apenas usuário admin poderá ter acesso ao endpoint
 		 * 
@@ -41,13 +44,33 @@ public class AvaliacaoEstabelecimentoController {
 	}
 	
 //	@PreAuthorize("hasAnyRole('ADMIN')")
-	@RequestMapping(value = "/estabelecimento/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/avaliacaoestabelecimento/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> findById(@PathVariable Integer id) {
 		AvaliacaoEstabelecimentoDTO aeDto = service.findById(id);
 		return ResponseEntity.ok().body(aeDto);
 		/*
-		 * 	[GET] http://{host-url}/
+		 * 	[GET] http://localhost:8080/api/avaliacoes/avaliacaoestabelecimento/1
+		 * 
 		 * */
+	}
+	
+	@RequestMapping(value = "/estabelecimento", method = RequestMethod.GET)
+	public ResponseEntity<Page<AvaliacaoEstabelecimentoDTO>> findPage(
+			@RequestParam(value="nome", defaultValue="") String nome, 
+			@RequestParam(value="page", defaultValue="0") Integer page, 
+			@RequestParam(value="linesPerPage", defaultValue="10") Integer linesPerPage, 
+			@RequestParam(value="orderBy", defaultValue="dataCriacao") String orderBy, 
+			@RequestParam(value="direction", defaultValue="DESC") String direction) {
+		String nomeDecoded = URL.decodeParam(nome);
+		Page<AvaliacaoEstabelecimento> list = service.search(nomeDecoded, page, linesPerPage, orderBy, direction);
+		Page<AvaliacaoEstabelecimentoDTO> listDto = list.map(obj -> new AvaliacaoEstabelecimentoDTO(obj));
+		return ResponseEntity.ok().body(listDto);
+		
+		/*
+		 * [GET] endpoint http://{host-url}/api/avaliacoes/estabelecimento   // exibe das as avaliações de estabelecimento da página 0
+		 * [GET] endpoint http://{host-url}/api/avaliacoes/estabelecimento/?nome={String}   // pesquisa por nome do estabelecimento
+		 * [GET] endpoint http://{host-url}/api/avaliacoes/estabelecimento/?page={page}   // número da página (padrão é 0)
+		 */
 	}
 	
 	@PreAuthorize("hasAnyRole('ADMIN')")
@@ -57,8 +80,8 @@ public class AvaliacaoEstabelecimentoController {
 		return ResponseEntity.ok().body(list);
 		/*
 		 * 
-		 * Método GET: Exibe lista de avaliações de estabelecimento com: IDAVALIACAO, DATACRIACAO, DESCRICAO, CLASSIFICACAO, USUARIO_NICKNAME
-		 * Endpoint: /avaliacoesestabelecimentos
+		 * [GET]: Exibe lista de avaliações de estabelecimento com: IDAVALIACAO, ESTABELECIMENTO_ID, ESTABELECIMENTO_NOME, DATACRIACAO, DESCRICAO, CLASSIFICACAO, USUARIO_ID, USUARIO_APELIDO
+		 * Endpoint:  http://{host-url}/api/avaliacoes/
 		 * 
 		 * @PreAuthorize("hasAnyRole('ADMIN')") ////Autorização de endpoint para perfil especifico - ADMIN: apenas usuário admin poderá ter acesso ao endpoint
 		 * 
@@ -75,8 +98,8 @@ public class AvaliacaoEstabelecimentoController {
 		return ResponseEntity.created(uri).build();
 		/*
 		 *
-		 * Método POST: cria uma avaliação de um estabelecimento
-		 * Endpoint: /avaliacoesestabelecimentos/new
+		 * [POST]: cria uma avaliação de um estabelecimento
+		 * Endpoint:  http://{host-url}/api/avaliacoes/new
 		 * 
 		 * Formato do JSON, exemplo:
 		 * 
