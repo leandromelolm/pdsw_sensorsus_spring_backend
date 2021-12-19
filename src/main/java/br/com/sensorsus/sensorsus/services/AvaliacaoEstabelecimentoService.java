@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.com.sensorsus.sensorsus.dto.AvaliacaoEstabelecimentoDTO;
 import br.com.sensorsus.sensorsus.dto.AvaliacaoEstabelecimentoNewDTO;
 import br.com.sensorsus.sensorsus.model.AvaliacaoEstabelecimento;
 import br.com.sensorsus.sensorsus.model.Estabelecimento;
@@ -28,6 +29,12 @@ public class AvaliacaoEstabelecimentoService {
 		Optional<AvaliacaoEstabelecimento> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + AvaliacaoEstabelecimento.class.getName()));
+	}
+	
+	public AvaliacaoEstabelecimentoDTO findById(Integer id) {
+		AvaliacaoEstabelecimento obj = repo.findById(id).orElseThrow(() -> new ObjectNotFoundException(
+				"Objeto não encontrado! Id: " + id + ", Tipo: " + AvaliacaoEstabelecimento.class.getName()));
+		return toAvalEstabDTO(obj);
 	}
 
 	public List<AvaliacaoEstabelecimento> findAll() {		
@@ -91,4 +98,17 @@ public class AvaliacaoEstabelecimentoService {
 		 *  
 		 * */
 	}
+	
+	private AvaliacaoEstabelecimentoDTO toAvalEstabDTO (AvaliacaoEstabelecimento ae) {
+		var aeDto = new AvaliacaoEstabelecimentoDTO();
+		aeDto.setIdAvaliacao(ae.getIdAvaliacao());
+		aeDto.setClassificacao(ae.getClassificacao());
+		aeDto.setDescricao(ae.getDescricao());
+		aeDto.setDataCriacao(ae.getDataCriacao());
+		aeDto.setEstabelecimentoId(ae.getEstabelecimento().getId());
+		aeDto.setNomeEstabelecimento(ae.getEstabelecimento().getNome());
+		aeDto.setUsuarioId(ae.getUsuario().getId());
+		aeDto.setApelido(ae.getUsuario().getNickname());
+		return aeDto;
+	} 
 }

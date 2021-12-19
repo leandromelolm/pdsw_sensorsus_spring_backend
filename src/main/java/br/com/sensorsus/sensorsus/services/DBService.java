@@ -75,7 +75,7 @@ public class DBService {
 		Estabelecimento estab6 = new Estabelecimento(null, "HGR hospital Geral dos Restaurados", 44443, " Recife", "Federal", "Administracão pública");
 		Estabelecimento estab7 = new Estabelecimento(null, "UPA baixa rio lago", 60020, " Recife", "Federal", "Administracão pública");
 		Estabelecimento estab8 = new Estabelecimento(null, "UPA Morro baixo", 7777, " Recife", "Federal", "Administracão pública");
-		Estabelecimento estab9 = new Estabelecimento(null, "HO hospital do Vida", 66666, " Jaboatao", "Municipal", "Filantropico");
+		Estabelecimento estab9 = new Estabelecimento(null, "HO hospital da Vida", 66666, " Jaboatao", "Municipal", "Filantropico");
 		Estabelecimento estab10 = new Estabelecimento(null, "HCP ", 3333, " Recife", "Federal", "Administracão pública");
 		Estabelecimento estab11 = new Estabelecimento(null, "HB2", 35445, " Recife", "Federal", "Administracão pública");
 		Estabelecimento estab12 = new Estabelecimento(null, "Hospital de Camaragib", 76444, " Recife", "Federal", "Administracão pública");

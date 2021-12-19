@@ -13,12 +13,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import br.com.sensorsus.sensorsus.dto.AvaliacaoEstabelecimentoDTO;
 import br.com.sensorsus.sensorsus.dto.AvaliacaoEstabelecimentoNewDTO;
 import br.com.sensorsus.sensorsus.model.AvaliacaoEstabelecimento;
 import br.com.sensorsus.sensorsus.services.AvaliacaoEstabelecimentoService;
 
 @RestController
-@RequestMapping(value = "/avaliacoesestabelecimentos")
+@RequestMapping(value = "api/avaliacoes")
 public class AvaliacaoEstabelecimentoController {
 
 	@Autowired
@@ -36,6 +37,16 @@ public class AvaliacaoEstabelecimentoController {
 		 * 
 		 * @PreAuthorize("hasAnyRole('ADMIN')") ////Autorização de endpoint para perfil especifico - ADMIN: apenas usuário admin poderá ter acesso ao endpoint
 		 * 
+		 * */
+	}
+	
+//	@PreAuthorize("hasAnyRole('ADMIN')")
+	@RequestMapping(value = "/estabelecimento/{id}", method = RequestMethod.GET)
+	public ResponseEntity<?> findById(@PathVariable Integer id) {
+		AvaliacaoEstabelecimentoDTO aeDto = service.findById(id);
+		return ResponseEntity.ok().body(aeDto);
+		/*
+		 * 	[GET] http://{host-url}/
 		 * */
 	}
 	

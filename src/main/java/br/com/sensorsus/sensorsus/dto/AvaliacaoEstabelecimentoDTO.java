@@ -6,16 +6,26 @@ import java.util.Date;
 public class AvaliacaoEstabelecimentoDTO implements Serializable {	
 	private static final long serialVersionUID = 1L;
 	
+	private Integer idAvaliacao;
+	
+	private Integer estabelecimentoId;
+	private String nomeEstabelecimento;
+	
 	private Date dataCriacao;
 	private String descricao;
-	private Double classificacao;
+	private Double classificacao;	
 	
 	private Integer usuarioId;
-	private Integer estabelecimentoId;
+	private String apelido;
 	
 	public AvaliacaoEstabelecimentoDTO() {		
 	}
-	
+	public Integer getIdAvaliacao() {
+		return idAvaliacao;
+	}
+	public void setIdAvaliacao(Integer idAvaliacao) {
+		this.idAvaliacao = idAvaliacao;
+	}	
 	public Date getDataCriacao() {
 		return dataCriacao;
 	}
@@ -45,5 +55,17 @@ public class AvaliacaoEstabelecimentoDTO implements Serializable {
 	}
 	public void setEstabelecimentoId(Integer estabelecimentoId) {
 		this.estabelecimentoId = estabelecimentoId;
+	}
+	public String getNomeEstabelecimento() {
+		return nomeEstabelecimento;
+	}
+	public void setNomeEstabelecimento(String nomeEstabelecimento) {
+		this.nomeEstabelecimento = nomeEstabelecimento;
+	}
+	public String getApelido() {
+		return apelido;
+	}
+	public void setApelido(String apelido) {
+		this.apelido = apelido;
 	}
 }
