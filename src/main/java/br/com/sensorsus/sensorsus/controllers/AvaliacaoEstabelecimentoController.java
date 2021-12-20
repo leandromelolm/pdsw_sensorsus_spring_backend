@@ -20,9 +20,12 @@ import br.com.sensorsus.sensorsus.dto.AvaliacaoEstabelecimentoDTO;
 import br.com.sensorsus.sensorsus.dto.AvaliacaoEstabelecimentoNewDTO;
 import br.com.sensorsus.sensorsus.model.AvaliacaoEstabelecimento;
 import br.com.sensorsus.sensorsus.services.AvaliacaoEstabelecimentoService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping(value = "api/avaliacoes")
+@Api("Api de avaliações de estabelecimento")
 public class AvaliacaoEstabelecimentoController {
 
 	@Autowired
@@ -87,9 +90,9 @@ public class AvaliacaoEstabelecimentoController {
 		 * 
 		 * */
 	}
-	
+	@ApiOperation(value = "POST Avaliação", nickname = "Cria avaliação de um estabelecimento")
 	@PreAuthorize("hasAnyRole('STANDARD')")
-	@RequestMapping(value = "/new", method = RequestMethod.POST)
+	@RequestMapping(value = "/new", method = RequestMethod.POST)	
 	public ResponseEntity<Void> insert(@RequestBody AvaliacaoEstabelecimentoNewDTO objDto){
 		AvaliacaoEstabelecimento obj = service.fromAEDTO(objDto);
 		obj = service.insert(obj);
