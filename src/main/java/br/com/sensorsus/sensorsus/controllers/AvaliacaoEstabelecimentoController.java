@@ -70,9 +70,10 @@ public class AvaliacaoEstabelecimentoController {
 		return ResponseEntity.ok().body(listDto);
 		
 		/*
-		 * [GET] endpoint http://{host-url}/api/avaliacoes/estabelecimento   // exibe das as avaliações de estabelecimento da página 0
+		 * [GET] endpoint http://{host-url}/api/avaliacoes/estabelecimento   // exibe as avaliações de estabelecimento da página 0
 		 * [GET] endpoint http://{host-url}/api/avaliacoes/estabelecimento/?nome={String}   // pesquisa por nome do estabelecimento
 		 * [GET] endpoint http://{host-url}/api/avaliacoes/estabelecimento/?page={page}   // número da página (padrão é 0)
+		 * [GET] endpoint http://localhost:8080/api/avaliacoes/estabelecimento/?nome={String}&page={page}
 		 */
 	}
 	
