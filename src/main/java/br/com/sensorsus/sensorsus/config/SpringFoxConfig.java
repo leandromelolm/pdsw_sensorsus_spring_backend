@@ -22,5 +22,6 @@ public class SpringFoxConfig {
                 .build();
     }
 }
-//  /swagger-ui/index.html#/
-
+// http://localhost:8080/swagger-ui/index.html
+// explorer /sensorsus-openapi
+// http://localhost:8080/swagger-ui/index.html?configUrl=/sensorsus-openapi/swagger-config#/

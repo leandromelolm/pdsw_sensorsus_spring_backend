@@ -46,7 +46,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			"/servicos/**",			
 			"/avaliacoesservicos/**",
 			"/avaliacoesestabelecimentos/**",	
-			"/api/avaliacoes/**"
+			"/api/avaliacoes/**"			
 	};
 	
 	private static final String[] PUBLIC_MATCHERS_POST = {
@@ -65,7 +65,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers(HttpMethod.POST, PUBLIC_MATCHERS_POST).permitAll()
 			.antMatchers(HttpMethod.GET, PUBLIC_MATCHERS_GET).permitAll()
 			.antMatchers(PUBLIC_MATCHERS).permitAll()
-			.antMatchers("/swagger-ui/**", "/javainuse-openapi/**").permitAll()
+			.antMatchers("/swagger-ui/**", "/sensorsus-openapi/**").permitAll()
 			.anyRequest().authenticated();
 		http.addFilter(new JWTAuthenticationFilter(authenticationManager(), jwtUtil));
 		http.addFilter(new JWTAuthorizationFilter(authenticationManager(), jwtUtil, userDetailsService));

@@ -72,5 +72,13 @@ http://localhost:8080/api/avaliacoes/new
 [GET] PERFIL USUÁRIO CADASTRO ( O USUÁRIO LOGADO (TOKEN VÁLIDO) RECUPERA SUAS PRÓPRIAS INFORMAÇÕES COM EMAIL)
 http://localhost:8080/usuarios/email?value=michelangelo_sensorsus@gmail.com"
 
+
+SWAGGER
+// http://localhost:8080/swagger-ui/index.html?configUrl=/sensorsus-openapi/swagger-config#/
+
+// http://localhost:8080/swagger-ui/index.html
+// campo explorer: /sensorsus-openapi
+
+
  * 
  * */
