@@ -167,12 +167,12 @@ public class DBService {
 		AvaliacaoEstabelecimento avE13 = new AvaliacaoEstabelecimento(null, sdf.parse("19/11/2021 11:10"),"Hospital tem um atendimento rapido",5.0, user4, estab5);
 		AvaliacaoEstabelecimento avE14 = new AvaliacaoEstabelecimento(null, sdf.parse("11/11/2021 11:10"),"atendimento fraco demais",1.0, user1, estab5);
 		AvaliacaoEstabelecimento avE15 = new AvaliacaoEstabelecimento(null, sdf.parse("01/12/2021 11:10"),"Atendimento demorado",1.0, user1, estab10);
-		AvaliacaoEstabelecimento avE16 = new AvaliacaoEstabelecimento(null, sdf.parse("29/11/2021 12:00"),"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",3.0, user9, estab13);
+		AvaliacaoEstabelecimento avE16 = new AvaliacaoEstabelecimento(null, sdf.parse("29/11/2021 12:00"),"aaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaa",3.0, user9, estab13);
 		AvaliacaoEstabelecimento avE17 = new AvaliacaoEstabelecimento(null, sdf.parse("23/11/2021 11:10"),"bbbbbbbbb bbbbbbbbbbbbbb bbbbbbbbbbbbbbbbbbbbbb",4.0, user2, estab13);
 		AvaliacaoEstabelecimento avE18 = new AvaliacaoEstabelecimento(null, sdf.parse("25/11/2021 11:10"),"",5.0, user6, estab13);
 		AvaliacaoEstabelecimento avE19 = new AvaliacaoEstabelecimento(null, sdf.parse("29/11/2021 11:10"),"Avaliação é o substantivo feminino que significa ato de avaliar, ou remete para o efeito essa avaliação. Pode ser sinônimo de estimativa ou apreciação. Uma avaliação pode ser a estimativa do valor de alguma coisa ou de algum trabalho.",1.0, user4, estab7);
-		AvaliacaoEstabelecimento avE20 = new AvaliacaoEstabelecimento(null, sdf.parse("21/02/2021 11:10"),"cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",4.0, user8, estab7);
-		AvaliacaoEstabelecimento avE21 = new AvaliacaoEstabelecimento(null, sdf.parse("29/11/2021 9:00"),"ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",2.0, user3, estab13);
+		AvaliacaoEstabelecimento avE20 = new AvaliacaoEstabelecimento(null, sdf.parse("21/02/2021 11:10"),"cccccccccc ccccccccccccccccccc ccccccccccccccccccccccc cccccccccc",4.0, user8, estab7);
+		AvaliacaoEstabelecimento avE21 = new AvaliacaoEstabelecimento(null, sdf.parse("29/11/2021 9:00"),"ddddddddddddddddddddd ddddddddddddddddddddddddddddddd ddddddddddddddddd",2.0, user3, estab13);
 					
 		avaliacaoEstabelecimentoReposity.saveAll(Arrays.asList(avE1, avE2, avE3, avE4, avE5, avE6, avE7, avE8, avE9, avE10, avE11, avE12, avE13, avE14, avE15, avE16, avE17, avE18, avE19, avE20, avE21));
 		
@@ -186,7 +186,7 @@ public class DBService {
 		AvaliacaoServico avServ7 = new AvaliacaoServico(null, sdf.parse("29/09/2021 10:31"),"serviçoatendimento ótimo",4.5, user5, serv1);
 		AvaliacaoServico avServ8 = new AvaliacaoServico(null, sdf.parse("29/09/2021 10:31"),"serviçoatendimento usuario 1 avaliando",4.5, user1, serv1);
 		AvaliacaoServico avServ9 = new AvaliacaoServico(null, sdf.parse("29/09/2021 10:31"),"serviçoatendimento ótimo ótimo ótimo ótimo ótimo",4.5, user4, serv1);
-		AvaliacaoServico avServ10 = new AvaliacaoServico(null, sdf.parse("29/09/2021 10:31"),"serviçoatendimento 99999999999999999999999999999999999999999999",4.5, user6, serv1);
+		AvaliacaoServico avServ10 = new AvaliacaoServico(null, sdf.parse("29/09/2021 10:31"),"serviçoatendimento 99999999999999999 9999999999999 99999999999999",4.5, user6, serv1);
 		AvaliacaoServico avServ11 = new AvaliacaoServico(null, sdf.parse("29/09/2021 10:31"),"serviçoatendimento wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww",4.5, user3, serv1);
 		
 		avaliacaoServicoRepository.saveAll(Arrays.asList(avServ1, avServ2, avServ3, avServ4, avServ5, avServ6, avServ7, avServ8, avServ9, avServ10, avServ11));

@@ -61,7 +61,7 @@ public class AvaliacaoEstabelecimentoController {
 	public ResponseEntity<Page<AvaliacaoEstabelecimentoDTO>> findPage(
 			@RequestParam(value="nome", defaultValue="") String nome, 
 			@RequestParam(value="page", defaultValue="0") Integer page, 
-			@RequestParam(value="linesPerPage", defaultValue="10") Integer linesPerPage, 
+			@RequestParam(value="linesPerPage", defaultValue="20") Integer linesPerPage, 
 			@RequestParam(value="orderBy", defaultValue="dataCriacao") String orderBy, 
 			@RequestParam(value="direction", defaultValue="DESC") String direction) {
 		String nomeDecoded = URL.decodeParam(nome);

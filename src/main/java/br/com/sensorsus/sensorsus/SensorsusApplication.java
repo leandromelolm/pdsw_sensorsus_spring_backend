@@ -40,7 +40,7 @@ http://localhost:8080/api/avaliacoes/estabelecimento/?nome={String}
 [GET] SELECIONA PÁGINA DA LISTA DE AVALIAÇÕES DE ESTABELECIMENTO EXIBINDO POR DATA MAIS RECENTE (COM PAGINAÇÃO)
 http://localhost:8080/api/avaliacoes/estabelecimento/?page={page}
 
-[GET] FILTRO EM CONJUNTO - NOME DO ESTABELECIMENTO E PÁGINA
+[GET] FILTRO EM CONJUNTO - NOME DO ESTABELECIMENTO E PÁGINA (COM PAGINAÇÃO)
 localhost:8080/api/avaliacoes/estabelecimento/?nome={String}&page={page}
 
 
@@ -72,12 +72,18 @@ http://localhost:8080/api/avaliacoes/new
 [GET] PERFIL USUÁRIO CADASTRO ( O USUÁRIO LOGADO (TOKEN VÁLIDO) RECUPERA SUAS PRÓPRIAS INFORMAÇÕES COM EMAIL)
 http://localhost:8080/usuarios/email?value=michelangelo_sensorsus@gmail.com"
 
+[GET] LISTA ESTABELECIMENTOS COM ENDEREÇO E TODAS AS AVALIAÇÕES DO ESTABELECIMENTO (COM PAGINAÇÃO)
+http://localhost:8080/estabelecimentos
+
+[GET] LISTA DE TODOS OS ESTABELECIMENTOS COM ENDEREÇO
+http://localhost:8080/estabelecimentos/enderecos
+
 
 SWAGGER
-// http://localhost:8080/swagger-ui/index.html?configUrl=/sensorsus-openapi/swagger-config#/
+http://localhost:8080/swagger-ui/index.html?configUrl=/sensorsus-openapi/swagger-config#/
 
-// http://localhost:8080/swagger-ui/index.html
-// campo explorer: /sensorsus-openapi
+http://localhost:8080/swagger-ui/index.html
+campo explorer: /sensorsus-openapi
 
 
  * 

@@ -32,13 +32,13 @@ public class EstabelecimentoController {
 		return ResponseEntity.ok().body(obj);
 		/*
 		 * 
-		 * Método GET: exibe um único estabelecimento (passado por id). resultado é ESTABELECIMENTO com todos atributos, ENDEREÇO com todos os atributos, e todas as AVALIACOES com atributos e USUARIO_NICKNAME
+		 * [GET]: exibe um único estabelecimento (passado por id). resultado é ESTABELECIMENTO com todos atributos, ENDEREÇO com todos os atributos, e todas as AVALIACOES com atributos e USUARIO_NICKNAME
 		 * Endpoint: /estabelecimento/{id}
 		 * 
 		 * */
 	}
 	
-	@PreAuthorize("hasAnyRole('ADMIN')")
+//	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(value = "/avaliacoes", method = RequestMethod.GET)
 	public ResponseEntity<List<EstabelecimentoAvaliacoesDTO>> findAvaliacao() {
 		List<Estabelecimento> list = service.findAll();
@@ -47,7 +47,7 @@ public class EstabelecimentoController {
 		return ResponseEntity.ok().body(listAvalicaoDto);
 		/*
 		 * 
-		 * Método GET: lista todos os estabelecimentos com ID, NOME, CODCNES, AVALIACOES com atributos e USUARIO_NICKNAME - Usando DTO
+		 * [GET]: lista todos os estabelecimentos com ID, NOME, CODCNES, AVALIACOES com atributos e USUARIO_NICKNAME - Usando DTO
 		 * Endpoint: /estabelecimento/avaliacoes		 * 
 		 * 
 		 * @PreAuthorize("hasAnyRole('ADMIN')") //Autorização de endpoint para perfil especifico
@@ -64,7 +64,7 @@ public class EstabelecimentoController {
 		return ResponseEntity.ok().body(listDto);
 		/*
 		 * 
-		 * Método GET: lista todos estabelecimentos com ENDERECO - Uso de DTO
+		 * [GET]: lista todos estabelecimentos com ENDERECO - Uso de DTO
 		 * Endpoint: /estabelecimentos/enderecos
 		 * 
 		 * */
@@ -83,7 +83,7 @@ public class EstabelecimentoController {
 		return ResponseEntity.ok().body(list);
 		/*
 		 * 
-		 * Método GET:estabelecimentos com Paginação e Pesquisa - resultado é ESTABELECIMENTO com todos atributos, ENDEREÇO com todos os atributos, e todas as AVALIACOES com atributos e USUARIO_NICKNAME
+		 * [GET]:estabelecimentos com Paginação e Pesquisa - resultado é ESTABELECIMENTO com todos atributos, ENDEREÇO com todos os atributos, e todas as AVALIACOES com atributos e USUARIO_NICKNAME
 		 * Endpoint: /estabelecimentos/?nome=UPA // O exemplo pesquisa todos os estabelecimentos que tem uma sequência string com UPA
 		 * Endpoint: /estabelecimentos/?page=0 // O exemplo retorna a primeira página
 		 * Endpoint: /estabelecimentos	// exibe em ordem alfabética a quantidade de elementos(estabelecimentos) atribuidos em linesPerPage. É exibido a page 0, ou seja, primeira página
