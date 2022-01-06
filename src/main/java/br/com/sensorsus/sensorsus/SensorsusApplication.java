@@ -79,6 +79,19 @@ http://localhost:8080/estabelecimentos
 http://localhost:8080/estabelecimentos/enderecos
 
 
+
+[GET] AVALIAÇÕES DE UM ESTABELECIMENTO PASSANDO ID DO ESTABELECIMENTO (ENDPOINT COM PAGINAÇÃO)
+	* exemplo endpoint: Avaliações do estabelecimento com id 1
+	* http://localhost:8080/api/avaliacoes/estabelecimento/id/?id=1
+
+
+[GET] AVALIAÇÕES DE UM ESTABELECIMENTO PASSANDO ID DO ESTABELECIMENTO E A PÁGINA
+	* exemplo endpoint: Avaliações de Estabelecimento de id 2 que estão na página 0 	
+	* http://localhost:8080/api/avaliacoes/estabelecimento/id/?id=2&page=0 
+
+
+
+
 SWAGGER
 http://localhost:8080/swagger-ui/index.html?configUrl=/sensorsus-openapi/swagger-config#/
 

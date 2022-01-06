@@ -121,5 +121,12 @@ public class AvaliacaoEstabelecimentoService {
 		
 //		return repo.findByEstabelecimento(estabelecimento, pageRequest);
 		return repo.search(estabelecimento, pageRequest);
-	} 
+	}
+	
+	public Page<AvaliacaoEstabelecimento> searchIdEstabelecimento(Integer estabelecimentoId, Integer page, Integer linesPerPage,
+			String orderBy, String direction) {
+		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);		
+
+		return repo.searchIdEstabelecimento(estabelecimentoId, pageRequest);
+	}
 }

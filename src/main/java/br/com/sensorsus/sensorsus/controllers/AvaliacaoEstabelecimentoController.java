@@ -46,14 +46,27 @@ public class AvaliacaoEstabelecimentoController {
 		 * */
 	}
 	
-//	@PreAuthorize("hasAnyRole('ADMIN')")
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(value = "/avaliacaoestabelecimento/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> findById(@PathVariable Integer id) {
 		AvaliacaoEstabelecimentoDTO aeDto = service.findById(id);
 		return ResponseEntity.ok().body(aeDto);
 		/*
-		 * 	[GET] http://localhost:8080/api/avaliacoes/avaliacaoestabelecimento/1
+		 * 	[GET] ID da avaliação
+		 * 	
+		 * 	Exemplo http://localhost:8080/api/avaliacoes/avaliacaoestabelecimento/15
 		 * 
+		 * {
+  				"idAvaliacao": 15,
+  				"estabelecimentoId": 10,
+  				"nomeEstabelecimento": "HCP ",
+  				"dataCriacao": "01/12/2021 14:10",
+  				"descricao": "Atendimento demorado",
+ 				"classificacao": 1.0,
+  				"usuarioId": 1,
+  				"apelido": "Skaggs"
+			}
+		 * 	
 		 * */
 	}
 	
@@ -76,6 +89,32 @@ public class AvaliacaoEstabelecimentoController {
 		 * [GET] endpoint http://localhost:8080/api/avaliacoes/estabelecimento/?nome={String}&page={page}
 		 */
 	}
+	
+	@RequestMapping(value = "/estabelecimento/id", method = RequestMethod.GET)
+	public ResponseEntity<Page<AvaliacaoEstabelecimentoDTO>> findIdPage(
+			@RequestParam(value="id", defaultValue="") String id, 
+			@RequestParam(value="page", defaultValue="0") Integer page, 
+			@RequestParam(value="linesPerPage", defaultValue="20") Integer linesPerPage, 
+			@RequestParam(value="orderBy", defaultValue="dataCriacao") String orderBy, 
+			@RequestParam(value="direction", defaultValue="DESC") String direction) {
+		String idDecoded = URL.decodeParam(id);
+		Integer idInt = Integer.parseInt(idDecoded);
+		Page<AvaliacaoEstabelecimento> list = service.searchIdEstabelecimento(idInt, page, linesPerPage, orderBy, direction);
+		Page<AvaliacaoEstabelecimentoDTO> listDto = list.map(obj -> new AvaliacaoEstabelecimentoDTO(obj));
+		return ResponseEntity.ok().body(listDto);
+		
+		/*
+		[GET] AVALIAÇÕES DE UM ESTABELECIMENTO PASSANDO ID DO ESTABELECIMENTO (ENDPOINT COM PAGINAÇÃO)
+		 	* exemplo endpoint: Avaliações do estabelecimento com id 1
+		 	* http://localhost:8080/api/avaliacoes/estabelecimento/id/?id=1
+
+
+		[GET] AVALIAÇÕES DE UM ESTABELECIMENTO PASSANDO ID DO ESTABELECIMENTO E A PÁGINA
+		 	* exemplo endpoint: Avaliações de Estabelecimento de id 2 que estão na página 0 	
+		 	* http://localhost:8080/api/avaliacoes/estabelecimento/id/?id=2&page=0
+		 */
+	}
+	
 	
 	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(method = RequestMethod.GET)
