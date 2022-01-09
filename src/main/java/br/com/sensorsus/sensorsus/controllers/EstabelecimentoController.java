@@ -38,7 +38,7 @@ public class EstabelecimentoController {
 		 * */
 	}
 	
-//	@PreAuthorize("hasAnyRole('ADMIN')")
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(value = "/avaliacoes", method = RequestMethod.GET)
 	public ResponseEntity<List<EstabelecimentoAvaliacoesDTO>> findAvaliacao() {
 		List<Estabelecimento> list = service.findAll();
