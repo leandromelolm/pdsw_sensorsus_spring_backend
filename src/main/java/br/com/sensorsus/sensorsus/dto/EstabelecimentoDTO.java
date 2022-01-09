@@ -1,12 +1,25 @@
 package br.com.sensorsus.sensorsus.dto;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import br.com.sensorsus.sensorsus.model.Endereco;
 import br.com.sensorsus.sensorsus.model.Estabelecimento;
+import br.com.sensorsus.sensorsus.model.Servico;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Getter
+@Setter
+@EqualsAndHashCode
+@NoArgsConstructor
+@AllArgsConstructor
 public class EstabelecimentoDTO implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -14,58 +27,23 @@ public class EstabelecimentoDTO implements Serializable {
 	private Integer id;
 	private String nome;
 	private Integer codCnes;
-	private Set<String> telefones = new HashSet<>();
-	
+	private String descricao;
+	private String orgaoGestor;
+	private String naturezaJuridica;
 	private Endereco endereco;
-	
-	public EstabelecimentoDTO() {		
-	}
+	private List<Servico> servicos = new ArrayList<>();
+	private Set<String> telefones = new HashSet<>();
 	
 	public EstabelecimentoDTO(Estabelecimento obj) {
 		id = obj.getId();
 		nome = obj.getNome();
 		codCnes = obj.getCodCnes();
+		descricao = obj.getDescricao();
+		orgaoGestor = obj.getOrgaoGestor();
+		naturezaJuridica = obj.getNaturezaJuridica();
 		endereco = obj.getEndereco();
+		servicos = obj.getServicos();
 		telefones = obj.getTelefones();
-	}
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public Integer getCodCnes() {
-		return codCnes;
-	}
-
-	public void setCodCnes(Integer codCnes) {
-		this.codCnes = codCnes;
-	}
-
-	public Endereco getEndereco() {
-		return endereco;
-	}
-
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
-	}
-
-	public Set<String> getTelefones() {
-		return telefones;
-	}
-
-	public void setTelefones(Set<String> telefones) {
-		this.telefones = telefones;
-	}
+		
+	}	
 }

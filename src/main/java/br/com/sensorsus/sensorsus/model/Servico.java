@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Servico implements Serializable {
 
@@ -22,12 +24,12 @@ public class Servico implements Serializable {
 	private Integer id;
 	private String nome;
 	
-
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="estabelecimento_id")
 	private Estabelecimento estabelecimento;
 	
-//	@JsonIgnore
+	@JsonIgnore
 	@OneToMany(mappedBy="servico")
 	private List<AvaliacaoServico> avaliacoesServico = new ArrayList<>();
 

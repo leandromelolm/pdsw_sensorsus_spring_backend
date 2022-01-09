@@ -67,20 +67,20 @@ public class DBService {
 		estadoRepository.saveAll(Arrays.asList(est1, est2));
 		cidadeRepository.saveAll(Arrays.asList(c1, c2, c3, c4, c5, c6, c7));		
 				
-		Estabelecimento estab1 = new Estabelecimento(null, "Hospital Springfield", 3323, " Recife", "Municipal", "Administracão pública");
-		Estabelecimento estab2 = new Estabelecimento(null, "Hospital Wakanda ", 55555, " Olinda", "Estadual", "Administracão pública");		
-		Estabelecimento estab3 = new Estabelecimento(null, "HCB Trata Coracao", 8888, " Jaboatao", "Municipal", "Filantropico");
-		Estabelecimento estab4 = new Estabelecimento(null, "UPA do alto do morro ", 59911, " Recife", "Federal", "Administracão pública");
-		Estabelecimento estab5 = new Estabelecimento(null, "Hospital de Fratura", 54445, " Recife", "Federal", "Administracão pública");
-		Estabelecimento estab6 = new Estabelecimento(null, "HGR hospital Geral dos Restaurados", 44443, " Recife", "Federal", "Administracão pública");
-		Estabelecimento estab7 = new Estabelecimento(null, "UPA baixa rio lago", 60020, " Recife", "Federal", "Administracão pública");
-		Estabelecimento estab8 = new Estabelecimento(null, "UPA Morro baixo", 7777, " Recife", "Federal", "Administracão pública");
-		Estabelecimento estab9 = new Estabelecimento(null, "HO hospital da Vida", 66666, " Jaboatao", "Municipal", "Filantropico");
-		Estabelecimento estab10 = new Estabelecimento(null, "HCP ", 3333, " Recife", "Federal", "Administracão pública");
-		Estabelecimento estab11 = new Estabelecimento(null, "HB2", 35445, " Recife", "Federal", "Administracão pública");
-		Estabelecimento estab12 = new Estabelecimento(null, "Hospital de Camaragib", 76444, " Recife", "Federal", "Administracão pública");
-		Estabelecimento estab13 = new Estabelecimento(null, "UPA pdsw", 600, " Recife", "Federal", "Administracão pública");
-		Estabelecimento estab14 = new Estabelecimento(null, "Pronto Socorro Villa Grande ", 27554, " Recife", "Federal", "Administracão pública");
+		Estabelecimento estab1 = new Estabelecimento(null, "Hospital Springfield", 3323, " Descrição de qualquer informação relevante", "Municipal", "Administracão pública");
+		Estabelecimento estab2 = new Estabelecimento(null, "Hospital Wakanda ", 55555, " Descrição sobre o hospital e como ele funciona", "Estadual", "Administracão pública");		
+		Estabelecimento estab3 = new Estabelecimento(null, "HCB Trata Coracao", 8888, " Horario de funcionamento de 8h até 17h", "Municipal", "Filantropico");
+		Estabelecimento estab4 = new Estabelecimento(null, "UPA do alto do morro ", 59911, " funciona 24 horas", "Federal", "Administracão pública");
+		Estabelecimento estab5 = new Estabelecimento(null, "Hospital de Fratura", 54445, " Descriçao sobre este hospital", "Federal", "Administracão pública");
+		Estabelecimento estab6 = new Estabelecimento(null, "HGR hospital Geral dos Restaurados", 44443, " Descriçao sobre este hospital6", "Federal", "Administracão pública");
+		Estabelecimento estab7 = new Estabelecimento(null, "UPA baixa rio lago", 60020, " Descriçao sobre este hospital7", "Federal", "Administracão pública");
+		Estabelecimento estab8 = new Estabelecimento(null, "UPA Morro baixo", 7777, " Descriçao sobre este hospital8", "Federal", "Administracão pública");
+		Estabelecimento estab9 = new Estabelecimento(null, "HO hospital da Vida", 66666, " Descriçao sobre este hospital9", "Municipal", "Filantropico");
+		Estabelecimento estab10 = new Estabelecimento(null, "HCP ", 3333, " Descriçao sobre este hospital10", "Federal", "Administracão pública");
+		Estabelecimento estab11 = new Estabelecimento(null, "HB2", 35445, " Descriçao sobre este hospital11", "Federal", "Administracão pública");
+		Estabelecimento estab12 = new Estabelecimento(null, "Hospital de Camaragib", 76444, " Descriçao sobre este hospital12", "Federal", "Administracão pública");
+		Estabelecimento estab13 = new Estabelecimento(null, "UPA pdsw", 600, " Descriçao sobre este hospital13", "Federal", "Administracão pública");
+		Estabelecimento estab14 = new Estabelecimento(null, "Pronto Socorro Villa Grande ", 27554, " Descriçao sobre este hospital14", "Federal", "Administracão pública");
 		
 		Endereco end1 = new Endereco(null, "Avenida Principal", 1000, "Bairro", "Proximo a Rodovia", "70999000", estab1, c4 );		
 		Endereco end2 = new Endereco(null, "Rodovia BR 101", 4450, "Cidade Universitaria", "Proximo a UFPE", "70999000", estab2, c1 );		
@@ -154,16 +154,16 @@ public class DBService {
 		
 		AvaliacaoEstabelecimento avE1 = new AvaliacaoEstabelecimento(null, sdf.parse("30/09/2021 10:31"),"Hospital Muito Bom atendimento",4.0, user2, estab1);
 		AvaliacaoEstabelecimento avE2 = new AvaliacaoEstabelecimento(null, sdf.parse("30/10/2021 10:33"),"Hospital Atendimento Ruim",2.2, user1, estab4);
-		AvaliacaoEstabelecimento avE3 = new AvaliacaoEstabelecimento(null, sdf.parse("25/10/2021 10:35"),"Hospital teve um atendimento mais ou menos",2.6, user3, estab1);
+		AvaliacaoEstabelecimento avE3 = new AvaliacaoEstabelecimento(null, sdf.parse("25/10/2021 10:35"),"Hospital teve um atendimento mais ou menos",2.5, user3, estab1);
 		AvaliacaoEstabelecimento avE4 = new AvaliacaoEstabelecimento(null, sdf.parse("23/11/2021 11:10"),"Foi bom o atendimento, mas poderia ser melhor",3.5, user4, estab2);
-		AvaliacaoEstabelecimento avE5 = new AvaliacaoEstabelecimento(null, sdf.parse("11/11/2021 11:10"),"Hospital Atendimento TOP",5.0, user4, estab1);
-		AvaliacaoEstabelecimento avE6 = new AvaliacaoEstabelecimento(null, sdf.parse("12/11/2021 11:10"),"Hospital muito bom",5.0, user4, estab3);
-		AvaliacaoEstabelecimento avE7 = new AvaliacaoEstabelecimento(null, sdf.parse("13/11/2021 11:10"),"Hospital ja foi melhor 7",5.0, user3, estab3);
+		AvaliacaoEstabelecimento avE5 = new AvaliacaoEstabelecimento(null, sdf.parse("11/11/2021 11:10"),"Hospital Atendimento TOP",3.0, user4, estab1);
+		AvaliacaoEstabelecimento avE6 = new AvaliacaoEstabelecimento(null, sdf.parse("12/11/2021 11:10"),"Hospital muito bom",4.0, user4, estab3);
+		AvaliacaoEstabelecimento avE7 = new AvaliacaoEstabelecimento(null, sdf.parse("13/11/2021 11:10"),"Hospital ja foi melhor 7",1.0, user3, estab3);
 		AvaliacaoEstabelecimento avE8 = new AvaliacaoEstabelecimento(null, sdf.parse("14/11/2021 11:10"),"Hospital não sei",5.0, user5, estab3);
-		AvaliacaoEstabelecimento avE9 = new AvaliacaoEstabelecimento(null, sdf.parse("15/11/2021 11:10"),"Hospital muito bom 9",5.0, user7, estab3);
-		AvaliacaoEstabelecimento avE10 = new AvaliacaoEstabelecimento(null, sdf.parse("16/11/2021 11:10"),"Hospital muito bom10 ",5.0, user6, estab2);
+		AvaliacaoEstabelecimento avE9 = new AvaliacaoEstabelecimento(null, sdf.parse("15/11/2021 11:10"),"Hospital muito bom 9",4.0, user7, estab3);
+		AvaliacaoEstabelecimento avE10 = new AvaliacaoEstabelecimento(null, sdf.parse("16/11/2021 11:10"),"Hospital muito bom10 ",2.0, user6, estab2);
 		AvaliacaoEstabelecimento avE11 = new AvaliacaoEstabelecimento(null, sdf.parse("17/11/2021 11:10"),"Hospital muito bom 11",5.0, user8, estab2);
-		AvaliacaoEstabelecimento avE12 = new AvaliacaoEstabelecimento(null, sdf.parse("18/11/2021 11:10"),"Atendimento Fast",5.0, user9, estab1);
+		AvaliacaoEstabelecimento avE12 = new AvaliacaoEstabelecimento(null, sdf.parse("18/11/2021 11:10"),"Atendimento Fast",4.0, user9, estab1);
 		AvaliacaoEstabelecimento avE13 = new AvaliacaoEstabelecimento(null, sdf.parse("19/11/2021 11:10"),"Hospital tem um atendimento rapido",5.0, user4, estab5);
 		AvaliacaoEstabelecimento avE14 = new AvaliacaoEstabelecimento(null, sdf.parse("11/11/2021 11:10"),"atendimento fraco demais",1.0, user1, estab5);
 		AvaliacaoEstabelecimento avE15 = new AvaliacaoEstabelecimento(null, sdf.parse("01/12/2021 11:10"),"Atendimento demorado",1.0, user1, estab10);
