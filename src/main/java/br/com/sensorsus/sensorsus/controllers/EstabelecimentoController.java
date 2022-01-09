@@ -56,18 +56,18 @@ public class EstabelecimentoController {
 		
 	}
 
-	@RequestMapping(value = "/enderecos" ,method = RequestMethod.GET)
+	@RequestMapping(value = "/detalhes" ,method = RequestMethod.GET)
 	public ResponseEntity<List<EstabelecimentoDTO>> findAll() {
 		List<Estabelecimento> list = service.findAll();
 		List<EstabelecimentoDTO> listDto = list.stream().map(obj -> new EstabelecimentoDTO(obj))
 				.collect(Collectors.toList());
 		return ResponseEntity.ok().body(listDto);
-		/*
-		 * 
-		 * [GET]: lista todos estabelecimentos com ENDERECO - Uso de DTO
-		 * Endpoint: /estabelecimentos/enderecos
-		 * 
-		 * */
+		/**
+		   
+		 [GET] LISTA DE TODOS OS ESTABELECIMENTOS COM ENDEREÇO E SERVIÇOS QUE SÃO PRESTADOS ( Uso de DTO, sem paginação)
+			* http://localhost:8080/estabelecimentos/detalhes
+		  
+		 **/
 	}
 
 	@RequestMapping(method = RequestMethod.GET)

@@ -70,15 +70,13 @@ http://localhost:8080/api/avaliacoes/new
 }
 
 [GET] PERFIL USUÁRIO CADASTRO ( O USUÁRIO LOGADO (TOKEN VÁLIDO) RECUPERA SUAS PRÓPRIAS INFORMAÇÕES COM EMAIL)
-http://localhost:8080/usuarios/email?value=michelangelo_sensorsus@gmail.com"
+	* http://localhost:8080/usuarios/email?value=michelangelo_sensorsus@gmail.com"
 
 [GET] LISTA ESTABELECIMENTOS COM ENDEREÇO E TODAS AS AVALIAÇÕES DO ESTABELECIMENTO (COM PAGINAÇÃO)
-http://localhost:8080/estabelecimentos
+	* http://localhost:8080/estabelecimentos
 
-[GET] LISTA DE TODOS OS ESTABELECIMENTOS COM ENDEREÇO
-http://localhost:8080/estabelecimentos/enderecos
-
-
+[GET] LISTA DE TODOS OS ESTABELECIMENTOS COM ENDEREÇO E SERVIÇOS QUE SÃO PRESTADOS
+	* http://localhost:8080/estabelecimentos/detalhes
 
 [GET] AVALIAÇÕES DE UM ESTABELECIMENTO PASSANDO ID DO ESTABELECIMENTO (ENDPOINT COM PAGINAÇÃO)
 	* exemplo endpoint: Avaliações do estabelecimento com id 1
