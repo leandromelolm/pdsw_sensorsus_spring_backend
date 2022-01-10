@@ -7,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import br.com.sensorsus.sensorsus.services.exception.StandardError;
 import br.com.sensorsus.sensorsus.services.exceptions.AuthorizationException;
 
 @ControllerAdvice

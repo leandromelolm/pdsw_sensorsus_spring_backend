@@ -1,4 +1,4 @@
-package br.com.sensorsus.sensorsus.services.exception;
+package br.com.sensorsus.sensorsus.controllers.exception;
 
 import java.io.Serializable;
 
