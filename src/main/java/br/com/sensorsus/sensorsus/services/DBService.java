@@ -142,12 +142,13 @@ public class DBService {
 		Usuario user6 = new Usuario(null,"Caetano Muriel", "Muriel", "test6test@test.com", pe.encode("6666666"));
 		Usuario user7 = new Usuario(null,"Chipison Johannessen", "Johannessen", "test7test@test.com", pe.encode("654321"));
 		Usuario user8 = new Usuario(null,"Alex Gansa", "Gansa", "test8test@test.com", pe.encode("888888"));
+		Usuario user10 = new Usuario(null,"Bob esponja", "Bob", "aaa@aaa.com", pe.encode("aaa"));
 		
 		Usuario user9 = new Usuario(null,"Howard Gordon", "Gordon", "test9test@test.com", pe.encode("999999"));
 		user9.addPerfil(Perfil.ADMIN);
 		
 		
-		usuarioReposity.saveAll(Arrays.asList(user1, user2, user3, user4, user5, user6, user7, user8, user9));
+		usuarioReposity.saveAll(Arrays.asList(user1, user2, user3, user4, user5, user6, user7, user8, user9, user10));
 		
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");		

@@ -18,6 +18,7 @@ import br.com.sensorsus.sensorsus.model.Estabelecimento;
 import br.com.sensorsus.sensorsus.model.Usuario;
 import br.com.sensorsus.sensorsus.model.enums.Perfil;
 import br.com.sensorsus.sensorsus.repositories.AvaliacaoEstabelecimentoRepository;
+import br.com.sensorsus.sensorsus.repositories.EstabelecimentoRepository;
 import br.com.sensorsus.sensorsus.security.UserSS;
 import br.com.sensorsus.sensorsus.services.exceptions.AuthorizationException;
 import br.com.sensorsus.sensorsus.services.exceptions.ObjectNotFoundException;
@@ -27,6 +28,9 @@ public class AvaliacaoEstabelecimentoService {
 	
 	@Autowired
 	private AvaliacaoEstabelecimentoRepository repo;
+	
+//	@Autowired
+//	private EstabelecimentoRepository repoEstab;
 	
 	public AvaliacaoEstabelecimento find(Integer id) {
 		Optional<AvaliacaoEstabelecimento> obj = repo.findById(id);
@@ -48,6 +52,10 @@ public class AvaliacaoEstabelecimentoService {
 	public AvaliacaoEstabelecimento insert(AvaliacaoEstabelecimento obj) {		
 		obj.setIdAvaliacao(null);
 		obj.setDataCriacao(new Date());
+//		Estabelecimento e = new Estabelecimento();
+//		e.SomaPontuacao(obj.getClassificacao());
+//		e.setId(obj.getEstabelecimento().getId());
+//		repoEstab.save(e);
 		return repo.save(obj);
 	}
 
@@ -74,8 +82,6 @@ public class AvaliacaoEstabelecimentoService {
 		 * OBS. Para criar uma avaliação é preciso inserir no Headers Authorization o token recebido na autenticação. Na criação da avaliação é necessário o usuario insira seu id.
 		 * 
 		 * */
-	
-	
 	}
 	
 	public AvaliacaoEstabelecimento fromAEDTO(AvaliacaoEstabelecimentoNewDTO objDto) {
@@ -85,7 +91,7 @@ public class AvaliacaoEstabelecimentoService {
 		}
 		Usuario usuario = new Usuario(user.getId(), null, null,objDto.getUsuarioEmail(), null);
 		Estabelecimento estab = new Estabelecimento(objDto.getEstabelecimentoId(), null, null, null, null, null);
-		AvaliacaoEstabelecimento avalEstab = new AvaliacaoEstabelecimento(null, objDto.getDataCriacao(), objDto.getDescricao(), objDto.getClassificacao(), usuario, estab);
+		AvaliacaoEstabelecimento avalEstab = new AvaliacaoEstabelecimento(null, objDto.getDataCriacao(), objDto.getDescricao(), objDto.getClassificacao(), usuario, estab);				
 		return avalEstab;
 		/*
 		 * Formato do JSON, exemplo:

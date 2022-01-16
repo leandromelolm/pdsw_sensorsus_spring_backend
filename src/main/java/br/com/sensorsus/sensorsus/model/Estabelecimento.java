@@ -47,6 +47,8 @@ public class Estabelecimento implements Serializable {
 	@OneToMany(mappedBy="estabelecimento")
 	private List<AvaliacaoEstabelecimento> avaliacoes = new ArrayList<>();
 	
+//	private Double pontuacaoTotal = 0.0;
+	
 	public Estabelecimento() {
 		
 	}	
@@ -140,7 +142,19 @@ public class Estabelecimento implements Serializable {
 
 	public void setAvaliacoes(List<AvaliacaoEstabelecimento> avaliacoes) {
 		this.avaliacoes = avaliacoes;
-	}
+	}	
+
+//	public Double getPontuacaoTotal() {
+//		return pontuacaoTotal;
+//	}
+//
+//	public void setPontuacaoTotal(Double pontuacaoTotal) {
+//		this.pontuacaoTotal = pontuacaoTotal;
+//	}
+//	
+//	public void SomaPontuacao(Double soma) {
+//		pontuacaoTotal = pontuacaoTotal + soma;
+//	}
 
 	@Override
 	public int hashCode() {
