@@ -68,7 +68,9 @@ public class UsuarioService {
 	@Transactional
 	public Usuario insert(Usuario obj) {
 		obj.setId(null);
-		return repo.save(obj);
+//		return repo.save(obj);
+		obj = repo.save(obj);
+		return obj;
 	}
 
 	public Usuario fromDTO(UsuarioNewDTO objDto) {

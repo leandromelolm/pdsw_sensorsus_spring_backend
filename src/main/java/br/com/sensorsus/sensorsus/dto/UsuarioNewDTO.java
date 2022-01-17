@@ -2,10 +2,13 @@ package br.com.sensorsus.sensorsus.dto;
 
 import java.io.Serializable;
 
-import javax.validation.constraints.NotEmpty;
-
+import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
 
+import br.com.sensorsus.sensorsus.services.validation.UsuarioInsert;
+
+@UsuarioInsert
 public class UsuarioNewDTO implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -15,10 +18,11 @@ public class UsuarioNewDTO implements Serializable {
 	private String nomeCompleto;
 	
 	@NotEmpty(message="Preenchimento obrigatório")
-	@Length(min=5, max=20, message="O tamanho deve ser entre 5 e 20 caracteres")
+	@Length(min=3, max=30, message="O tamanho deve ser entre 3 e 30 caracteres")
 	private String nickname;
 	
 	@NotEmpty(message="Preenchimento obrigatório")
+	@Email(message="Email inválido")
 	private String email;
 	
 	@NotEmpty(message="Preenchimento obrigatório")

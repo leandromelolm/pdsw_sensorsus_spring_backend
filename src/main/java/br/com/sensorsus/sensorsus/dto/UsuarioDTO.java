@@ -3,6 +3,9 @@ package br.com.sensorsus.sensorsus.dto;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+
 import br.com.sensorsus.sensorsus.model.Usuario;
 
 public class UsuarioDTO implements Serializable {
@@ -12,7 +15,11 @@ public class UsuarioDTO implements Serializable {
 	private Integer id;
 	private String nomeCompleto;
 	private String nickname;
+	
+	@NotEmpty(message="Preenchimento obrigatório")
+	@Email(message="Email inválido")
 	private String email;
+	
 //	private String senha;
 	
 	public UsuarioDTO() {		
