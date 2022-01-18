@@ -34,6 +34,9 @@ public class EstabelecimentoDTO implements Serializable {
 	private List<Servico> servicos = new ArrayList<>();
 	private Set<String> telefones = new HashSet<>();
 	
+	private Double score;
+	private Integer count;
+	
 	public EstabelecimentoDTO(Estabelecimento obj) {
 		id = obj.getId();
 		nome = obj.getNome();
@@ -44,6 +47,8 @@ public class EstabelecimentoDTO implements Serializable {
 		endereco = obj.getEndereco();
 		servicos = obj.getServicos();
 		telefones = obj.getTelefones();
+		score = obj.getScore();
+		count = obj.getCount();
 		
 	}	
 }

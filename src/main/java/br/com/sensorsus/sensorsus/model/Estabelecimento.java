@@ -40,14 +40,18 @@ public class Estabelecimento implements Serializable {
 	private Set<String> telefones = new HashSet<>();
 	
 	@JsonIgnore
-    @OneToMany(mappedBy = "estabelecimento")
-    private List<Servico> servicos = new ArrayList<>();
+	@OneToMany(mappedBy = "estabelecimento")
+	private List<Servico> servicos = new ArrayList<>();
 	
-//	@JsonIgnore
+	@JsonIgnore
 	@OneToMany(mappedBy="estabelecimento")
 	private List<AvaliacaoEstabelecimento> avaliacoes = new ArrayList<>();
 	
-//	private Double pontuacaoTotal = 0.0;
+	private Double score;	
+	private Integer count;
+	
+	@OneToMany(mappedBy = "estabelecimento")
+	private Set<AvaliacaoEstabelecimento> scores = new HashSet<>();
 	
 	public Estabelecimento() {
 		
@@ -62,6 +66,19 @@ public class Estabelecimento implements Serializable {
 		this.descricao = descricao;
 		this.orgaoGestor = orgaoGestor;
 		this.naturezaJuridica = naturezaJuridica;		
+	}	
+
+	public Estabelecimento(Integer id, String nome, Integer codCnes, String descricao, String orgaoGestor,
+			String naturezaJuridica, Double score, Integer count) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.codCnes = codCnes;
+		this.descricao = descricao;
+		this.orgaoGestor = orgaoGestor;
+		this.naturezaJuridica = naturezaJuridica;		
+		this.score = score;
+		this.count = count;
 	}
 
 	public Integer getId() {
@@ -144,17 +161,25 @@ public class Estabelecimento implements Serializable {
 		this.avaliacoes = avaliacoes;
 	}	
 
-//	public Double getPontuacaoTotal() {
-//		return pontuacaoTotal;
-//	}
-//
-//	public void setPontuacaoTotal(Double pontuacaoTotal) {
-//		this.pontuacaoTotal = pontuacaoTotal;
-//	}
-//	
-//	public void SomaPontuacao(Double soma) {
-//		pontuacaoTotal = pontuacaoTotal + soma;
-//	}
+	public Double getScore() {
+		return score;
+	}
+
+	public void setScore(Double score) {
+		this.score = score;
+	}
+
+	public Integer getCount() {
+		return count;
+	}
+
+	public void setCount(Integer count) {
+		this.count = count;
+	}
+
+	public Set<AvaliacaoEstabelecimento> getScores() {
+		return scores;
+	}
 
 	@Override
 	public int hashCode() {

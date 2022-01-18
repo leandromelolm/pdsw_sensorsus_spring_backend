@@ -28,16 +28,16 @@ public class AvaliacaoEstabelecimentoService {
 	
 	@Autowired
 	private AvaliacaoEstabelecimentoRepository repo;
-	
-//	@Autowired
-//	private EstabelecimentoRepository repoEstab;
-	
+
+	@Autowired
+	private EstabelecimentoRepository repoEstab;
+
 	public AvaliacaoEstabelecimento find(Integer id) {
 		Optional<AvaliacaoEstabelecimento> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + AvaliacaoEstabelecimento.class.getName()));
 	}
-	
+
 	public AvaliacaoEstabelecimentoDTO findById(Integer id) {
 		AvaliacaoEstabelecimento obj = repo.findById(id).orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + AvaliacaoEstabelecimento.class.getName()));
@@ -47,43 +47,15 @@ public class AvaliacaoEstabelecimentoService {
 	public List<AvaliacaoEstabelecimento> findAll() {		
 		return repo.findAll();
 	}
-	
+
 	@Transactional
 	public AvaliacaoEstabelecimento insert(AvaliacaoEstabelecimento obj) {		
 		obj.setIdAvaliacao(null);
-		obj.setDataCriacao(new Date());
-//		Estabelecimento e = new Estabelecimento();
-//		e.SomaPontuacao(obj.getClassificacao());
-//		e.setId(obj.getEstabelecimento().getId());
-//		repoEstab.save(e);
+		obj.setDataCriacao(new Date());		
 		return repo.save(obj);
 	}
-
-	public AvaliacaoEstabelecimento fromDTO(AvaliacaoEstabelecimentoNewDTO objDto) {
-		UserSS user = UserService.authenticated();
-		if (user==null || !user.hasRole(Perfil.ADMIN) && !objDto.getUsuarioId().equals(user.getId())) {
-			throw new AuthorizationException("Acesso negado");
-		}
-		Usuario usuario = new Usuario(objDto.getUsuarioId(), null, null, null, null);
-		Estabelecimento estab = new Estabelecimento(objDto.getEstabelecimentoId(), null, null, null, null, null);
-		AvaliacaoEstabelecimento avalEstab = new AvaliacaoEstabelecimento(null, objDto.getDataCriacao(), objDto.getDescricao(), objDto.getClassificacao(), usuario, estab);
-		return avalEstab;
-		/*
-		 * 
-		 * Formato do JSON, exemplo:
-		 * 
-		   {   
-    			"descricao": "TESTE JSON POST nova avaliação",
-    			"classificacao": "4.1",
-    			"usuarioId": "5",
-    			"estabelecimentoId": "11"  
-			}
-		 * 
-		 * OBS. Para criar uma avaliação é preciso inserir no Headers Authorization o token recebido na autenticação. Na criação da avaliação é necessário o usuario insira seu id.
-		 * 
-		 * */
-	}
 	
+	// Método passando Email do Usuário
 	public AvaliacaoEstabelecimento fromAEDTO(AvaliacaoEstabelecimentoNewDTO objDto) {
 		UserSS user = UserService.authenticated();
 		if (user==null || !user.hasRole(Perfil.ADMIN) && !objDto.getUsuarioEmail().equals(user.getUsername())) {
@@ -92,22 +64,27 @@ public class AvaliacaoEstabelecimentoService {
 		Usuario usuario = new Usuario(user.getId(), null, null,objDto.getUsuarioEmail(), null);
 		Estabelecimento estab = new Estabelecimento(objDto.getEstabelecimentoId(), null, null, null, null, null);
 		AvaliacaoEstabelecimento avalEstab = new AvaliacaoEstabelecimento(null, objDto.getDataCriacao(), objDto.getDescricao(), objDto.getClassificacao(), usuario, estab);				
+		
+		// Score e Count Estabelecimento
+		Estabelecimento est = repoEstab.findById(objDto.getEstabelecimentoId()).get();
+
+		double sum = 0.0;
+		for (AvaliacaoEstabelecimento ae : est.getScores()) {
+			sum = sum + ae.getClassificacao();			
+		}
+		sum = sum + avalEstab.getClassificacao();
+		
+		Integer count = est.getScores().size()+1;
+
+		double avg = sum / count;
+
+		est.setScore(avg);
+		est.setCount(count);		
+		est = repoEstab.save(est);
+
 		return avalEstab;
-		/*
-		 * Formato do JSON, exemplo:
-		 * 		
-		 	{
-    			"descricao": "TESTE JSON POST inserindo uma nova avaliação no estabelecimento ",
-    			"classificacao": "4.1",
-    			"usuarioEmail":"test5test@test.com",
-    			"estabelecimentoId": "12"
-			}
-		 *  
-		 *  OBS. Para criar uma avaliação é preciso inserir no Headers Authorization o token recebido na autenticação. Na criação da avaliação é necessário o usuario passar seu email de login.
-		 *  
-		 * */
 	}
-	
+
 	private AvaliacaoEstabelecimentoDTO toAvalEstabDTO (AvaliacaoEstabelecimento ae) {
 		var aeDto = new AvaliacaoEstabelecimentoDTO(ae);
 		aeDto.setIdAvaliacao(ae.getIdAvaliacao());
@@ -124,15 +101,89 @@ public class AvaliacaoEstabelecimentoService {
 	public Page<AvaliacaoEstabelecimento> search(String estabelecimento, Integer page, Integer linesPerPage,
 			String orderBy, String direction) {
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
-		
-//		return repo.findByEstabelecimento(estabelecimento, pageRequest);
+
+		//		return repo.findByEstabelecimento(estabelecimento, pageRequest);
 		return repo.search(estabelecimento, pageRequest);
 	}
-	
+
 	public Page<AvaliacaoEstabelecimento> searchIdEstabelecimento(Integer estabelecimentoId, Integer page, Integer linesPerPage,
 			String orderBy, String direction) {
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);		
 
 		return repo.searchIdEstabelecimento(estabelecimentoId, pageRequest);
 	}
+
+
+
+	// Método passando ID do Usuario
+	public AvaliacaoEstabelecimento fromDTO(AvaliacaoEstabelecimentoNewDTO objDto) {
+		UserSS user = UserService.authenticated();
+		if (user==null || !user.hasRole(Perfil.ADMIN) && !objDto.getUsuarioId().equals(user.getId())) {
+			throw new AuthorizationException("Acesso negado");
+		}
+		Usuario usuario = new Usuario(objDto.getUsuarioId(), null, null, null, null);
+		Estabelecimento estab = new Estabelecimento(objDto.getEstabelecimentoId(), null, null, null, null, null);
+		AvaliacaoEstabelecimento avalEstab = new AvaliacaoEstabelecimento(null, objDto.getDataCriacao(), objDto.getDescricao(), objDto.getClassificacao(), usuario, estab);
+
+		return avalEstab;
+
+	}	
+
 }
+
+
+
+
+/*
+ * 
+ * // Método passando Email do Usuário
+ * public AvaliacaoEstabelecimento fromAEDTO(AvaliacaoEstabelecimentoNewDTO objDto)
+ * Formato do JSON, exemplo:
+
+	{
+    	"descricao": "TESTE JSON POST inserindo uma nova avaliação no estabelecimento ",
+    	"classificacao": "4.1",
+    	"usuarioEmail":"test5test@test.com",
+    	"estabelecimentoId": "12"
+	}
+ *
+ *  OBS. Para criar uma avaliação é preciso inserir no Headers Authorization o token recebido na autenticação. Na criação da avaliação é necessário o usuario passar seu email de login.
+ *  
+ */
+
+
+
+
+/* 
+ * // Método passando ID do Usuário
+ * public AvaliacaoEstabelecimento fromDTO(AvaliacaoEstabelecimentoNewDTO objDto)
+ * Formato do JSON, exemplo:
+ * 
+	   {   
+			"descricao": "TESTE JSON POST nova avaliação",
+			"classificacao": "4.1",
+			"usuarioId": "5",
+			"estabelecimentoId": "11"  
+		}
+ * 
+ * OBS. Para criar uma avaliação é preciso inserir no Headers Authorization o token recebido na autenticação. Na criação da avaliação é necessário o usuario insira seu id.
+ * 
+ * */
+
+/*
+
+//public void saveScore(AvaliacaoEstabelecimentoNewDTO dto) {
+public void saveScore(AvaliacaoEstabelecimento dto) {
+//	Estabelecimento est = repoEstab.findById(dto.getEstabelecimentoId()).get();
+	Estabelecimento est = repoEstab.findById(dto.getEstabelecimento().getId()).get();	
+	double sum = 0.0;
+	for (AvaliacaoEstabelecimento ae : est.getScores()) {
+		sum = sum + ae.getClassificacao();		
+	}		
+	double avg = sum / est.getScores().size();	
+	est.setScore(avg);
+	est.setCount(est.getScores().size());	
+	est = repoEstab.save(est);
+}
+
+*/

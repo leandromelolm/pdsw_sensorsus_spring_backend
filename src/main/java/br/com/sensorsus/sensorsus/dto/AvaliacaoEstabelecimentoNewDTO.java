@@ -65,6 +65,5 @@ public class AvaliacaoEstabelecimentoNewDTO implements Serializable {
 
 	public void setUsuarioEmail(String usuarioEmail) {
 		this.usuarioEmail = usuarioEmail;
-	}
-	
+	}	
 }
