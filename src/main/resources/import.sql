@@ -12,17 +12,17 @@ INSERT INTO cidade(nome, estado_id) VALUES ('Cabo', 1);
 
 
 INSERT INTO estabelecimento (cod_cnes,count,descricao,natureza_juridica,nome,orgao_gestor,score) VALUES (3323,8,' Descrição de qualquer informação relevante','Administracão pública','Hospital Springfield','Municipal',2.5);
-INSERT INTO estabelecimento (cod_cnes,count,descricao,natureza_juridica,nome,orgao_gestor,score) VALUES (55555,7,' Descrição sobre o hospital e como ele funciona','Administracão pública','Hospital Wakanda ','Estadual',4.14);
+INSERT INTO estabelecimento (cod_cnes,count,descricao,natureza_juridica,nome,orgao_gestor,score) VALUES (55555,4,' Descrição sobre o hospital e como ele funciona','Administracão pública','Hospital Wakanda ','Estadual',3.75);
 INSERT INTO estabelecimento (cod_cnes,count,descricao,natureza_juridica,nome,orgao_gestor,score) VALUES (8888,4,' Horario de funcionamento de 8h até 17h','Filantropico','Hospital Alfa de Pi','Municipal',3.5);
 INSERT INTO estabelecimento (cod_cnes,count,descricao,natureza_juridica,nome,orgao_gestor,score) VALUES (59911,2,' funciona 24 horas','Administracão pública','UPA Beta ','Federal',3.0);
 INSERT INTO estabelecimento (cod_cnes,count,descricao,natureza_juridica,nome,orgao_gestor,score) VALUES (54445,4,' Descriçao sobre este hospital','Administracão pública','Hospital de Fratura Omega','Federal',4.0);
 INSERT INTO estabelecimento (cod_cnes,count,descricao,natureza_juridica,nome,orgao_gestor,score) VALUES (44443,2,' Descriçao sobre este hospital6','Administracão pública','HGR hospital Geral dos Restaurados','Federal',1.0);
 INSERT INTO estabelecimento (cod_cnes,count,descricao,natureza_juridica,nome,orgao_gestor,score) VALUES (60020,2,' Descriçao sobre este hospital7','Administracão pública','UPA Delta','Federal',2.5);
-INSERT INTO estabelecimento (cod_cnes,count,descricao,natureza_juridica,nome,orgao_gestor,score) VALUES (7777,1,' Descriçao sobre este hospital8','Administracão pública','UPA Gamma','Federal',5);
-INSERT INTO estabelecimento (cod_cnes,count,descricao,natureza_juridica,nome,orgao_gestor,score) VALUES (66666,4,' Descriçao sobre este hospital9','Filantropico','Hospital Zeta','Municipal',3.75);
+INSERT INTO estabelecimento (cod_cnes,count,descricao,natureza_juridica,nome,orgao_gestor,score) VALUES (7777,1,' Descriçao sobre este hospital8','Administracão pública','UPA Gamma','Federal',5.0);
+INSERT INTO estabelecimento (cod_cnes,count,descricao,natureza_juridica,nome,orgao_gestor,score) VALUES (66666,1,' Descriçao sobre este hospital9','Filantropico','Hospital Zeta','Municipal',3.0);
 INSERT INTO estabelecimento (cod_cnes,count,descricao,natureza_juridica,nome,orgao_gestor,score) VALUES (3333,2,' Descriçao sobre este hospital10','Administracão pública','Pronto Atendimento Omicron ','Federal',2.5);
-INSERT INTO estabelecimento (cod_cnes,count,descricao,natureza_juridica,nome,orgao_gestor,score) VALUES (35445,3,' Descriçao sobre este hospital11','Administracão pública','Unidade de Atendimento Sigma','Federal',3.33);
-INSERT INTO estabelecimento (cod_cnes,count,descricao,natureza_juridica,nome,orgao_gestor,score) VALUES (76444,3,' Descriçao sobre este hospital12','Administracão pública','Hospital Lambda Epsilon','Federal',3.33);
+INSERT INTO estabelecimento (cod_cnes,count,descricao,natureza_juridica,nome,orgao_gestor,score) VALUES (35445,1,' Descriçao sobre este hospital11','Administracão pública','Unidade de Atendimento Sigma','Federal',4.0);
+INSERT INTO estabelecimento (cod_cnes,count,descricao,natureza_juridica,nome,orgao_gestor,score) VALUES (76444,1,' Descriçao sobre este hospital12','Administracão pública','Hospital Lambda Epsilon','Federal',3.0);
 INSERT INTO estabelecimento (cod_cnes,count,descricao,natureza_juridica,nome,orgao_gestor,score) VALUES (600,5,' Descriçao sobre este hospital13','Administracão pública','Unidade Pronto Atendimento PDSW','Federal',3.2);
 INSERT INTO estabelecimento (cod_cnes,count,descricao,natureza_juridica,nome,orgao_gestor,score) VALUES  (27554,2,' Descriçao sobre este hospital14','Administracão pública','Urgência Tau','Federal',3.5);
 INSERT INTO estabelecimento (cod_cnes,count,descricao,natureza_juridica,nome,orgao_gestor,score) VALUES  (27888,0,' Descriçao sobre este hospital15','Administracão pública','Centro de Saúde Java SpringBoot ','Federal',0.0);	
@@ -108,18 +108,18 @@ INSERT INTO avaliacao_estabelecimento (classificacao,data_criacao,descricao,esta
 INSERT INTO avaliacao_estabelecimento (classificacao,data_criacao,descricao,estabelecimento_id,usuario_id) VALUES	 (3.0,'2022-01-22 14:13:44','',12,10);
 INSERT INTO avaliacao_estabelecimento (classificacao,data_criacao,descricao,estabelecimento_id,usuario_id) VALUES	 (5.0,'2022-01-22 14:16:49','nota cinco estrelas',8,10);
 INSERT INTO avaliacao_estabelecimento (classificacao,data_criacao,descricao,estabelecimento_id,usuario_id) VALUES	 (4.0,'2022-01-22 14:18:23','nota quatro',10,10);
-INSERT INTO avaliacao_estabelecimento (classificacao,data_criacao,descricao,estabelecimento_id,usuario_id) VALUES	 (5.0,'2022-01-22 14:34:10','aaaaaaaa bbbbbbbbbbbbbb cccccccccccc dddddddddddd fffffffff ',9,10);
+INSERT INTO avaliacao_estabelecimento (classificacao,data_criacao,descricao,estabelecimento_id,usuario_id) VALUES	 (2.0,'2022-01-22 14:34:10','avaliação usuario id3 nome lews ',9,3);
 INSERT INTO avaliacao_estabelecimento (classificacao,data_criacao,descricao,estabelecimento_id,usuario_id) VALUES	 (4.0,'2022-01-22 14:35:44','avaliacao com nota quatro',11,10);
 INSERT INTO avaliacao_estabelecimento (classificacao,data_criacao,descricao,estabelecimento_id,usuario_id) VALUES	 (2.0,'2022-01-22 14:36:44','avaliação com nota dois ',13,10);
 INSERT INTO avaliacao_estabelecimento (classificacao,data_criacao,descricao,estabelecimento_id,usuario_id) VALUES	 (4.0,'2022-01-22 14:51:31','comentario nota quatro',14,6);
 INSERT INTO avaliacao_estabelecimento (classificacao,data_criacao,descricao,estabelecimento_id,usuario_id) VALUES	 (4.0,'2022-01-22 16:10:22','nota quatro',4,6);
 INSERT INTO avaliacao_estabelecimento (classificacao,data_criacao,descricao,estabelecimento_id,usuario_id) VALUES	 (1.0,'2022-01-22 16:13:49','nota um',1,6);
-INSERT INTO avaliacao_estabelecimento (classificacao,data_criacao,descricao,estabelecimento_id,usuario_id) VALUES	 (5.0,'2022-01-22 16:14:43','nota 5 aaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaa aaaaaa',5,6);
+INSERT INTO avaliacao_estabelecimento (classificacao,data_criacao,descricao,estabelecimento_id,usuario_id) VALUES	 (5.0,'2022-01-22 16:14:43','nota cinco (5) aaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaa aaaaaa',5,1);
 INSERT INTO avaliacao_estabelecimento (classificacao,data_criacao,descricao,estabelecimento_id,usuario_id) VALUES	 (5.0,'2022-01-22 16:15:23','nota cinco',5,6);
 INSERT INTO avaliacao_estabelecimento (classificacao,data_criacao,descricao,estabelecimento_id,usuario_id) VALUES	 (1.0,'2022-01-22 16:27:13','ummmmmmmmmmmmmmmm ',6,6);
 INSERT INTO avaliacao_estabelecimento (classificacao,data_criacao,descricao,estabelecimento_id,usuario_id) VALUES	 (2.0,'2022-01-22 16:35:11','nota dois teste avaliação ',1,10);
 INSERT INTO avaliacao_estabelecimento (classificacao,data_criacao,descricao,estabelecimento_id,usuario_id) VALUES	 (1.0,'2022-01-22 16:38:30','nota mínima avaliação',1,11);
-INSERT INTO avaliacao_estabelecimento (classificacao,data_criacao,descricao,estabelecimento_id,usuario_id) VALUES	 (3.0,'2022-01-22 16:39:14','avaliação teste teste teste test',1,11);
+INSERT INTO avaliacao_estabelecimento (classificacao,data_criacao,descricao,estabelecimento_id,usuario_id) VALUES	 (3.0,'2022-01-22 16:39:14','avaliação teste teste teste test',1,5);
 INSERT INTO avaliacao_estabelecimento (classificacao,data_criacao,descricao,estabelecimento_id,usuario_id) VALUES	 (5.0,'2022-01-22 16:42:44','',2,11);
 INSERT INTO avaliacao_estabelecimento (classificacao,data_criacao,descricao,estabelecimento_id,usuario_id) VALUES	 (3.0,'2022-01-22 16:51:40',' usuario eeee  avaliação ',14,11);
 
