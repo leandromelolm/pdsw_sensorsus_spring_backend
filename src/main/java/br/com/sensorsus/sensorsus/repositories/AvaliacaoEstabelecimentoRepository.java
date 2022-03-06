@@ -12,6 +12,7 @@ import br.com.sensorsus.sensorsus.model.AvaliacaoEstabelecimento;
 
 @Repository
 public interface AvaliacaoEstabelecimentoRepository extends JpaRepository<AvaliacaoEstabelecimento, Integer> {
+
 	
 	@Transactional(readOnly=true)
 	@Query("SELECT obj FROM AvaliacaoEstabelecimento obj WHERE obj.estabelecimento.nome LIKE %:nome%")

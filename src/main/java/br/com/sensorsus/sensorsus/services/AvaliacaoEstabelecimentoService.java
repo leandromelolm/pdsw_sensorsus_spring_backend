@@ -1,6 +1,5 @@
 package br.com.sensorsus.sensorsus.services;
 
-import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
