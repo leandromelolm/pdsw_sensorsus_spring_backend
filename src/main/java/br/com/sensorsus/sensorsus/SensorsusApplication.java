@@ -91,9 +91,10 @@ http://localhost:8080/api/avaliacoes/new
 
 
 SWAGGER
+http://localhost:8080/swagger-ui.html
 http://localhost:8080/swagger-ui/index.html?configUrl=/sensorsus-openapi/swagger-config#/
 
-http://localhost:8080/swagger-ui/index.html
+
 campo explorer: /sensorsus-openapi
 
 
