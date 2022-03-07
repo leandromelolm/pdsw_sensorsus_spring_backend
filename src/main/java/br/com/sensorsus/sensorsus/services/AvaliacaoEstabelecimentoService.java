@@ -114,7 +114,8 @@ public class AvaliacaoEstabelecimentoService {
 			String orderBy, String direction) {
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);		
 
-		return repo.searchIdEstabelecimento(estabelecimentoId, pageRequest);
+//		return repo.searchIdEstabelecimento(estabelecimentoId, pageRequest);
+		return repo.findByEstabelecimentoId(estabelecimentoId, pageRequest);
 	}
 
 

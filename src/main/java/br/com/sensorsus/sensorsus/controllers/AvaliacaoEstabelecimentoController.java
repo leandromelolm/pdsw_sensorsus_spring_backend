@@ -20,12 +20,12 @@ import br.com.sensorsus.sensorsus.dto.AvaliacaoEstabelecimentoDTO;
 import br.com.sensorsus.sensorsus.dto.AvaliacaoEstabelecimentoNewDTO;
 import br.com.sensorsus.sensorsus.model.AvaliacaoEstabelecimento;
 import br.com.sensorsus.sensorsus.services.AvaliacaoEstabelecimentoService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping(value = "api/avaliacoes")
-//@RequestMapping(value = "/avaliacao")
-//@Api("Api de avaliações de estabelecimento")
+@Api("Api de avaliações de estabelecimento")
 public class AvaliacaoEstabelecimentoController {
 
 	@Autowired
@@ -48,7 +48,6 @@ public class AvaliacaoEstabelecimentoController {
 	
 	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(value = "/avaliacaoestabelecimento/{id}", method = RequestMethod.GET)
-//	public ResponseEntity<?> findById(@PathVariable Integer id) {
 	public ResponseEntity<?> findById(@PathVariable Integer id) {
 		AvaliacaoEstabelecimentoDTO aeDto = service.findById(id);
 		return ResponseEntity.ok().body(aeDto);
@@ -92,17 +91,14 @@ public class AvaliacaoEstabelecimentoController {
 	}
 	
 	@RequestMapping(value = "/estabelecimento/id", method = RequestMethod.GET)
-//	@RequestMapping(value = "/estab", method = RequestMethod.GET)
 	public ResponseEntity<Page<AvaliacaoEstabelecimentoDTO>> findIdPage(
 			@RequestParam(value="id", defaultValue="") String id, 
 			@RequestParam(value="page", defaultValue="0") Integer page, 
 			@RequestParam(value="linesPerPage", defaultValue="20") Integer linesPerPage, 
 			@RequestParam(value="orderBy", defaultValue="dataCriacao") String orderBy, 
 			@RequestParam(value="direction", defaultValue="DESC") String direction) {
-		String idDecoded = URL.decodeParam(id);
-		Integer idInt = Integer.parseInt(idDecoded);
-//		Long idLong = Long.parseLong(idDecoded);
-		Page<AvaliacaoEstabelecimento> list = service.searchIdEstabelecimento(idInt, page, linesPerPage, orderBy, direction);
+		Integer idInteger = Integer.parseInt(id);
+		Page<AvaliacaoEstabelecimento> list = service.searchIdEstabelecimento(idInteger, page, linesPerPage, orderBy, direction);
 		Page<AvaliacaoEstabelecimentoDTO> listDto = list.map(obj -> new AvaliacaoEstabelecimentoDTO(obj));
 		return ResponseEntity.ok().body(listDto);
 		

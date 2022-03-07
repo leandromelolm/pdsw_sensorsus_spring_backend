@@ -17,10 +17,14 @@ public interface AvaliacaoEstabelecimentoRepository extends JpaRepository<Avalia
 	@Transactional(readOnly=true)
 	@Query("SELECT obj FROM AvaliacaoEstabelecimento obj WHERE obj.estabelecimento.nome LIKE %:nome%")
 //	Page<AvaliacaoEstabelecimento> findByEstabelecimento(@Param("nome")String estabelecimento, Pageable pageRequest);
-	Page<AvaliacaoEstabelecimento> search(@Param("nome")String estabelecimento, Pageable pageRequest);
-	
+	Page<AvaliacaoEstabelecimento> search(@Param("nome")String estabelecimento, Pageable pageRequest);	
 	
 	@Transactional(readOnly=true)
-	@Query("SELECT obj FROM AvaliacaoEstabelecimento obj WHERE obj.estabelecimento.id LIKE :id")
+	@Query("SELECT obj FROM AvaliacaoEstabelecimento obj WHERE obj.estabelecimento.id LIKE :id")	
 	Page<AvaliacaoEstabelecimento> searchIdEstabelecimento(@Param("id")Integer estabelecimento, Pageable pageRequest);
+	
+	
+	// Encontrar estabelecimento com id do parametro
+	@Transactional(readOnly=true)
+	Page<AvaliacaoEstabelecimento> findByEstabelecimentoId(@Param("id")Integer estabelecimento, Pageable pageRequest);
 }
