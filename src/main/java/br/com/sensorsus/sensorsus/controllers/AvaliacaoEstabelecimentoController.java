@@ -25,7 +25,7 @@ import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping(value = "api/avaliacoes")
-@Api("Api de avaliações de estabelecimento")
+//@Api("Api de avaliações de estabelecimento")
 public class AvaliacaoEstabelecimentoController {
 
 	@Autowired
