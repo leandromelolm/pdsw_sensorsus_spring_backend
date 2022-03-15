@@ -8,6 +8,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -31,7 +33,7 @@ public class AvaliacaoEstabelecimentoController {
 	@Autowired
 	private AvaliacaoEstabelecimentoService service;
 	
-	@PreAuthorize("hasAnyRole('ADMIN')")
+//	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> find(@PathVariable Integer id) {
 		AvaliacaoEstabelecimento obj = service.find(id);
@@ -157,5 +159,16 @@ public class AvaliacaoEstabelecimentoController {
 		 * @PreAuthorize("hasAnyRole('STANDARD')") ////Autorização de endpoint para perfil especifico
 		 * 
 		 * */
-	}	
+	}
+	
+//	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+//	@PutMapping(value = "/{id}")
+	@PutMapping
+//	public ResponseEntity<Void> update(@RequestBody AvaliacaoEstabelecimentoNewDTO objDto, @PathVariable Integer id){
+	public ResponseEntity<Void> update(@RequestBody AvaliacaoEstabelecimentoNewDTO objDto){
+		AvaliacaoEstabelecimento obj = service.fromAEDTO(objDto);
+//		obj.setIdAvaliacao(id);
+		obj = service.update(obj);
+		return ResponseEntity.noContent().build();		
+	}
 }

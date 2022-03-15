@@ -19,6 +19,7 @@ import br.com.sensorsus.sensorsus.model.Usuario;
 import br.com.sensorsus.sensorsus.model.enums.Perfil;
 import br.com.sensorsus.sensorsus.repositories.AvaliacaoEstabelecimentoRepository;
 import br.com.sensorsus.sensorsus.repositories.EstabelecimentoRepository;
+import br.com.sensorsus.sensorsus.repositories.UsuarioRepository;
 import br.com.sensorsus.sensorsus.security.UserSS;
 import br.com.sensorsus.sensorsus.services.exceptions.AuthorizationException;
 import br.com.sensorsus.sensorsus.services.exceptions.ObjectNotFoundException;
@@ -31,6 +32,9 @@ public class AvaliacaoEstabelecimentoService {
 
 	@Autowired
 	private EstabelecimentoRepository repoEstab;
+	
+	@Autowired
+	private UsuarioRepository repoUsuario;
 
 	public AvaliacaoEstabelecimento find(Integer id) {
 		Optional<AvaliacaoEstabelecimento> obj = repo.findById(id);
@@ -61,20 +65,29 @@ public class AvaliacaoEstabelecimentoService {
 		if (user==null || !user.hasRole(Perfil.ADMIN) && !objDto.getUsuarioEmail().equals(user.getUsername())) {
 			throw new AuthorizationException("Acesso negado");
 		}
+		
 		Usuario usuario = new Usuario(user.getId(), null, null,objDto.getUsuarioEmail(), null);
 		Estabelecimento estab = new Estabelecimento(objDto.getEstabelecimentoId(), null, null, null, null, null);
 		AvaliacaoEstabelecimento avalEstab = new AvaliacaoEstabelecimento(null, objDto.getDataCriacao(), objDto.getDescricao(), objDto.getClassificacao(), usuario, estab);				
 		
-		// Score e Count Estabelecimento
-		Estabelecimento est = repoEstab.findById(objDto.getEstabelecimentoId()).get();
+		Estabelecimento objEstab = repoEstab.findById(objDto.getEstabelecimentoId()).get();
+		
+		for (AvaliacaoEstabelecimento avaestb : objEstab.getAvaliacoes()) {
+			System.out.println(avaestb.getUsuario().getNickname());
+			System.out.println(avaestb.getUsuario().getEmail());
+			if(user.getUsername().equals(avaestb.getUsuario().getEmail())) {
+				throw new AuthorizationException("Avaliação já realizada para esta unidade de saúde");
+			}
+		}		
+		
 
 		double sum = 0.0;
-		for (AvaliacaoEstabelecimento ae : est.getScores()) {
+		for (AvaliacaoEstabelecimento ae : objEstab.getScores()) {
 			sum = sum + ae.getClassificacao();			
 		}
 		sum = sum + avalEstab.getClassificacao();
 		
-		Integer count = est.getScores().size()+1;
+		Integer count = objEstab.getScores().size()+1;
 
 		double avg = sum / count;		
 		
@@ -82,9 +95,9 @@ public class AvaliacaoEstabelecimentoService {
 		double media = Math.round(avg * 100);
 		media = media/100;
 		
-		est.setScore(media);
-		est.setCount(count);		
-		est = repoEstab.save(est);
+		objEstab.setScore(media);
+		objEstab.setCount(count);		
+		objEstab = repoEstab.save(objEstab);
 
 		return avalEstab;
 	}
@@ -133,6 +146,28 @@ public class AvaliacaoEstabelecimentoService {
 		return avalEstab;
 
 	}	
+	
+	@Transactional
+	public AvaliacaoEstabelecimento update(AvaliacaoEstabelecimento obj) {
+		UserSS user = UserService.authenticated();
+		if (user==null || !user.hasRole(Perfil.ADMIN) && !obj.getUsuario().getEmail().equals(user.getUsername())) {
+			throw new AuthorizationException("Acesso negado");
+		}
+		
+		Usuario usuario = new Usuario(user.getId(), null, null,obj.getUsuario().getEmail(), null);
+		//Estabelecimento estab = new Estabelecimento(obj.getEstabelecimento().getId(), null, null, null, null, null);
+		Estabelecimento estab = repoEstab.findById(obj.getEstabelecimento().getId()).get();
+		AvaliacaoEstabelecimento avalEstab = new AvaliacaoEstabelecimento(obj.getIdAvaliacao(), obj.getDataCriacao(), obj.getDescricao(), obj.getClassificacao(), usuario, estab);	
+		
+		
+		
+		
+//		find(obj.getIdAvaliacao());
+		obj.getEstabelecimento().getId();
+		obj.setDataCriacao(new Date());	
+		avalEstab.setDataCriacao(new Date());
+		return repo.save(avalEstab);
+	}
 
 }
 
