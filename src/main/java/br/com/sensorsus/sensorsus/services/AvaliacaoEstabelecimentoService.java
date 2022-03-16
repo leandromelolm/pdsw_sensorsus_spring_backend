@@ -76,6 +76,7 @@ public class AvaliacaoEstabelecimentoService {
 			System.out.println(avaestb.getUsuario().getNickname());
 			System.out.println(avaestb.getUsuario().getEmail());
 			System.out.println(avaestb.getIdAvaliacao());
+			System.out.println(avaestb.getClassificacao());
 			if(user.getUsername().equals(avaestb.getUsuario().getEmail())) {
 				
 				System.out.println("TEST POST = " + avaestb.getIdAvaliacao());
@@ -83,6 +84,27 @@ public class AvaliacaoEstabelecimentoService {
 				avalEstab.setClassificacao(objDto.getClassificacao());
 				avalEstab.setDescricao(objDto.getDescricao());
 				avalEstab.setDataCriacao(new Date());
+				
+				objEstab = repoEstab.save(objEstab);
+				
+				double sum = 0.0;
+				for (AvaliacaoEstabelecimento ae : objEstab.getScores()) {
+					sum = sum + ae.getClassificacao();			
+				}
+				sum = sum - avaestb.getClassificacao(); // subtraindo nota anterior feita pelo usuario, para atualizar com nova nota em seguida e recalcular a média
+				sum = sum + avalEstab.getClassificacao();
+				
+				Integer count = objEstab.getScores().size();
+
+				double avg = sum / count;		
+				
+				// Math.round para arredondar média para duas casas decimais
+				double media = Math.round(avg * 100);
+				media = media/100;
+				
+				objEstab.setScore(avg);
+				objEstab.setCount(count);		
+				objEstab = repoEstab.save(objEstab);
 				
 				return repo.save(avalEstab);
 				
@@ -170,10 +192,7 @@ public class AvaliacaoEstabelecimentoService {
 		//Estabelecimento estab = new Estabelecimento(obj.getEstabelecimento().getId(), null, null, null, null, null);
 		Estabelecimento estab = repoEstab.findById(obj.getEstabelecimento().getId()).get();
 		AvaliacaoEstabelecimento avalEstab = new AvaliacaoEstabelecimento(obj.getIdAvaliacao(), obj.getDataCriacao(), obj.getDescricao(), obj.getClassificacao(), usuario, estab);	
-		
-		
-		
-		
+				
 //		find(obj.getIdAvaliacao());
 		obj.getEstabelecimento().getId();
 		obj.setDataCriacao(new Date());	
