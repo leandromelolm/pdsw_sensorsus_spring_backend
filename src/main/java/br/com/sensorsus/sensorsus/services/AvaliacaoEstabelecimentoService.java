@@ -53,11 +53,11 @@ public class AvaliacaoEstabelecimentoService {
 	}
 
 	@Transactional
-	public AvaliacaoEstabelecimento insert(AvaliacaoEstabelecimento obj) {		
-		obj.setIdAvaliacao(null);
-		obj.setDataCriacao(new Date());		
-		return repo.save(obj);
-	}
+//	public AvaliacaoEstabelecimento insert(AvaliacaoEstabelecimento obj) {		
+//		obj.setIdAvaliacao(null);
+//		obj.setDataCriacao(new Date());		
+//		return repo.save(obj);
+//	}
 	
 	// Método passando Email do Usuário
 	public AvaliacaoEstabelecimento fromAEDTO(AvaliacaoEstabelecimentoNewDTO objDto) {
@@ -75,8 +75,20 @@ public class AvaliacaoEstabelecimentoService {
 		for (AvaliacaoEstabelecimento avaestb : objEstab.getAvaliacoes()) {
 			System.out.println(avaestb.getUsuario().getNickname());
 			System.out.println(avaestb.getUsuario().getEmail());
+			System.out.println(avaestb.getIdAvaliacao());
 			if(user.getUsername().equals(avaestb.getUsuario().getEmail())) {
-				throw new AuthorizationException("Avaliação já realizada para esta unidade de saúde");
+				
+				System.out.println("TEST POST = " + avaestb.getIdAvaliacao());
+				avalEstab.setIdAvaliacao(avaestb.getIdAvaliacao());
+				avalEstab.setClassificacao(objDto.getClassificacao());
+				avalEstab.setDescricao(objDto.getDescricao());
+				avalEstab.setDataCriacao(new Date());
+				
+				return repo.save(avalEstab);
+				
+				
+				
+//				throw new AuthorizationException("Avaliação já realizada para esta unidade de saúde");
 			}
 		}		
 		
