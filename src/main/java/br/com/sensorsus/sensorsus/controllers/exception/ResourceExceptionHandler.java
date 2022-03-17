@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import br.com.sensorsus.sensorsus.services.exceptions.AuthorizationException;
 import br.com.sensorsus.sensorsus.services.exceptions.DataIntegrityException;
+import br.com.sensorsus.sensorsus.services.exceptions.DatabaseException;
 import br.com.sensorsus.sensorsus.services.exceptions.ResourceNotFoundException;
 
 @ControllerAdvice
@@ -53,6 +54,13 @@ public class ResourceExceptionHandler {
 		// ERROR 404 : NOT_FOUND
 		StandardError err = new StandardError(System.currentTimeMillis(), HttpStatus.NOT_FOUND.value(), "Não encontrado", e.getMessage(), request.getRequestURI());
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(err);
+	}
+	
+	@ExceptionHandler(DatabaseException.class)
+	public ResponseEntity<StandardError> database(DatabaseException e, HttpServletRequest request) {
+		//ERROR 400 : BAD_REQUEST
+		StandardError err = new StandardError(System.currentTimeMillis(), HttpStatus.BAD_REQUEST.value(), "Exceção no banco: problema de integridade de dados", e.getMessage(), request.getRequestURI());
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(err);
 	}
 	
 //	@ExceptionHandler(Exception.class)
