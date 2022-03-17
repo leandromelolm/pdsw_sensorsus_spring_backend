@@ -46,5 +46,14 @@ public class ResourceExceptionHandler {
 		StandardError err = new StandardError(System.currentTimeMillis(), HttpStatus.FORBIDDEN.value(), "Acesso negado", e.getMessage(), request.getRequestURI());
 		return ResponseEntity.status(HttpStatus.FORBIDDEN).body(err);
 	}
+	
+	@ExceptionHandler(Exception.class)
+    public ResponseEntity<StandardError> handle(Exception e, HttpServletRequest request) {
+        if (e instanceof NullPointerException) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        StandardError err = new StandardError(System.currentTimeMillis(), HttpStatus.NOT_FOUND.value(), "Erro Exception", e.getMessage(), request.getRequestURI());
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(err);
+    }
 
 }
