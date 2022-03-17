@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
@@ -21,7 +23,9 @@ import br.com.sensorsus.sensorsus.repositories.AvaliacaoEstabelecimentoRepositor
 import br.com.sensorsus.sensorsus.repositories.EstabelecimentoRepository;
 import br.com.sensorsus.sensorsus.security.UserSS;
 import br.com.sensorsus.sensorsus.services.exceptions.AuthorizationException;
+import br.com.sensorsus.sensorsus.services.exceptions.DatabaseException;
 import br.com.sensorsus.sensorsus.services.exceptions.ObjectNotFoundException;
+import br.com.sensorsus.sensorsus.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class AvaliacaoEstabelecimentoService {
@@ -168,6 +172,36 @@ public class AvaliacaoEstabelecimentoService {
 		objEstab = repoEstab.save(objEstab);
 
 		return repo.save(entity);
+	}
+	
+	public void delete(Integer id) {
+		
+		UserSS user = UserService.authenticated();	
+		
+		Optional<AvaliacaoEstabelecimento> avaliestab = repo.findById(id); // findbyId para encontrar na tabela, buscando por meio do id, a avaliação com o valor do id. Em seguida é salvo no objeto avaliestab		
+		avaliestab.orElseThrow(() -> new ResourceNotFoundException("Id " + id + " não existe!")); // caso não exista lança uma exceção		
+		
+		// código apenas para visualizar no console 
+//		System.out.println("TESTE MÉTODO DELETE");
+//		System.out.println("INFORMAÇÕES USUÁRIO LOGADO ");
+//		System.out.println("usuario apelido: " + user.getUsername());
+//		System.out.println("usuario id: " + user.getId());
+//		System.out.println("INFORMAÇÕES DA AVALIAÇÃO RECEBIDA COMO ARGUMENTO");
+//		System.out.println("avaliacao id: " + avaliestab.get().getIdAvaliacao());
+//		System.out.println("avaliacao usuario: " + avaliestab.get().getUsuario().getNickname());
+//		System.out.println("avaliacao usuario id: " + avaliestab.get().getUsuario().getId());		
+		
+		if (!user.getId().equals(avaliestab.get().getUsuario().getId())) { // verificação se id do usuario logado é igual ao id da avaliação recebida no parametro do método
+			throw new AuthorizationException("Não é permitido remover avaliação de outro usuário");
+		}
+		
+		try {
+			repo.deleteById(id);
+		} catch (EmptyResultDataAccessException e) {
+			throw new ResourceNotFoundException("Id não existe " + id);
+		} catch (DataIntegrityViolationException e) {
+			throw new DatabaseException("Violação de integridade no banco");
+		}
 	}
 	
 	private void copyDtoToEntity(AvaliacaoEstabelecimentoNewDTO dto, AvaliacaoEstabelecimento entity ) {		

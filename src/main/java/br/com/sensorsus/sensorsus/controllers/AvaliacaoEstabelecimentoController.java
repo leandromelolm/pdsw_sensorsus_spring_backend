@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -105,7 +106,13 @@ public class AvaliacaoEstabelecimentoController {
 				.path("/{id}").buildAndExpand(dto.getAvaliacaoId()).toUri();
 		return ResponseEntity.created(uri).build();
 		// [POST] http://localhost:8080/api/avaliacoes/new
-	}	
+	}
+	
+	@DeleteMapping(value = "/{id}")
+	public ResponseEntity<AvaliacaoEstabelecimentoDTO> delete(@PathVariable Integer id){
+		service.delete(id); //pega o id e passa como argumento para o método delete do Service
+		return ResponseEntity.noContent().build(); 	
+	}
 }
 
 
