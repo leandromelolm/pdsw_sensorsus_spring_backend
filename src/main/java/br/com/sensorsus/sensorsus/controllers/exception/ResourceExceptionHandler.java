@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import br.com.sensorsus.sensorsus.services.exceptions.AuthorizationException;
 import br.com.sensorsus.sensorsus.services.exceptions.DataIntegrityException;
+import br.com.sensorsus.sensorsus.services.exceptions.ResourceNotFoundException;
 
 @ControllerAdvice
 public class ResourceExceptionHandler {
@@ -47,13 +48,20 @@ public class ResourceExceptionHandler {
 		return ResponseEntity.status(HttpStatus.FORBIDDEN).body(err);
 	}
 	
-	@ExceptionHandler(Exception.class)
-    public ResponseEntity<StandardError> handle(Exception e, HttpServletRequest request) {
-        if (e instanceof NullPointerException) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-        StandardError err = new StandardError(System.currentTimeMillis(), HttpStatus.NOT_FOUND.value(), "Erro Exception", e.getMessage(), request.getRequestURI());
+	@ExceptionHandler(ResourceNotFoundException.class)
+	public ResponseEntity<StandardError> entityNotFound(ResourceNotFoundException e, HttpServletRequest request){
+		// ERROR 404 : NOT_FOUND
+		StandardError err = new StandardError(System.currentTimeMillis(), HttpStatus.NOT_FOUND.value(), "Não encontrado", e.getMessage(), request.getRequestURI());
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(err);
-    }
+	}
+	
+//	@ExceptionHandler(Exception.class)
+//    public ResponseEntity<StandardError> handle(Exception e, HttpServletRequest request) {
+//        if (e instanceof NullPointerException) {
+//            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+//        }
+//        StandardError err = new StandardError(System.currentTimeMillis(), HttpStatus.NOT_FOUND.value(), "Erro Exception", e.getMessage(), request.getRequestURI());
+//		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(err);
+//    }
 
 }
