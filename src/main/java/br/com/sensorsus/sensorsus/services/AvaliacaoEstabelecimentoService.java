@@ -19,7 +19,6 @@ import br.com.sensorsus.sensorsus.model.Usuario;
 import br.com.sensorsus.sensorsus.model.enums.Perfil;
 import br.com.sensorsus.sensorsus.repositories.AvaliacaoEstabelecimentoRepository;
 import br.com.sensorsus.sensorsus.repositories.EstabelecimentoRepository;
-import br.com.sensorsus.sensorsus.repositories.UsuarioRepository;
 import br.com.sensorsus.sensorsus.security.UserSS;
 import br.com.sensorsus.sensorsus.services.exceptions.AuthorizationException;
 import br.com.sensorsus.sensorsus.services.exceptions.ObjectNotFoundException;
@@ -32,9 +31,6 @@ public class AvaliacaoEstabelecimentoService {
 
 	@Autowired
 	private EstabelecimentoRepository repoEstab;
-	
-	@Autowired
-	private UsuarioRepository repoUsuario;
 
 	public AvaliacaoEstabelecimento find(Integer id) {
 		Optional<AvaliacaoEstabelecimento> obj = repo.findById(id);
@@ -51,39 +47,87 @@ public class AvaliacaoEstabelecimentoService {
 	public List<AvaliacaoEstabelecimento> findAll() {		
 		return repo.findAll();
 	}
+	
+	public Page<AvaliacaoEstabelecimento> search(String estabelecimento, Integer page, Integer linesPerPage,
+			String orderBy, String direction) {
+		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
+//		return repo.findByEstabelecimento(estabelecimento, pageRequest);
+		return repo.search(estabelecimento, pageRequest);
+	}
+
+	public Page<AvaliacaoEstabelecimento> searchIdEstabelecimento(Integer estabelecimentoId, Integer page, Integer linesPerPage,
+			String orderBy, String direction) {
+		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
+//		return repo.searchIdEstabelecimento(estabelecimentoId, pageRequest);
+		return repo.findByEstabelecimentoId(estabelecimentoId, pageRequest);
+	}
 
 	@Transactional
-//	public AvaliacaoEstabelecimento insert(AvaliacaoEstabelecimento obj) {		
-//		obj.setIdAvaliacao(null);
-//		obj.setDataCriacao(new Date());		
-//		return repo.save(obj);
-//	}
-	
-	// Método passando Email do Usuário
-	public AvaliacaoEstabelecimento fromAEDTO(AvaliacaoEstabelecimentoNewDTO objDto) {
+	public AvaliacaoEstabelecimentoNewDTO insert(AvaliacaoEstabelecimentoNewDTO dto) {
+		// Método insert cria uma nova avaliação, e não permite repetir uma avaliação no mesmo estabelecimento
 		UserSS user = UserService.authenticated();
-		if (user==null || !user.hasRole(Perfil.ADMIN) && !objDto.getUsuarioEmail().equals(user.getUsername())) {
+		if (user==null || !user.hasRole(Perfil.ADMIN) && !dto.getUsuarioEmail().equals(user.getUsername())) {
+			throw new AuthorizationException("Acesso negado");
+		}
+		AvaliacaoEstabelecimento entity = new AvaliacaoEstabelecimento();		
+		entity.setIdAvaliacao(null);
+		entity.setDataCriacao(new Date());	
+		
+		copyDtoToEntity(dto, entity);
+		
+		Estabelecimento objEstab = repoEstab.findById(dto.getEstabelecimentoId()).get();
+		for (AvaliacaoEstabelecimento avaest : objEstab.getAvaliacoes()) {
+
+			if(user.getUsername().equals(avaest.getUsuario().getEmail())) {				
+							
+				throw new AuthorizationException("Avaliação já realizada para esta unidade de saúde");
+			}
+		}
+		
+		double sum = 0.0;
+		for (AvaliacaoEstabelecimento ae : objEstab.getScores()) {
+			sum = sum + ae.getClassificacao();			
+		}
+		sum = sum + entity.getClassificacao();
+		
+		Integer count = objEstab.getScores().size()+1;
+
+		double avg = sum / count;
+		
+		objEstab.setScore(avg);
+		objEstab.setCount(count);		
+		objEstab = repoEstab.save(objEstab);	
+		
+		
+		entity = repo.save(entity);
+		return new AvaliacaoEstabelecimentoNewDTO(entity);
+	}	
+	
+	@Transactional
+	public AvaliacaoEstabelecimento update(AvaliacaoEstabelecimentoNewDTO dto) {		
+		// Método update cria nova avaliação se não houve, caso contrário altera a antiga avaliação	
+		UserSS user = UserService.authenticated();
+		if (user==null || !user.hasRole(Perfil.ADMIN) && !dto.getUsuarioEmail().equals(user.getUsername())) {
 			throw new AuthorizationException("Acesso negado");
 		}
 		
-		Usuario usuario = new Usuario(user.getId(), null, null,objDto.getUsuarioEmail(), null);
-		Estabelecimento estab = new Estabelecimento(objDto.getEstabelecimentoId(), null, null, null, null, null);
-		AvaliacaoEstabelecimento avalEstab = new AvaliacaoEstabelecimento(null, objDto.getDataCriacao(), objDto.getDescricao(), objDto.getClassificacao(), usuario, estab);				
+		AvaliacaoEstabelecimento entity = new AvaliacaoEstabelecimento();
 		
-		Estabelecimento objEstab = repoEstab.findById(objDto.getEstabelecimentoId()).get();
+		copyDtoToEntity(dto, entity);
 		
-		for (AvaliacaoEstabelecimento avaestb : objEstab.getAvaliacoes()) {
-			System.out.println(avaestb.getUsuario().getNickname());
-			System.out.println(avaestb.getUsuario().getEmail());
-			System.out.println(avaestb.getIdAvaliacao());
-			System.out.println(avaestb.getClassificacao());
-			if(user.getUsername().equals(avaestb.getUsuario().getEmail())) {
+		Estabelecimento objEstab = repoEstab.findById(dto.getEstabelecimentoId()).get();
+		
+		for (AvaliacaoEstabelecimento avaest : objEstab.getAvaliacoes()) {
+			
+			// O IF verifica se já existe uma avaliação do usuario associada ao estabelecimento
+			// se SIM: seta o id da avaliação e altera com dados passados.
+			if(user.getUsername().equals(avaest.getUsuario().getEmail())) { 
 				
-				System.out.println("TEST POST = " + avaestb.getIdAvaliacao());
-				avalEstab.setIdAvaliacao(avaestb.getIdAvaliacao());
-				avalEstab.setClassificacao(objDto.getClassificacao());
-				avalEstab.setDescricao(objDto.getDescricao());
-				avalEstab.setDataCriacao(new Date());
+//				System.out.println("idAvaliação = " + avaest.getIdAvaliacao());
+				entity.setIdAvaliacao(avaest.getIdAvaliacao()); //Seta ID da antiga avaliação
+				entity.setClassificacao(dto.getClassificacao());
+				entity.setDescricao(dto.getDescricao());
+				entity.setDataCriacao(new Date());
 				
 				objEstab = repoEstab.save(objEstab);
 				
@@ -91,49 +135,54 @@ public class AvaliacaoEstabelecimentoService {
 				for (AvaliacaoEstabelecimento ae : objEstab.getScores()) {
 					sum = sum + ae.getClassificacao();			
 				}
-				sum = sum - avaestb.getClassificacao(); // subtraindo nota anterior feita pelo usuario, para atualizar com nova nota em seguida e recalcular a média
-				sum = sum + avalEstab.getClassificacao();
+				
+				// subtraindo nota anterior feita pelo usuario, para atualizar com nova nota em seguida e recalcular a média
+				sum = sum - avaest.getClassificacao(); 
+				
+				sum = sum + entity.getClassificacao();
 				
 				Integer count = objEstab.getScores().size();
 
 				double avg = sum / count;		
 				
-				// Math.round para arredondar média para duas casas decimais
-				double media = Math.round(avg * 100);
-				media = media/100;
-				
 				objEstab.setScore(avg);
 				objEstab.setCount(count);		
-				objEstab = repoEstab.save(objEstab);
-				
-				return repo.save(avalEstab);
-				
-				
-				
-//				throw new AuthorizationException("Avaliação já realizada para esta unidade de saúde");
+				objEstab = repoEstab.save(objEstab);				
+				return repo.save(entity);	
 			}
-		}		
+		}
 		
-
+		//Cria nova avaliação se não houve uma avaliação associando o usuario ao estabelecimento		
 		double sum = 0.0;
 		for (AvaliacaoEstabelecimento ae : objEstab.getScores()) {
 			sum = sum + ae.getClassificacao();			
 		}
-		sum = sum + avalEstab.getClassificacao();
+		sum = sum + entity.getClassificacao();
 		
 		Integer count = objEstab.getScores().size()+1;
 
-		double avg = sum / count;		
+		double avg = sum / count;
 		
-		// Math.round para arredondar média para duas casas decimais
-		double media = Math.round(avg * 100);
-		media = media/100;
-		
-		objEstab.setScore(media);
+		objEstab.setScore(avg);
 		objEstab.setCount(count);		
 		objEstab = repoEstab.save(objEstab);
 
-		return avalEstab;
+		return repo.save(entity);
+	}
+	
+	private void copyDtoToEntity(AvaliacaoEstabelecimentoNewDTO dto, AvaliacaoEstabelecimento entity ) {		
+		UserSS user = UserService.authenticated();		
+		Usuario usuario = new Usuario();
+		usuario.setId(user.getId());
+		usuario.setEmail(dto.getUsuarioEmail());		
+		Estabelecimento estabelecimento = new Estabelecimento();
+		estabelecimento.setId(dto.getEstabelecimentoId());
+		
+		entity.setDataCriacao(new Date());
+		entity.setDescricao(dto.getDescricao());
+		entity.setClassificacao(dto.getClassificacao());
+		entity.setUsuario(usuario);
+		entity.setEstabelecimento(estabelecimento);		
 	}
 
 	private AvaliacaoEstabelecimentoDTO toAvalEstabDTO (AvaliacaoEstabelecimento ae) {
@@ -147,26 +196,8 @@ public class AvaliacaoEstabelecimentoService {
 		aeDto.setUsuarioId(ae.getUsuario().getId());
 		aeDto.setApelido(ae.getUsuario().getNickname());
 		return aeDto;
-	}
-
-	public Page<AvaliacaoEstabelecimento> search(String estabelecimento, Integer page, Integer linesPerPage,
-			String orderBy, String direction) {
-		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
-
-		//		return repo.findByEstabelecimento(estabelecimento, pageRequest);
-		return repo.search(estabelecimento, pageRequest);
-	}
-
-	public Page<AvaliacaoEstabelecimento> searchIdEstabelecimento(Integer estabelecimentoId, Integer page, Integer linesPerPage,
-			String orderBy, String direction) {
-		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);		
-
-//		return repo.searchIdEstabelecimento(estabelecimentoId, pageRequest);
-		return repo.findByEstabelecimentoId(estabelecimentoId, pageRequest);
-	}
-
-
-
+	}	
+	
 	// Método passando ID do Usuario
 	public AvaliacaoEstabelecimento fromDTO(AvaliacaoEstabelecimentoNewDTO objDto) {
 		UserSS user = UserService.authenticated();
@@ -178,29 +209,12 @@ public class AvaliacaoEstabelecimentoService {
 		AvaliacaoEstabelecimento avalEstab = new AvaliacaoEstabelecimento(null, objDto.getDataCriacao(), objDto.getDescricao(), objDto.getClassificacao(), usuario, estab);
 
 		return avalEstab;
-
 	}	
 	
-	@Transactional
-	public AvaliacaoEstabelecimento update(AvaliacaoEstabelecimento obj) {
-		UserSS user = UserService.authenticated();
-		if (user==null || !user.hasRole(Perfil.ADMIN) && !obj.getUsuario().getEmail().equals(user.getUsername())) {
-			throw new AuthorizationException("Acesso negado");
-		}
-		
-		Usuario usuario = new Usuario(user.getId(), null, null,obj.getUsuario().getEmail(), null);
-		//Estabelecimento estab = new Estabelecimento(obj.getEstabelecimento().getId(), null, null, null, null, null);
-		Estabelecimento estab = repoEstab.findById(obj.getEstabelecimento().getId()).get();
-		AvaliacaoEstabelecimento avalEstab = new AvaliacaoEstabelecimento(obj.getIdAvaliacao(), obj.getDataCriacao(), obj.getDescricao(), obj.getClassificacao(), usuario, estab);	
-				
-//		find(obj.getIdAvaliacao());
-		obj.getEstabelecimento().getId();
-		obj.setDataCriacao(new Date());	
-		avalEstab.setDataCriacao(new Date());
-		return repo.save(avalEstab);
-	}
-
 }
+
+
+
 
 
 
@@ -214,7 +228,7 @@ public class AvaliacaoEstabelecimentoService {
 	{
     	"descricao": "TESTE JSON POST inserindo uma nova avaliação no estabelecimento ",
     	"classificacao": "4.1",
-    	"usuarioEmail":"test5test@test.com",
+    	"usuarioEmail":"aaa@aaa.com",
     	"estabelecimentoId": "12"
 	}
  *

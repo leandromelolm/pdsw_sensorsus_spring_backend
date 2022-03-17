@@ -23,6 +23,22 @@ public class AvaliacaoEstabelecimentoDTO implements Serializable {
 	private Integer usuarioId;
 	private String apelido;
 	
+	public AvaliacaoEstabelecimentoDTO() {
+		
+	}
+	
+	public AvaliacaoEstabelecimentoDTO(Integer idAvaliacao, Integer estabelecimentoId, String nomeEstabelecimento,
+			Date dataCriacao, String descricao, Double classificacao, Integer usuarioId, String apelido) {		
+		this.idAvaliacao = idAvaliacao;
+		this.estabelecimentoId = estabelecimentoId;
+		this.nomeEstabelecimento = nomeEstabelecimento;
+		this.dataCriacao = dataCriacao;
+		this.descricao = descricao;
+		this.classificacao = classificacao;
+		this.usuarioId = usuarioId;
+		this.apelido = apelido;
+	}
+
 	public AvaliacaoEstabelecimentoDTO(AvaliacaoEstabelecimento obj) {
 		idAvaliacao = obj.getIdAvaliacao();
 		estabelecimentoId = obj.getEstabelecimento().getId();

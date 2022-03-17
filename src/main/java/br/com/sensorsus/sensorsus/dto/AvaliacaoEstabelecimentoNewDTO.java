@@ -3,9 +3,13 @@ package br.com.sensorsus.sensorsus.dto;
 import java.io.Serializable;
 import java.util.Date;
 
+import br.com.sensorsus.sensorsus.model.AvaliacaoEstabelecimento;
+
 public class AvaliacaoEstabelecimentoNewDTO implements Serializable {
 	
-	private static final long serialVersionUID = 1L;	
+	private static final long serialVersionUID = 1L;
+	
+	private Integer AvaliacaoId;
 	
 	private Date dataCriacao;
 	private String descricao;
@@ -17,6 +21,25 @@ public class AvaliacaoEstabelecimentoNewDTO implements Serializable {
 	private String usuarioEmail;
 	
 	public AvaliacaoEstabelecimentoNewDTO() {		
+	}
+	
+	public AvaliacaoEstabelecimentoNewDTO(AvaliacaoEstabelecimento obj) {
+		AvaliacaoId = obj.getIdAvaliacao();
+		estabelecimentoId = obj.getEstabelecimento().getId();
+		estabelecimentoId = obj.getEstabelecimento().getId();
+		dataCriacao = obj.getDataCriacao();
+		descricao = obj.getDescricao();
+		classificacao = obj.getClassificacao();
+		usuarioId = obj.getUsuario().getId();
+		usuarioEmail = obj.getUsuario().getEmail();
+	}
+	
+	public Integer getAvaliacaoId() {
+		return AvaliacaoId;
+	}
+
+	public void setAvaliacaoId(Integer avaliacaoId) {
+		AvaliacaoId = avaliacaoId;
 	}
 
 	public Date getDataCriacao() {
@@ -65,5 +88,6 @@ public class AvaliacaoEstabelecimentoNewDTO implements Serializable {
 
 	public void setUsuarioEmail(String usuarioEmail) {
 		this.usuarioEmail = usuarioEmail;
-	}	
+	}
+	
 }
