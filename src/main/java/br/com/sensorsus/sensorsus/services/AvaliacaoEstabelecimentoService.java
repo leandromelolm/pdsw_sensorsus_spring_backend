@@ -137,7 +137,7 @@ public class AvaliacaoEstabelecimentoService {
 				
 				double sum = 0.0;
 				for (AvaliacaoEstabelecimento ae : objEstab.getScores()) {
-					sum = sum + ae.getClassificacao();			
+					sum = sum + ae.getClassificacao();	
 				}
 				
 				// subtraindo nota anterior feita pelo usuario, para atualizar com nova nota em seguida e recalcular a média
@@ -174,6 +174,7 @@ public class AvaliacaoEstabelecimentoService {
 		return repo.save(entity);
 	}
 	
+	
 	public void delete(Integer id) {
 		
 		UserSS user = UserService.authenticated();	
@@ -194,6 +195,29 @@ public class AvaliacaoEstabelecimentoService {
 		if (!user.getId().equals(avaliestab.get().getUsuario().getId())) { // verificação se id do usuario logado é igual ao id da avaliação recebida no parametro do método
 			throw new AuthorizationException("Não é permitido remover avaliação de outro usuário");
 		}
+		
+		Optional<Estabelecimento> estabelecimentoOpt = repoEstab.findById(avaliestab.get().getEstabelecimento().getId());
+		Estabelecimento estabelecimento = estabelecimentoOpt.get();
+		
+		double sum = 0.0;
+		for (AvaliacaoEstabelecimento ae : estabelecimentoOpt.get().getScores()){
+			System.out.println("Score Avaliação ");
+			System.out.println(ae.getClassificacao());
+			sum = sum + ae.getClassificacao();			
+		}
+		sum = sum - avaliestab.get().getClassificacao(); // subtração da nota que será removida		
+		Integer quant = estabelecimentoOpt.get().getScores().size()-1; //subtração de uma (1) avaliação da quantidade total
+		
+		if(quant < 1) { // se quantidade de notas for menor que 1 já é atribuido os valores 0 para média e para quantidade de avaliações 
+			estabelecimento.setScore(0.0);
+			estabelecimento.setCount(0);		
+			estabelecimento = repoEstab.save(estabelecimento);
+		}else {			
+			double avg = sum / quant; // calcula nova média
+			estabelecimento.setScore(avg);
+			estabelecimento.setCount(quant);		
+			estabelecimento = repoEstab.save(estabelecimento);			
+		}		
 		
 		try {
 			repo.deleteById(id);
