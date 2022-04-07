@@ -65,6 +65,15 @@ public class AvaliacaoEstabelecimentoService {
 //		return repo.searchIdEstabelecimento(estabelecimentoId, pageRequest);
 		return repo.findByEstabelecimentoId(estabelecimentoId, pageRequest);
 	}
+	
+	
+	public Page<AvaliacaoEstabelecimento> searchIdUsuario(Integer usuarioId, Integer page, Integer linesPerPage,
+			String orderBy, String direction) {
+		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
+//		return repo.searchIdEstabelecimento(estabelecimentoId, pageRequest);
+		return repo.findByUsuarioId(usuarioId, pageRequest);
+	}
+	
 
 	@Transactional
 	public AvaliacaoEstabelecimentoNewDTO insert(AvaliacaoEstabelecimentoNewDTO dto) {

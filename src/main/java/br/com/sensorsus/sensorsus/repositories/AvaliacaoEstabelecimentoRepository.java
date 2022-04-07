@@ -27,4 +27,8 @@ public interface AvaliacaoEstabelecimentoRepository extends JpaRepository<Avalia
 	// Encontrar estabelecimento com id do parametro
 	@Transactional(readOnly=true)
 	Page<AvaliacaoEstabelecimento> findByEstabelecimentoId(@Param("id")Integer estabelecimento, Pageable pageRequest);
+	
+	// Encontrar usuario com id
+	@Transactional(readOnly=true)
+	Page<AvaliacaoEstabelecimento> findByUsuarioId(@Param("id")Integer usuario, Pageable pageRequest);
 }

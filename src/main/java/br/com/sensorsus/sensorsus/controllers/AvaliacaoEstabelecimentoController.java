@@ -2,6 +2,7 @@ package br.com.sensorsus.sensorsus.controllers;
 
 import java.net.URI;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -20,6 +21,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import br.com.sensorsus.sensorsus.controllers.utils.URL;
 import br.com.sensorsus.sensorsus.dto.AvaliacaoEstabelecimentoDTO;
 import br.com.sensorsus.sensorsus.dto.AvaliacaoEstabelecimentoNewDTO;
+import br.com.sensorsus.sensorsus.dto.EstabelecimentoAvaliacoesDTO;
 import br.com.sensorsus.sensorsus.model.AvaliacaoEstabelecimento;
 import br.com.sensorsus.sensorsus.services.AvaliacaoEstabelecimentoService;
 import io.swagger.annotations.Api;
@@ -66,6 +68,22 @@ public class AvaliacaoEstabelecimentoController {
 		// [GET] http://localhost:8080/api/avaliacoes/estabelecimento/?nome={String}&page={page}		
 	}
 	
+	
+	// Pesquisa de avaliação por usuario para exibir na página MyRatings do frontend (usuario visualiza suas avaliações)
+	@RequestMapping(value = "/usuarioid", method = RequestMethod.GET)
+	public ResponseEntity<Page<AvaliacaoEstabelecimentoDTO>> findRatingUser(
+			@RequestParam(value="id", defaultValue="") String id,
+			@RequestParam(value="page", defaultValue="0") Integer page, 
+			@RequestParam(value="linesPerPage", defaultValue="20") Integer linesPerPage, 
+			@RequestParam(value="orderBy", defaultValue="dataCriacao") String orderBy, 
+			@RequestParam(value="direction", defaultValue="DESC") String direction) {
+		Integer idInteger = Integer.parseInt(id);
+		Page<AvaliacaoEstabelecimento> list = service.searchIdUsuario(idInteger, page, linesPerPage, orderBy, direction);
+		Page<AvaliacaoEstabelecimentoDTO> listDto = list.map(obj -> new AvaliacaoEstabelecimentoDTO(obj));
+		return ResponseEntity.ok().body(listDto);
+		// [GET] localhost:8080/api/avaliacoes/usuarioid/?id=1
+	}
+	
 	@RequestMapping(value = "/estabelecimento/id", method = RequestMethod.GET)
 	public ResponseEntity<Page<AvaliacaoEstabelecimentoDTO>> findIdPage(
 			@RequestParam(value="id", defaultValue="") String id, 
@@ -83,9 +101,11 @@ public class AvaliacaoEstabelecimentoController {
 	
 	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<List<AvaliacaoEstabelecimento>> findAll() {
+	public ResponseEntity<List<AvaliacaoEstabelecimentoDTO>> findAll() {
 		List<AvaliacaoEstabelecimento> list = service.findAll();
-		return ResponseEntity.ok().body(list);
+		List<AvaliacaoEstabelecimentoDTO> listAvaliacaoDto = list.stream()
+				.map(obj -> new AvaliacaoEstabelecimentoDTO(obj)).collect(Collectors.toList());
+		return ResponseEntity.ok().body(listAvaliacaoDto);
 		// [GET] http://localhost:8080/api/avaliacoes/	
 	}
 	
